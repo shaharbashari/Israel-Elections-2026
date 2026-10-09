@@ -66,6 +66,197 @@
     environment_infrastructure: ["mint", "topic-environment.svg"]
   };
   const COMPARISON_LIMIT = 4;
+  const COMPASS_MINIMUM = 3;
+  const COMPASS_VALUES = new Set([-2, -1, 1, 2]);
+  const COMPASS_LABELS = {
+    "-2": "מתנגד/ת נחרצות",
+    "-1": "מתנגד/ת",
+    "0": "בלי עמדה מחייבת",
+    "1": "תומך/ת",
+    "2": "תומך/ת נחרצות"
+  };
+  const COMPASS_RELATIONS = ["פער מלא", "פער", "חפיפה חלקית", "התאמה קרובה", "התאמה מלאה"];
+  const COMPASS = {
+    version: 1,
+    methodHe: "האחוז הוא חפיפה בין הכיוון שסימנתם לבין עמדה שקודדה מרשומת מחקר קיימת. הקוד הוא קריאה עריכתית של אותו תיעוד, לא ציון רשמי ולא המלצת הצבעה.",
+    questions: [
+      { id: "civil_union", topicId: "religion_state", titleHe: "מסלול זוגיות אזרחי", promptHe: "יש לאפשר מסלול זוגיות אזרחי עם זכויות וחובות של זוגות נשואים.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_marriage", readingHe: "ההצעה המתועדת היא נישואים וגירושים אזרחיים לכל אזרח. זהו הכיוון המפורש של השאלה, ולכן הקוד הוא 2." },
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_civil_union", readingHe: "ההצעה המתועדת היא ברית זוגיות אזרחית במשרד הפנים עם זכויות וחובות של זוגות נשואים. זהו הכיוון המפורש של השאלה, ולכן הקוד הוא 2." }
+      ]},
+      { id: "universal_service", topicId: "public_services_equality", titleHe: "שירות לכל אזרח", promptHe: "יש לחייב שירות צבאי או אזרחי לכל אזרח.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_service", readingHe: "ההצעה המתועדת היא חובת שירות צבאי או אזרחי לכל אזרח בגיל 18, עם סנקציות. הקוד הוא 2." },
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_service", readingHe: "ההצעה המתועדת היא חוק שירות ממלכתי לכל, בראש ובראשונה בצה״ל. הקוד הוא 2." },
+        { partyId: "miluimnikim_economic", value: 2, evidenceId: "e_miluimnikim_economic_service", readingHe: "ההצעה המתועדת היא שירות צבאי או אזרחי לכל אזרח, עם סנקציות והטבות. הקוד הוא 2." },
+        { partyId: "amcha_israel", value: 1, evidenceId: "e_amcha_israel_service", readingHe: "יש שירות צבאי למתאימים, שירות לאומי לאחרים ומסלול מצוינות תורנית. זהו כיוון של שירות, לא חובה זהה לכולם, ולכן הקוד הוא 1." },
+        { partyId: "haredi_public", value: -2, evidenceId: "e_haredi_public_service", readingHe: "ההצעה מבקשת להגן על לומדי תורה מסנקציות. זהו כיוון מנוגד לחובת שירות לכל אזרח, ולכן הקוד הוא ‎-2." }
+      ]},
+      { id: "core_funding", topicId: "public_services_equality", titleHe: "ליבה כתנאי למימון", promptHe: "יש להתנות מימון ציבורי למוסדות חינוך בלימודי ליבה.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_core", readingHe: "ההצעה מתנה מימון ציבורי בלימודי ליבה מלאים. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_core", readingHe: "ההצעה דורשת לימודי ליבה לכל תלמיד ושלילת תקצוב ממוסד שאינו עומד בכך. הקוד הוא 2." },
+        { partyId: "yashar", value: 1, evidenceId: "e_yashar_core", readingHe: "ההצעה היא לימודי ליבה לכל ועדיפות לחינוך הממלכתי. היא תומכת בליבה, אך אינה מתנה במפורש מימון, ולכן הקוד הוא 1." },
+        { partyId: "haredi_public", value: -1, evidenceId: "e_haredi_public_education", readingHe: "ההצעה שומרת על עצמאות החינוך החרדי ומשפרת אנגלית ומתמטיקה. היא מתנגדת להתניית המימון, אך אינה דוחה כל לימודי ליבה, ולכן הקוד הוא ‎-1." }
+      ]},
+      { id: "state_inquiry", topicId: "institutions_democracy", titleHe: "ועדת חקירה ממלכתית", promptHe: "יש להקים ועדת חקירה ממלכתית לאירועי שבעה באוקטובר.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_inquiry", readingHe: "ההצעה המתועדת היא ועדת חקירה ממלכתית לאירועי שבעה באוקטובר. הקוד הוא 2." },
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_inquiry", readingHe: "ההצעה המתועדת היא ועדת חקירה ממלכתית לטבח, לעשור שקדם לו ולניהול המלחמה. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_inquiry", readingHe: "ההצעה המתועדת היא שוועדת חקירה ממלכתית תהיה החלטת הממשלה הראשונה. הקוד הוא 2." },
+        { partyId: "miluimnikim_economic", value: 1, evidenceId: "e_miluimnikim_economic_inquiry", readingHe: "יש קריאה לחקירת הכשלים, בלי לנקוב במפורש בוועדה ממלכתית. הקוד הוא 1." }
+      ]},
+      { id: "term_limits", topicId: "institutions_democracy", titleHe: "הגבלת כהונה", promptHe: "יש להגביל את מספר הקדנציות של ראש הממשלה.", stances: [
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_term_limits", readingHe: "ההצעה המתועדת היא הגבלה לשתי קדנציות. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_term_limits", readingHe: "ההצעה המתועדת היא הגבלת כהונת ראש הממשלה. הקוד הוא 2." }
+      ]},
+      { id: "override_clause", topicId: "institutions_democracy", titleHe: "פסקת התגברות", promptHe: "יש לאפשר לכנסת להתגבר על פסילת חוקים בבג״ץ.", stances: [
+        { partyId: "noam", value: 2, evidenceId: "e_noam_override", readingHe: "ההצעה המתועדת היא פסקת התגברות שמצמצמת את יכולת בג״ץ לבטל החלטות כנסת. הקוד הוא 2." }
+      ]},
+      { id: "shabbat_transit", topicId: "religion_state", titleHe: "תחבורה ציבורית בשבת", promptHe: "יש לאפשר לרשות מקומית להפעיל תחבורה ציבורית בשבת.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_shabbat_transport", readingHe: "ההצעה מאפשרת לכל רשות לקבוע תחבורה ציבורית בשבת לפי צביונה. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_shabbat_transport", readingHe: "ההצעה היא תחבורה ציבורית בשבת לפי החלטות הרשויות המקומיות. הקוד הוא 2." }
+      ]},
+      { id: "shabbat_rest", topicId: "religion_state", titleHe: "שבת במרחב הציבורי", promptHe: "יש לשמור על השבת כיום מנוחה במרחב הציבורי.", stances: [
+        { partyId: "noam", value: 2, evidenceId: "e_noam_shabbat", readingHe: "ההצהרה המתועדת היא שמירת שבת כיום מנוחה במרחב הציבורי והגנה על עסקים ועובדים שומרי שבת. הקוד הוא 2." }
+      ]},
+      { id: "competition", topicId: "economy_cost_of_living", titleHe: "תחרות וצמצום ריכוזיות", promptHe: "יש לצמצם ריכוזיות ורגולציה ולהגביר תחרות.", stances: [
+        { partyId: "likud", value: 2, evidenceId: "e_likud_market", readingHe: "יש הצהרה על שוק חופשי, צמצום רגולציה ותחרות. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_competition", readingHe: "ההצעה היא הפחתת רגולציה, פירוק מונופולים והגברת תחרות. הקוד הוא 2." },
+        { partyId: "haredi_public", value: 2, evidenceId: "e_haredi_public_market", readingHe: "יש הצהרה על משק חופשי, תחרות ומסים נמוכים. הקוד הוא 2." },
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_competition", readingHe: "ההצעה היא פירוק מוקדי ריכוזיות, חיזוק תחרות ואימוץ תקינה בינלאומית. הקוד הוא 2." },
+        { partyId: "beyachad", value: 1, evidenceId: "e_beyachad_competition", readingHe: "ההצעה עוסקת בריכוזיות בשרשרת המזון, לא בצמצום רגולציה בכל המשק. הקוד הוא 1." }
+      ]},
+      { id: "minimum_wage", topicId: "economy_cost_of_living", titleHe: "הצמדת שכר המינימום", promptHe: "יש להעלות את שכר המינימום ולהצמידו לשכר הממוצע.", stances: [
+        { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_minimum_wage", readingHe: "ההצעה המתועדת היא להעלות את שכר המינימום ולהצמידו לשכר הממוצע. הקוד הוא 2." }
+      ]},
+      { id: "lgbtq_protection", topicId: "religion_state", titleHe: "הגנה מפני אפליה", promptHe: "יש לעגן בחוק הגנה מאפליה בשל נטייה מינית או זהות מגדרית.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_lgbtq", readingHe: "ההצעה המתועדת כוללת עיגון הגנה מאפליה בשל נטייה מינית או זהות מגדרית. הקוד הוא 2." }
+      ]},
+      { id: "climate_law", topicId: "environment_infrastructure", titleHe: "חוק אקלים", promptHe: "יש לחוקק חוק אקלים מחייב ומתוקצב.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_climate", readingHe: "ההצעה המתועדת היא חוק אקלים מחייב ומתוקצב. הקוד הוא 2." }
+      ]},
+      { id: "public_housing", topicId: "economy_cost_of_living", titleHe: "דיור ציבורי ופיקוח על שכר דירה", promptHe: "יש להרחיב דיור ציבורי ולפקח על שכר דירה.", stances: [
+        { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_housing", readingHe: "ההצעה המתועדת כוללת הרחבת דיור ציבורי ופיקוח על שכר דירה. הקוד הוא 2." }
+      ]},
+      { id: "settlements", topicId: "security_foreign_relations", titleHe: "חיזוק ההתיישבות", promptHe: "יש לחזק את ההתיישבות בכל חלקי הארץ.", stances: [
+        { partyId: "likud", value: 2, evidenceId: "e_likud_settlements", readingHe: "יש הצהרה על חיזוק ההתיישבות בכל חלקי הארץ. הקוד הוא 2." },
+        { partyId: "joint_list", value: -2, evidenceId: "e_joint_list_spending", readingHe: "ההצעה המתועדת כוללת הפסקת מימון התנחלויות. זהו כיוון מנוגד לשאלה, ולכן הקוד הוא ‎-2." },
+        { partyId: "amcha_israel", value: 1, evidenceId: "e_amcha_israel_border_settlements", readingHe: "ההצעה מחזקת התיישבות בגבולות ובאזורים מאוימים, לא בכל חלקי הארץ. הקוד הוא 1." }
+      ]},
+      { id: "avrech_allowances", topicId: "economy_cost_of_living", titleHe: "קצבאות אברך", promptHe: "יש לבטל קצבאות אברך והטבות שמעודדות אי־שירות.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_benefits", readingHe: "ההצעה המתועדת היא לבטל קצבאות אברך והטבות שמעודדות אי־שירות. הקוד הוא 2." }
+      ]},
+      { id: "attorney_general", topicId: "institutions_democracy", titleHe: "פיצול היועץ המשפטי", promptHe: "יש לפצל את תפקיד היועץ המשפטי לממשלה ולבטל את הווטו שלו על החלטות הממשלה.", stances: [
+        { partyId: "noam", value: 2, evidenceId: "e_noam_attorney_general", readingHe: "ההצעה המתועדת היא פיצול התפקיד וצמצומו לייעוץ שאינו מטיל וטו. הקוד הוא 2." }
+      ]},
+      { id: "constitution", topicId: "institutions_democracy", titleHe: "חוקה וזכויות אדם", promptHe: "יש לקדם חוקה שתעגן זכויות אדם ותסדיר את היחסים בין הרשויות.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_constitution", readingHe: "ההצעה המתועדת היא חוקה שתעגן זכויות אדם ותסדיר יחסים בין רשויות. הקוד הוא 2." }
+      ]},
+      { id: "religious_councils", topicId: "religion_state", titleHe: "מועצות דתיות", promptHe: "יש לבטל מועצות דתיות ולהעביר את שירותי הדת לרשויות המקומיות.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_religious_services", readingHe: "ההצעה המתועדת היא לבטל מועצות דתיות ולהקים מחלקות עירוניות. הקוד הוא 2." }
+      ]},
+      { id: "coal_exit", topicId: "environment_infrastructure", titleHe: "יציאה מפחם", promptHe: "יש להפסיק את ההפעלה השוטפת של יחידות הפחם הישנות ולהאיץ אנרגיה מתחדשת.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_energy", readingHe: "ההצעה המתועדת היא להפסיק הפעלה שוטפת של יחידות הפחם הישנות ולהאיץ אנרגיה מתחדשת. הקוד הוא 2." }
+      ]},
+      { id: "crime_detention", topicId: "security_foreign_relations", titleHe: "מעצר מנהלי בפשיעה", promptHe: "יש לאפשר מעצרים מנהליים לראשי ארגוני פשיעה.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_detention", readingHe: "ההצעה המתועדת כוללת חקיקה שתאפשר מעצרים מנהליים לראשי ארגוני פשיעה. הקוד הוא 2." }
+      ]},
+      { id: "transparency", topicId: "institutions_democracy", titleHe: "שקיפות החלטות", promptHe: "יש לחייב שקיפות באינטרסים ובתהליכי קבלת החלטות.", stances: [
+        { partyId: "pirates", value: 2, evidenceId: "e_pirates_transparency", readingHe: "יש הצהרה על שקיפות בתהליכי קבלת החלטות ובאינטרסים המשפיעים עליהם. הקוד הוא 2." }
+      ]},
+      { id: "labor_enforcement", topicId: "economy_cost_of_living", titleHe: "אכיפת דיני עבודה", promptHe: "יש לאכוף באופן מלא דיני עבודה ושכר מינימום.", stances: [
+        { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_workers", readingHe: "יש הצהרה על אכיפה מלאה של דיני עבודה, שכר מינימום ובטיחות. הקוד הוא 2." }
+      ]},
+      { id: "import_barriers", topicId: "economy_cost_of_living", titleHe: "הסרת חסמי יבוא", promptHe: "יש להסיר חסמי יבוא ולאמץ תקינה בינלאומית.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_imports", readingHe: "ההצעה המתועדת היא להסיר חסמי יבוא ולאמץ תקינה אירופית. הקוד הוא 2." }
+      ]},
+      { id: "kashrut", topicId: "religion_state", titleHe: "בלעדיות הכשרות", promptHe: "יש לצמצם את בלעדיות הרבנות בכשרות ולהכיר בכשרות נוספת.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_kashrut", readingHe: "ההצעה המתועדת היא להכיר בכשרות בינלאומית ולצמצם את בלעדיות הרבנות. הקוד הוא 2." }
+      ]},
+      { id: "local_conversion", topicId: "religion_state", titleHe: "ביזור הגיור", promptHe: "יש לבזר סמכויות גיור אורתודוקסי לרבני קהילה, תוך שמירת תקן הלכתי.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_conversion", readingHe: "ההצעה המתועדת היא לבזר גיור אורתודוקסי לרבני קהילה תוך שמירת תקן הלכתי. הקוד הוא 2." }
+      ]},
+      { id: "nissim_report", topicId: "religion_state", titleHe: "דוח ניסים", promptHe: "יש לאמץ את דוח ניסים בנושא הגיור.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_conversion", readingHe: "ההצעה המתועדת היא לאמץ את דוח ניסים בנושא הגיור. הקוד הוא 2. השאלה אינה מפרשת את הדוח מעבר למה שתועד." }
+      ]},
+      { id: "shamgar_deals", topicId: "security_foreign_relations", titleHe: "עסקאות שבויים", promptHe: "יש לבסס עסקאות עתידיות להשבת שבויים ונעדרים על דוח שמגר.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_captives", readingHe: "ההצעה המתועדת היא לבסס עסקאות עתידיות על דוח שמגר. הקוד הוא 2. השאלה אינה מפרשת את הדוח מעבר למה שתועד." }
+      ]},
+      { id: "coalition_rule", topicId: "institutions_democracy", titleHe: "כלל לשותפות קואליציונית", promptHe: "יש להרכיב ממשלה רק ממפלגות שהרשימה מגדירה ציוניות, ללא מפלגות חרדיות או ערביות שהיא מגדירה לא־ציוניות.", stances: [
+        { partyId: "miluimnikim_economic", value: 2, evidenceId: "e_miluimnikim_economic_coalition", readingHe: "ההצעה המתועדת של מרכיב המילואימניקים היא ממשלה ממפלגות שהוא מגדיר ציוניות, ללא מפלגות חרדיות או ערביות שהוא מגדיר לא־ציוניות. הקוד הוא 2." }
+      ]},
+      { id: "health_periphery", topicId: "public_services_equality", titleHe: "בריאות בפריפריה", promptHe: "יש להשקיע בשירותי בריאות בפריפריה.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_health", readingHe: "ההצעה כוללת מרכזי בריאות בפריסה ארצית, בעדיפות לפריפריה. הקוד הוא 2." },
+        { partyId: "likud", value: 2, evidenceId: "e_likud_health", readingHe: "יש הצהרה על השקעה בבריאות בפריפריה. הקוד הוא 2." },
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_health", readingHe: "ההצעה המתועדת כוללת השקעה בבריאות בפריפריה. הקוד הוא 2." }
+      ]},
+      { id: "arab_gaps", topicId: "public_services_equality", titleHe: "פערים בחברה הערבית", promptHe: "יש תכנית ייעודית לסגירת פערים בשירותים ובתשתיות בחברה הערבית.", stances: [
+        { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_arab_development", readingHe: "ההצעה המתועדת כוללת תכניות ייעודיות לסגירת פערים בחברה הערבית. הקוד הוא 2." }
+      ]},
+      { id: "organized_crime", topicId: "security_foreign_relations", titleHe: "מאבק בפשיעה המאורגנת", promptHe: "יש לחזק את המאבק בפשיעה המאורגנת ובפרוטקשן באמצעות גוף ייעודי או אכיפה מוגברת.", stances: [
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_police", readingHe: "ההצעה המתועדת היא קבינט למאבק בפשיעה המאורגנת. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_police", readingHe: "ההצעה המתועדת היא מטה לאומי למאבק בפשע המאורגן ובפרוטקשן. הקוד הוא 2." },
+        { partyId: "amcha_israel", value: 1, evidenceId: "e_amcha_israel_police", readingHe: "ההצעה מחזקת אכיפה וענישה נגד פרוטקשן, בלי גוף ייעודי מפורש. הקוד הוא 1." }
+      ]},
+      { id: "judicial_independence", topicId: "institutions_democracy", titleHe: "עצמאות מערכת המשפט", promptHe: "יש לשמור על מערכת משפט עצמאית ועל יכולתה לבקר את הרשויות.", stances: [
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_judiciary", readingHe: "יש הצהרה על שמירת מערכת משפט עצמאית, זכויות המיעוט ושלטון החוק. הקוד הוא 2." }
+      ]},
+      { id: "long_rent", topicId: "economy_cost_of_living", titleHe: "שכירות ארוכת טווח", promptHe: "יש להרחיב שכירות ארוכת טווח, כולל מסלול מסובסד.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_housing", readingHe: "ההצעה המתועדת כוללת שכירות ארוכת טווח ומסלול מסובסד. הקוד הוא 2." }
+      ]},
+      { id: "pension_floor", topicId: "economy_cost_of_living", titleHe: "השלמת הכנסה לגמלאים", promptHe: "יש להשלים הכנסה לגמלאים עד לגובה שכר המינימום.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_pensions", readingHe: "ההצעה המתועדת היא השלמת הכנסה לגמלאים עד לגובה שכר המינימום. הקוד הוא 2." }
+      ]},
+      { id: "nature_protection", topicId: "environment_infrastructure", titleHe: "שמירת טבע ומים", promptHe: "יש לשמור על מקורות המים, הטבע והסביבה.", stances: [
+        { partyId: "pirates", value: 2, evidenceId: "e_pirates_nature", readingHe: "יש הצהרה על שמירת מקורות המים, הטבע והסביבה. הקוד הוא 2." }
+      ]},
+      { id: "corporate_tax", topicId: "economy_cost_of_living", titleHe: "הטבות מס לתאגידים", promptHe: "יש לצמצם הטבות מס לתאגידים גדולים.", stances: [
+        { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_tax", readingHe: "ההצעה המתועדת כוללת צמצום הטבות מס לתאגידים גדולים. הקוד הוא 2." }
+      ]},
+      { id: "equal_services", topicId: "public_services_equality", titleHe: "השוואת שירותים", promptHe: "יש להשוות תקציבים ורמת שירותי חינוך, דיור ורווחה בין האזרחים.", stances: [
+        { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_budgets", readingHe: "ההצעה המתועדת היא להשוות תקציבים ורמת שירותי חינוך, דיור ורווחה. הקוד הוא 2." }
+      ]}
+    ]
+  };
+
+  function scoreDocumentedOverlap(questions, parties, answers, weights, evidenceIds, minimum = COMPASS_MINIMUM) {
+    const partyIds = new Set(asArray(parties).map((party) => party.id));
+    const sided = [];
+    for (const question of asArray(questions)) {
+      const user = answers instanceof Map ? answers.get(question.id) : answers?.[question.id];
+      if (!COMPASS_VALUES.has(user)) continue;
+      const seen = new Set();
+      const stances = [];
+      for (const stance of asArray(question.stances)) {
+        if (!partyIds.has(stance.partyId) || seen.has(stance.partyId) || !COMPASS_VALUES.has(stance.value) || !evidenceIds.has(stance.evidenceId)) continue;
+        seen.add(stance.partyId);
+        stances.push(stance);
+      }
+      sided.push({ question, user, weight: weights instanceof Set && weights.has(question.id) ? 2 : 1, stances });
+    }
+    const scored = [];
+    const none = [];
+    for (const party of asArray(parties)) {
+      const row = { partyId: party.id, nameHe: party.nameHe, points: 0, maxPoints: 0, coverage: 0, rows: [] };
+      for (const item of sided) {
+        const stance = item.stances.find((candidate) => candidate.partyId === party.id);
+        if (!stance) continue;
+        const points = 4 - Math.abs(item.user - stance.value);
+        row.points += points * item.weight;
+        row.maxPoints += 4 * item.weight;
+        row.coverage += 1;
+        row.rows.push({
+          questionId: item.question.id, titleHe: item.question.titleHe, user: item.user,
+          partyValue: stance.value, points, weight: item.weight, evidenceId: stance.evidenceId, readingHe: stance.readingHe
+        });
+      }
+      if (!row.coverage) none.push(row);
+      else {
+        row.percentage = Math.round((row.points / row.maxPoints) * 100);
+        row.stable = row.coverage >= minimum;
+        scored.push(row);
+      }
+    }
+    return { sidedCount: sided.length, minimum, scored, none };
+  }
   const collator = new Intl.Collator("he", { usage: "sort", sensitivity: "base" });
   const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
   const nonempty = (value) => typeof value === "string" && value.trim().length > 0;
@@ -455,7 +646,7 @@
   }
 
   function createReadingState() {
-    return { view: "overview", step: 1, topics: new Set(), evidence: "all", depth: "brief", search: "", comparison: new Set(), reading: false, questionId: null, comparisonQuestionId: null };
+    return { view: "overview", step: 1, topics: new Set(), evidence: "all", depth: "brief", search: "", comparison: new Set(), reading: false, questionId: null, comparisonQuestionId: null, compassIndex: 0, compassDone: false, compassAnswers: new Map(), compassWeights: new Set(), compassOpen: null };
   }
 
   function resetReadingState(target) {
@@ -919,13 +1110,167 @@
   }
 
   function viewHeading() {
-    return $(state.view === "overview" ? "overview-title" : state.view === "compare" ? "compare-title" : state.reading ? "reading-title" : "explore-title");
+    if (state.view === "overview") return $("overview-title");
+    if (state.view === "compare") return $("compare-title");
+    if (state.view === "compass") return $("compass-title");
+    return $(state.reading ? "reading-title" : "explore-title");
+  }
+
+  function compassEvidenceIds() {
+    return new Set(model.evidenceIndex.keys());
+  }
+
+  function compassResult() {
+    return scoreDocumentedOverlap(COMPASS.questions, model.parties, state.compassAnswers, state.compassWeights, compassEvidenceIds());
+  }
+
+  function overlapSort(left, right) {
+    return right.percentage - left.percentage || right.coverage - left.coverage || collator.compare(left.nameHe, right.nameHe) || (left.partyId < right.partyId ? -1 : 1);
+  }
+
+  function compassChoice(value, selected) {
+    const node = button(COMPASS_LABELS[String(value)], "compass-answer", "compass-choice");
+    node.dataset.compassValue = String(value);
+    node.setAttribute("aria-pressed", selected ? "true" : "false");
+    return node;
+  }
+
+  function renderOverlap(row, sidedCount) {
+    const card = element("article", "compass-result");
+    card.dataset.partyId = row.partyId;
+    const heading = element("div", "compass-result-heading");
+    heading.append(element("h3", "", row.nameHe), element("strong", "compass-percent", `${row.percentage}%`));
+    const meter = element("div", "overlap-meter");
+    meter.setAttribute("role", "img");
+    meter.setAttribute("aria-label", `${row.percentage} אחוז חפיפה`);
+    const fill = element("span");
+    fill.style.setProperty("--overlap", String(row.percentage));
+    meter.append(fill);
+    const meta = element("p", "compass-meta", `${row.coverage} שאלות מתועדות מתוך ${sidedCount} שסימנתם בהן כיוון · ${row.points} נקודות מתוך ${row.maxPoints}`);
+    const toggle = button(state.compassOpen === row.partyId ? "סגירת הנימוק" : "למה זה האחוז", "compass-open");
+    toggle.dataset.partyId = row.partyId;
+    card.append(heading, meter, meta, toggle);
+    if (state.compassOpen === row.partyId) {
+      const detail = element("div", "compass-detail");
+      paragraph(detail, "כל שורה היא שאלה שנכנסה לחישוב. הנקודות הן 4 פחות המרחק בין הכיוון שלכם לקוד המתועד. חוסר תיעוד אינו עמדה ואינו מופיע כאן.");
+      row.rows.forEach((item) => {
+        const block = element("section", "compass-reason");
+        block.append(element("h4", "", item.titleHe));
+        paragraph(block, `אתם: ${COMPASS_LABELS[String(item.user)]}. מתועד: ${COMPASS_LABELS[String(item.partyValue)]}. ${COMPASS_RELATIONS[item.points]}. ${item.points} מתוך 4 נקודות, במשקל ${item.weight}.`);
+        paragraph(block, item.readingHe, "evidence-note");
+        const evidence = model.evidenceIndex.get(item.evidenceId);
+        if (evidence) {
+          paragraph(block, evidence.summaryHe);
+          detail.append(block);
+          block.append(sourceControl(evidence.sourceIds, evidence.summaryHe, evidence.id));
+        } else detail.append(block);
+      });
+      card.append(detail);
+    }
+    return card;
+  }
+
+  function renderCompass() {
+    const root = $("compass-root");
+    if (!root) return;
+    root.replaceChildren();
+    const header = element("header", "view-heading");
+    header.append(element("p", "eyebrow", "מצפן עמדות · חפיפה מתועדת"));
+    const title = element("h1", "", "לא ניחוש. חפיפה עם מה שתועד.");
+    title.id = "compass-title";
+    title.tabIndex = -1;
+    header.append(title);
+    paragraph(header, "עונים על כיוון. האחוז מחושב רק משאלות שיש עליהן עמדה מתועדת ומקודדת. חוסר תיעוד אינו נכנס למונה או למכנה, ואינו נספר כהתנגדות. זה אינו המלצת הצבעה.");
+    root.append(header);
+    if (!model.research) {
+      const empty = element("div", "empty-state");
+      empty.append(element("h2", "", "אין מחקר תקין לחישוב."));
+      paragraph(empty, "בלי רשומות מתועדות אין מצפן. לא מוצגים אחוזים משוערים.");
+      root.append(empty);
+      return;
+    }
+    const total = COMPASS.questions.length;
+    const sidedNow = [...state.compassAnswers.values()].filter((value) => COMPASS_VALUES.has(value)).length;
+    if (!state.compassDone) {
+      const question = COMPASS.questions[state.compassIndex];
+      const card = element("article", "compass-card");
+      card.dataset.tone = (TOPIC_ART[question.topicId] || ["violet"])[0];
+      const progress = element("p", "compass-progress", `שאלה ${state.compassIndex + 1} מתוך ${total}`);
+      card.append(art(question.topicId, 72).image, progress, element("h2", "", question.titleHe));
+      paragraph(card, question.promptHe, "compass-prompt");
+      paragraph(card, `${question.stances.length} רשימות קודדו לשאלה הזו מתוך התיעוד. שאר הרשימות לא ייכנסו לחישוב שלה.`, "small-copy");
+      const scale = element("div", "compass-scale");
+      scale.setAttribute("role", "group");
+      scale.setAttribute("aria-label", "הכיוון שלכם בשאלה");
+      [2, 1, 0, -1, -2].forEach((value) => scale.append(compassChoice(value, state.compassAnswers.get(question.id) === value)));
+      const weight = element("label", "compass-weight");
+      const box = element("input");
+      box.type = "checkbox";
+      box.dataset.compassWeight = question.id;
+      box.checked = state.compassWeights.has(question.id);
+      weight.append(box, element("span", "", "השאלה חשובה לי במיוחד. משקל כפול בחישוב."));
+      const actions = element("div", "wizard-actions");
+      const back = button("חזרה", "compass-back", "button button--outline");
+      back.disabled = state.compassIndex === 0;
+      const skip = button("דילוג על השאלה", "compass-skip", "button button--outline");
+      const next = button(state.compassIndex === total - 1 ? "לתוצאות החפיפה" : "לשאלה הבאה", "compass-next", "button button--primary");
+      actions.append(back, skip, next);
+      card.append(scale, weight, actions);
+      if (sidedNow) {
+        const jump = button("לתוצאות עם התשובות שכבר סומנו", "compass-results", "text-button");
+        card.append(jump);
+      }
+      root.append(card);
+      return;
+    }
+    const result = compassResult();
+    const method = element("section", "compass-method");
+    method.append(element("h2", "", "איך האחוז מחושב"));
+    paragraph(method, COMPASS.methodHe);
+    paragraph(method, "נקודות לשאלה = 4 פחות המרחק בין הכיוון שלכם לקוד המתועד. אחוז = סכום הנקודות כפול המשקל, חלקי סכום 4 כפול המשקל. משקל 2 אם סימנתם שהשאלה חשובה, אחרת 1.");
+    paragraph(method, "דילוג, או בחירה בלי עמדה מחייבת, לא נכנסים. לרשימה בלי קוד מתועד אין אחוז: לא 0 ולא 50. הדירוג הראשי כולל רק רשימות עם לפחות 3 שאלות מתועדות, והוא ממוין מהחפיפה הגבוהה לנמוכה.");
+    const tools = element("div", "wizard-actions");
+    tools.append(button("חזרה לשאלות", "compass-edit", "button button--outline"), button("מחיקת התשובות", "compass-clear", "button button--outline"));
+    method.append(tools);
+    root.append(method);
+    if (!result.sidedCount) {
+      const empty = element("div", "empty-state");
+      empty.append(element("h2", "", "עדיין אין כיוון לחישוב."));
+      paragraph(empty, "דילוג ובחירה בלי עמדה מחייבת לא יוצרים אחוז. סמנו תמיכה או התנגדות לפחות בשאלה אחת.");
+      root.append(empty);
+      return;
+    }
+    const stable = result.scored.filter((row) => row.stable).sort(overlapSort);
+    const partial = result.scored.filter((row) => !row.stable).sort(overlapSort);
+    const bands = element("div", "compass-bands");
+    const addBand = (title, note, rows, className) => {
+      const band = element("section", `compass-band ${className}`);
+      band.append(element("h2", "", title));
+      paragraph(band, note);
+      if (!rows.length) paragraph(band, "אין רשימות בקבוצה הזו לפי התשובות הנוכחיות.", "small-copy");
+      rows.forEach((row, index) => {
+        const item = renderOverlap(row, result.sidedCount);
+        item.style.setProperty("--order", String(index));
+        band.append(item);
+      });
+      bands.append(band);
+    };
+    addBand("החפיפה המתועדת, מהגבוה לנמוך", `רק רשימות עם לפחות ${COMPASS_MINIMUM} שאלות מתועדות מול כיוון שסימנתם. אחוז על שאלה אחת אינו מספיק כדי לעמוד בראש.`, stable, "compass-band--stable");
+    addBand("חפיפה חלקית, לא דירוג יציב", "יש כאן אחוז, אבל הוא נשען על שאלה אחת או שתיים. הוא מוצג בנפרד כדי שאחוז גבוה על מעט תיעוד לא ייראה כמו התאמה מבוססת.", partial, "compass-band--partial");
+    root.append(bands);
+    const aside = element("section", "compass-unscored");
+    aside.append(element("h2", "", "בלי אחוז"));
+    paragraph(aside, "לרשימות האלה אין עמדה מקודדת מול הכיוון שסימנתם. חוסר תיעוד אינו עמדה, ולכן לא מוצג להן 0% או 50%.");
+    const names = element("ul", "compass-name-list");
+    canonicalOrder(result.none.map((row) => ({ id: row.partyId, nameHe: row.nameHe }))).forEach((row) => names.append(element("li", "", row.nameHe)));
+    aside.append(names);
+    root.append(aside);
   }
 
   function showView(view, moveFocus = true) {
-    if (!["overview", "explore", "compare"].includes(view)) return;
+    if (!["overview", "explore", "compare", "compass"].includes(view)) return;
     state.view = view;
-    ["overview", "explore", "compare"].forEach((id) => { $(`view-${id}`).hidden = view !== id; });
+    ["overview", "explore", "compare", "compass"].forEach((id) => { $(`view-${id}`).hidden = view !== id; });
     document.querySelectorAll(".main-nav [data-view]").forEach((control) => {
       if (control.dataset.view === view) control.setAttribute("aria-current", "page");
       else control.removeAttribute("aria-current");
@@ -938,7 +1283,7 @@
     } else if (view === "compare") {
       if (!state.comparison.size) $("comparison-picker").open = true;
       renderComparison();
-    }
+    } else if (view === "compass") renderCompass();
     if (moveFocus) {
       window.scrollTo({ top: 0, behavior: "auto" });
       focus(viewHeading());
@@ -1216,6 +1561,40 @@
       state.comparison.clear();
       syncComparison();
       announce("רשימות ההשוואה נוקו.");
+    } else if (action === "compass-answer") {
+      const value = Number(control.dataset.compassValue);
+      const question = COMPASS.questions[state.compassIndex];
+      if (!question || ![-2, -1, 0, 1, 2].includes(value)) return;
+      state.compassAnswers.set(question.id, value);
+      renderCompass();
+    } else if (action === "compass-skip") {
+      const question = COMPASS.questions[state.compassIndex];
+      if (question) state.compassAnswers.delete(question.id);
+      renderCompass();
+    } else if (action === "compass-next") {
+      if (state.compassIndex < COMPASS.questions.length - 1) state.compassIndex += 1;
+      else state.compassDone = true;
+      renderCompass();
+      focus($("compass-title"));
+    } else if (action === "compass-back") {
+      if (state.compassDone) state.compassDone = false;
+      else state.compassIndex = Math.max(0, state.compassIndex - 1);
+      renderCompass();
+      focus($("compass-title"));
+    } else if (action === "compass-results" || action === "compass-edit" || action === "compass-clear" || action === "compass-open") {
+      if (action === "compass-results") state.compassDone = true;
+      if (action === "compass-edit") state.compassDone = false;
+      if (action === "compass-clear") {
+        state.compassAnswers = new Map();
+        state.compassWeights = new Set();
+        state.compassIndex = 0;
+        state.compassDone = false;
+        state.compassOpen = null;
+      }
+      if (action === "compass-open") state.compassOpen = state.compassOpen === control.dataset.partyId ? null : control.dataset.partyId;
+      renderCompass();
+      if (action !== "compass-open") focus($("compass-title"));
+      if (action === "compass-clear") announce("תשובות המצפן נמחקו מהזיכרון של העמוד.");
     } else if (action === "remove-comparison") {
       state.comparison.delete(control.dataset.partyId);
       syncComparison();
@@ -1237,6 +1616,11 @@
     else if (input.id === "reading-filter" && own(FILTERS, input.value)) { state.evidence = input.value; renderReading(); announce("סוג התיעוד עודכן. לא סוננו רשימות."); }
     else if (input.id === "reading-depth" && ["brief", "deep"].includes(input.value)) { state.depth = input.value; renderReading(); announce("עומק הקריאה עודכן."); }
     else if (input.id === "comparison-question") { state.comparisonQuestionId = input.value; renderComparison(); announce("שאלת ההשוואה התחלפה. בחירת הרשימות לא השתנתה."); }
+    else if (input.matches("input[data-compass-weight]")) {
+      if (input.checked) state.compassWeights.add(input.dataset.compassWeight);
+      else state.compassWeights.delete(input.dataset.compassWeight);
+      if (state.compassDone) renderCompass();
+    }
   }
 
   function initialise() {
@@ -1281,7 +1665,7 @@
       validateResearch, validateIssueGuide, publicSourceURL, validDate, validTimestamp,
       canonicalOrder, currentParties, normaliseName, nameMatches, ballotInfo,
       evidenceOwnership, buildIssueRows, createReadingState, resetReadingState,
-      updateSelection, loadData, COMPARISON_LIMIT
+      updateSelection, loadData, COMPARISON_LIMIT, COMPASS, COMPASS_MINIMUM, scoreDocumentedOverlap
     };
   }
   if (typeof document !== "undefined") {

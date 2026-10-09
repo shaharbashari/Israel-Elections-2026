@@ -11,17 +11,68 @@ const html = read("index.html");
 const source = read("app.js");
 const css = read("styles.css");
 
-test("personal scoring, political answers, recommendations and exports are removed, not merely hidden", () => {
+test("compass scores documented overlap only and does not recommend a vote", () => {
   for (const name of ["calculateMatchResults", "hasRatedStance", "quizState", "PARTY_BALLOT_LETTERS", "apply2026PartyUpdates"]) {
     assert.equal(app[name], undefined);
     assert.equal(source.includes(name), false);
   }
   for (const text of [html, source, css]) {
-    assert.doesNotMatch(text, /quiz-data|select-stance|data-stance|matchPercentage|podium|leaderboard|confetti|share-results|calculateMatch/iu);
+    assert.doesNotMatch(text, /quiz-data|select-stance|data-stance|matchPercentage|podium|leaderboard|confetti|share-results|calculateMatch|הצביעו|מומלץ להצביע/iu);
   }
   assert.doesNotMatch(source, /\bnavigator\.(?:share|clipboard)\b|\bBlob\s*\(|download\s*=/u);
-  assert.match(html, /בלי שאלות על העמדות שלכם/u);
-  assert.match(html, /ללא דירוג|בלי דירוג/u);
+  assert.match(html, /אינו המלצת הצבעה/u);
+  assert.match(html, /מצפן עמדות/u);
+  assert.match(html, /ללא דירוג|בלי דירוג|לא דירוג/u);
+  assert.equal(app.COMPASS_MINIMUM, 3);
+  const questions = [{ id: "q", titleHe: "שאלה", stances: [{ partyId: "a", value: 2, evidenceId: "e1", readingHe: "קריאה" }] }];
+  const parties = [{ id: "a", nameHe: "אלף" }, { id: "b", nameHe: "בית" }];
+  const evidence = new Set(["e1"]);
+  const full = app.scoreDocumentedOverlap(questions, parties, new Map([["q", 2]]), new Set(), evidence);
+  assert.equal(full.scored[0].percentage, 100);
+  assert.equal(full.scored[0].stable, false);
+  assert.equal(full.none[0].partyId, "b");
+  assert.equal(app.scoreDocumentedOverlap(questions, parties, new Map([["q", -2]]), new Set(), evidence).scored[0].percentage, 0);
+  assert.equal(app.scoreDocumentedOverlap(questions, parties, new Map([["q", 0]]), new Set(), evidence).sidedCount, 0);
+  assert.equal(app.scoreDocumentedOverlap(questions, parties, new Map([["q", 2]]), new Set(), new Set()).scored.length, 0);
+  const weighted = app.scoreDocumentedOverlap(
+    [
+      { id: "q1", titleHe: "א", stances: [{ partyId: "a", value: 2, evidenceId: "e1" }] },
+      { id: "q2", titleHe: "ב", stances: [{ partyId: "a", value: -2, evidenceId: "e2" }] }
+    ],
+    parties, new Map([["q1", 2], ["q2", 2]]), new Set(["q1"]), new Set(["e1", "e2"])
+  );
+  assert.equal(weighted.scored[0].percentage, 67);
+  assert.equal(weighted.scored[0].coverage, 2);
+});
+
+test("compass codes cite existing evidence and never reuse one record twice", () => {
+  const research = JSON.parse(read("data/research.json"));
+  const evidenceIds = new Set();
+  for (const party of research.parties) {
+    for (const bucket of Object.values(party.topicPositions)) {
+      for (const items of [bucket.positions, bucket.promises, bucket.records, bucket.contextualReporting]) {
+        for (const item of items || []) evidenceIds.add(item.id);
+      }
+    }
+  }
+  const partyIds = new Set(research.parties.map((party) => party.id));
+  const used = new Set();
+  assert.ok(app.COMPASS.questions.length >= 30);
+  for (const question of app.COMPASS.questions) {
+    assert.equal(typeof question.promptHe, "string");
+    assert.ok(question.stances.length >= 1, question.id);
+    const seen = new Set();
+    for (const stance of question.stances) {
+      assert.equal(seen.has(stance.partyId), false, question.id);
+      seen.add(stance.partyId);
+      assert.equal(partyIds.has(stance.partyId), true, stance.partyId);
+      assert.equal(evidenceIds.has(stance.evidenceId), true, stance.evidenceId);
+      assert.equal(used.has(stance.evidenceId), false, stance.evidenceId);
+      used.add(stance.evidenceId);
+      assert.equal([-2, -1, 1, 2].includes(stance.value), true);
+      assert.match(stance.readingHe, /הקוד הוא/);
+    }
+  }
 });
 
 test("canonical Hebrew sorting is deterministic, nonmutating, and independent of reading choices", () => {

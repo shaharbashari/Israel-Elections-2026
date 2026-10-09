@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
     <meta name="referrer" content="no-referrer">
-    <meta name="description" content="מבט — מרחב עצמאי לקריאת מידע על הבחירות בישראל. רשימות, שאלות ומקורות, ללא דירוג וללא המלצות הצבעה.">
+    <meta name="description" content="מבט — מרחב עצמאי לקריאת מידע על הבחירות בישראל. רשימות, מקורות ומצפן חפיפה עם עמדות מתועדות. אינו המלצת הצבעה.">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
     <title>מבט — בחירות בישראל, עם המקורות</title>
     <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
@@ -25,6 +25,7 @@
         <nav class="main-nav" aria-label="ניווט ראשי">
           <button type="button" data-view="overview" aria-current="page">הרשימות</button>
           <button type="button" data-view="explore">מפת הנושאים</button>
+          <button type="button" data-view="compass">מצפן עמדות</button>
           <button type="button" data-view="compare">השוואה ומקורות <span id="nav-count" class="nav-count" hidden></span></button>
         </nav>
         <span class="header-note">מידע ציבורי. קריאה עצמאית.</span>
@@ -44,12 +45,12 @@
           <div class="hero-copy">
             <p class="eyebrow hero-eyebrow"><span class="small-rule" aria-hidden="true"></span> מבט על הבחירות · מאגר עצמאי</p>
             <h1 id="overview-title" tabindex="-1">פחות רעש.<br><span>יותר הקשר.</span></h1>
-            <p class="hero-description">הרשימות, הסוגיות ומה שכתוב במקורות.<br>מרחב לקריאה עצמאית — בלי דירוג מפלגות ובלי המלצות הצבעה.</p>
+            <p class="hero-description">הרשימות, הסוגיות ומה שכתוב במקורות.<br>אפשר גם למדוד חפיפה עם עמדות מתועדות — זה אינו המלצת הצבעה.</p>
             <div class="hero-actions">
-              <button type="button" class="button button--light" data-action="start-reading">מה תרצו להבין? <span aria-hidden="true">←</span></button>
-              <button type="button" class="button button--on-dark" data-action="show-roster">להיכרות עם הרשימות</button>
+              <button type="button" class="button button--light" data-view="compass">למצפן העמדות <span aria-hidden="true">←</span></button>
+              <button type="button" class="button button--on-dark" data-action="start-reading">מה תרצו להבין?</button>
             </div>
-            <p class="hero-footnote">בלי חשבון · בלי שאלות על העמדות שלכם</p>
+            <p class="hero-footnote">בלי חשבון · התשובות נשארות בעמוד בלבד</p>
           </div>
           <figure class="hero-art">
             <img src="assets/reading-room.svg" width="520" height="410" alt="">
@@ -159,6 +160,10 @@
         </section>
       </section>
 
+      <section id="view-compass" class="view" aria-labelledby="compass-title" hidden>
+        <div id="compass-root"></div>
+      </section>
+
       <section id="view-compare" class="view" aria-labelledby="compare-title" hidden>
         <header class="view-heading"><p class="eyebrow">השוואה ומקורות</p><h1 id="compare-title" tabindex="-1">זו לצד זו. בקצב שלכם.</h1><p>בוחרים במפורש עד ארבע רשימות וקוראים את אותו נושא. הסדר תמיד אלפביתי; אין ציון, דירוג או המלצה.</p></header>
         <details id="comparison-picker" class="comparison-picker">
@@ -181,7 +186,7 @@
             <article><span class="method-number" aria-hidden="true">03</span><h3>קוראים גם את המקור</h3><p>לכל מקטע יש תאריך והפניות או סימון פער. סוג המקור, הערות הגישה וההסתייגויות זמינים בפתיחת המקורות.</p></article>
           </div>
           <details class="method-detail"><summary>איך נקבעים הסדר והכיסוי?</summary><p>כל הרשימות שבמאגר מופיעות לפי סדר א״ב בעברית, גם כשחסר מידע בנושא מסוים. חיפוש לפי שם מסנן רק את מאגר השמות. בחירת נושא או סוג תיעוד אינה מסננת או מדרגת רשימות. בהשוואה מוצגות רק הרשימות שבחרתם במפורש.</p><p>רשומות שסומנו כנדחות או כפורשות אינן מוצגות כרשימות מתמודדות. שלמות המיפוי ומעמד הרשימות נקבעים לפי קובץ המחקר והמקורות, לא לפי מספר הכרטיסים.</p></details>
-          <details class="method-detail"><summary>פרטיות וגבולות השירות</summary><p>האתר אינו שואל על אמונות פוליטיות, אינו מחשב התאמה, ואינו שומר או שולח את בחירות הקריאה. אין עוגיות, אחסון מקומי, חשבון או שירות אנליטיקה בקוד האתר. רענון או איפוס מחזירים את התצוגה להתחלה.</p><p>באתר המתארח ב־GitHub Pages, המארח ורשת ההפצה עשויים להחזיק יומני גישה ומטמונים שאינם בשליטת האתר. פתיחת מקור חיצוני היא ביקור באתר אחר, הכפוף למדיניותו. הקישור נפתח ללא הפניית כתובת העמוד הזה.</p></details>
+          <details class="method-detail"><summary>פרטיות וגבולות השירות</summary><p>המצפן שואל על כיוון עמדות רק כדי לחשב חפיפה עם עמדות מתועדות. זה אינו המלצת הצבעה. התשובות נשארות בזיכרון העמוד ואינן נשמרות או נשלחות. אין עוגיות, אחסון מקומי, חשבון או שירות אנליטיקה בקוד האתר. רענון או איפוס מוחקים אותן.</p><p>באתר המתארח ב־GitHub Pages, המארח ורשת ההפצה עשויים להחזיק יומני גישה ומטמונים שאינם בשליטת האתר. פתיחת מקור חיצוני היא ביקור באתר אחר, הכפוף למדיניותו. הקישור נפתח ללא הפניית כתובת העמוד הזה.</p></details>
           <details id="source-library" class="method-detail"><summary>ספריית המקורות <span id="source-count" class="count-label"></span></summary><p class="small-copy">הופעת מקור כאן אינה אישור לנכונות כל טענה. יש לקרוא את סוג המקור, התאריך והערות הגישה.</p><div id="source-directory" class="source-directory"></div></details>
         </section>
       </section>
