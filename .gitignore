@@ -8,3 +8,10 @@
 .squad/.cache/
 # Squad: SubSquad activation file (local to this machine)
 .squad-workstream
+
+# Browser test profiles
+tali-browser-state/
+tali-integration-browser/
+test-quiz-browser.cjs
+*.png
+*.log
