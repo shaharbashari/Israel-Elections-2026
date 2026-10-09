@@ -7,136 +7,233 @@ const path = require("node:path");
 const vm = require("node:vm");
 const app = require("../app.js");
 const root = path.join(__dirname, "..");
-const research = JSON.parse(fs.readFileSync(path.join(root, "data", "research.json"), "utf8"));
-const quiz = structuredClone(require("../quiz-data.js"));
-const questions = quiz.QUIZ_QUESTIONS;
-const party = id => research.parties.find(p => p.id === id);
-const question = id => questions.find(q => q.id === id);
+const readJSON = (filename) => JSON.parse(fs.readFileSync(path.join(root, filename), "utf8").replace(/^\uFEFF/u, ""));
+const research = readJSON(path.join("data", "research.json"));
+const guidePath = path.join("data", "issue-guide.json");
+const guide = fs.existsSync(path.join(root, guidePath)) ? readJSON(guidePath) : null;
+const clone = () => structuredClone(research);
+const checked = app.validateResearch(research);
 
-test("research validates and browser data is the exact canonical object", () => {
-  const result = app.validateResearch(research);
-  assert.equal(result.valid, true, result.problems.join("\n"));
+function emptyGuide(data = research) {
+  return {
+    version: 1, asOfDate: data.asOfDate,
+    questions: [{
+      id: "q_reference_test", topicId: data.topics[0].id,
+      titleHe: "בדיקת הפניות בלבד", promptHe: "בדיקה טכנית, ללא טענה פוליטית",
+      explanationHe: "נתוני הבדיקה אינם מוצגים באתר.",
+      evidenceByParty: Object.fromEntries(data.parties.map(({ id }) => [id, []]))
+    }]
+  };
+}
+
+test("research structure validates without mutation; browser payload equals canonical research", () => {
+  const before = JSON.stringify(research);
+  assert.equal(checked.valid, true, checked.problems.join("\n"));
   const context = { window: {} };
   vm.runInNewContext(fs.readFileSync(path.join(root, "data.js"), "utf8"), context);
   assert.deepEqual(JSON.parse(JSON.stringify(context.window.ELECTION_DATA)), research);
+  assert.equal(JSON.stringify(research), before);
 });
 
-test("all 32 questions and 448 canonical party positions have honest evidence status", () => {
-  assert.equal(research.parties.length, 14);
-  assert.equal(questions.length, 32);
-  assert.equal(new Set(questions.map(q => q.id)).size, 32);
-  const ids = new Set(research.sources.map(s => s.id));
-  let rated = 0, missing = 0;
-  for (const q of questions) {
-    assert.deepEqual(new Set(Object.keys(q.stances)), new Set(research.parties.map(p => p.id)));
-    for (const s of Object.values(q.stances)) {
-      assert.ok(s.note && s.asOfDate);
-      assert.equal(Object.hasOwn(s, "quote"), false, "Paraphrases must not masquerade as quotations");
-      for (const id of s.sourceIds) assert.ok(ids.has(id), `Unknown source ${id}`);
-      if (s.val === null) {
-        missing++;
-        assert.equal(s.status, "missing");
-        assert.equal(app.hasRatedStance(s), false);
-      } else {
-        rated++;
-        assert.ok(Number.isInteger(s.val) && s.val >= -2 && s.val <= 2);
-        assert.ok(s.sourceIds.length > 0);
-        assert.equal(s.status, "assessment");
+test("the published reading guide exists, has the requested breadth, and serializes exactly", () => {
+  assert.ok(guide, "Integration blocker: data\\issue-guide.json has not been delivered");
+  const result = app.validateIssueGuide(guide, research, checked.evidenceIndex);
+  assert.equal(result.valid, true, result.problems.join("\n"));
+  assert.ok(guide.questions.length >= 32, "Maintain the researched 32-subject breadth without numeric political stances");
+  const context = { window: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(root, "issue-data.js"), "utf8"), context);
+  assert.deepEqual(JSON.parse(JSON.stringify(context.window.ISSUE_GUIDE)), guide);
+});
+
+test("roster records have explicit coverage metadata; enumeration is not assumed official verification", () => {
+  assert.ok(research.roster, "Integration blocker: roster coverage and enumeration metadata are required");
+  assert.ok(["complete", "partial", "unverified"].includes(research.roster.completeness));
+  assert.ok(research.roster.basisHe.trim());
+  assert.deepEqual(new Set(research.roster.entries.map(({ id }) => id)), new Set(research.parties.map(({ id }) => id)));
+  for (const id of research.roster.authoritySourceIds) {
+    assert.equal(research.sources.find((source) => source.id === id)?.sourceType, "electoral_authority");
+  }
+  if (research.roster.completeness === "complete") {
+    assert.ok(research.roster.authoritySourceIds.length + research.roster.enumerationSourceIds.length > 0);
+  }
+  const rendered = new Set(app.currentParties(research).map(({ id }) => id));
+  for (const entry of research.roster.entries) {
+    if (["withdrawn", "rejected"].includes(entry.status)) assert.equal(rendered.has(entry.id), false);
+  }
+});
+
+test("source integrity is metadata and reference integrity, not a factual truth certificate", () => {
+  const sources = new Map(research.sources.map((source) => [source.id, source]));
+  assert.equal(sources.size, research.sources.length);
+  for (const source of sources.values()) {
+    assert.ok(source.title.trim() && source.publisher.trim());
+    assert.ok(app.publicSourceURL(source.url));
+    assert.ok(source.publicationDate === null || app.validDate(source.publicationDate));
+    assert.ok(app.validDate(source.asOfDate));
+    assert.ok(app.validTimestamp(source.retrievedAt));
+    assert.ok(source.accessNotesHe === null || typeof source.accessNotesHe === "string");
+  }
+  for (const item of checked.evidenceIndex.values()) {
+    for (const sourceId of item.sourceIds) assert.ok(sources.has(sourceId), `Dangling source: ${sourceId}`);
+    for (const id of item.contradictionIds) assert.ok(id !== item.id && checked.evidenceIndex.has(id));
+    if (item.status === "missing") assert.ok(item.missingEvidenceLabelHe?.trim());
+    if (item.status === "uncertain") assert.ok(item.uncertaintyLabelHe?.trim());
+    if (["declared", "historical"].includes(item.status)) assert.ok(item.sourceIds.length > 0);
+  }
+});
+
+test("invalid source metadata, broken references and unsupported official claims fail closed", () => {
+  for (const mutate of [
+    (data) => { data.sources[0].title = ""; },
+    (data) => { data.sources[0].url = "javascript:alert(1)"; },
+    (data) => { data.sources[0].publicationDate = "2026-02-30"; },
+    (data) => { data.sources[0].retrievedAt = "2026-10-09T09:00:00"; },
+    (data) => { data.parties[0].identityEvidence.sourceIds = ["source_that_does_not_exist"]; },
+    (data) => { data.parties[0].identityEvidence.contradictionIds = [data.parties[0].identityEvidence.id]; },
+    (data) => { data.election.dateConfirmationStatus = "confirmed"; data.election.dateSourceIds = []; },
+    (data) => { data.coverage.includedPartyIds = []; },
+    (data) => { data.parties[0].identityEvidence.status = "officially_verified"; }
+  ]) {
+    const data = clone();
+    mutate(data);
+    assert.equal(app.validateResearch(data).valid, false);
+    assert.equal(app.loadData(data), false);
+  }
+  assert.equal(app.validateResearch(null).valid, false);
+  assert.equal(app.loadData(undefined), false);
+});
+
+test("exact evidence IDs resolve to their own sources, without topic or keyword fallback", () => {
+  assert.ok(guide, "Integration blocker: issue guide absent");
+  const question = guide.questions.find((entry) => Object.values(entry.evidenceByParty).some((ids) => ids.length));
+  assert.ok(question, "The researched guide must contain source-backed evidence to exercise exact resolution");
+  const rows = app.buildIssueRows(research, guide, question.id);
+  for (const row of rows) {
+    const references = question.evidenceByParty[row.party.id];
+    assert.deepEqual(row.linkedEvidence.map(({ id }) => id), references);
+    assert.deepEqual(row.evidence, references.map((id) => checked.evidenceIndex.get(id)));
+    for (const item of row.evidence) assert.deepEqual(item.sourceIds, checked.evidenceIndex.get(item.id).sourceIds);
+    if (!references.length) assert.deepEqual(row.evidence, [], "A gap must not borrow a general position or another party's evidence");
+  }
+});
+
+test("missing, foreign, duplicate and numeric guide references are rejected, never guessed", () => {
+  const first = research.parties[0];
+  const second = research.parties[1];
+  assert.ok(first && second);
+  for (const mutate of [
+    (g) => { g.questions[0].evidenceByParty[first.id] = ["absent_evidence"]; },
+    (g) => { g.questions[0].evidenceByParty[first.id] = [second.identityEvidence.id]; },
+    (g) => { g.questions[0].evidenceByParty[first.id] = [first.identityEvidence.id, first.identityEvidence.id]; },
+    (g) => { g.questions[0].evidenceByParty[first.id] = [0]; },
+    (g) => { delete g.questions[0].evidenceByParty[first.id]; },
+    (g) => { g.questions[0].stances = {}; },
+    (g) => { g.questions.push(structuredClone(g.questions[0])); }
+  ]) {
+    const fixture = emptyGuide();
+    mutate(fixture);
+    assert.equal(app.validateIssueGuide(fixture, research, checked.evidenceIndex).valid, false);
+    assert.deepEqual(app.buildIssueRows(research, fixture, fixture.questions[0].id), []);
+  }
+  assert.equal(app.validateIssueGuide(null, research).valid, false);
+  assert.equal(app.validateIssueGuide(emptyGuide(), { ...research, parties: [null] }).valid, false);
+  assert.deepEqual(app.buildIssueRows(research, null, "absent"), []);
+});
+
+test("unknown is an evidence gap, never opposition, neutrality, agreement or a numeric score", () => {
+  const fixture = emptyGuide();
+  for (const filter of ["all", "declared", "documented", "context"]) {
+    const rows = app.buildIssueRows(research, fixture, fixture.questions[0].id, filter);
+    assert.equal(rows.length, app.currentParties(research).length);
+    for (const row of rows) {
+      assert.equal(row.hasGap, true);
+      assert.deepEqual(row.evidence, []);
+      assert.deepEqual(row.linkedEvidence, []);
+      for (const key of ["val", "stance", "score", "matchPercentage", "agreements", "disagreements"]) assert.equal(Object.hasOwn(row, key), false);
+    }
+  }
+});
+
+test("evidence filters keep every party and every missing label in a fixed alphabetical order", () => {
+  const fixture = emptyGuide();
+  const candidates = app.currentParties(research).flatMap((owner) =>
+    Object.entries(owner.topicPositions).map(([topicId, bucket]) => ({
+      owner, topicId,
+      gap: bucket.gaps.find((item) => item.status === "missing"),
+      declaration: bucket.positions.find((item) => item.status === "declared")
+    })));
+  const candidate = candidates.find(({ gap, declaration }) => gap && declaration);
+  assert.ok(candidate, "Use an actual researched topic containing both a declared position and an explicit gap");
+  const { owner, topicId, gap, declaration } = candidate;
+  fixture.questions[0].topicId = topicId;
+  fixture.questions[0].evidenceByParty[owner.id] = [declaration.id, gap.id];
+  const expected = app.currentParties(research).map(({ id }) => id);
+  for (const filter of ["all", "declared", "documented", "context"]) {
+    const rows = app.buildIssueRows(research, fixture, fixture.questions[0].id, filter);
+    assert.deepEqual(rows.map(({ party }) => party.id), expected);
+    const row = rows.find(({ party }) => party.id === owner.id);
+    assert.deepEqual(row.evidence.find(({ id }) => id === gap.id), gap, "Filtering must retain the complete missing-evidence label and metadata");
+    assert.deepEqual(row.linkedEvidence.map(({ id }) => id), [declaration.id, gap.id]);
+  }
+});
+
+test("guide links cannot borrow an unrelated topic from the same party", () => {
+  assert.ok(guide, "Integration blocker: issue guide absent");
+  const ownership = app.evidenceOwnership(research);
+  const question = guide.questions.find((entry) => Object.values(entry.evidenceByParty).some((ids) => ids.length));
+  const [ownerId] = Object.entries(question.evidenceByParty).find(([, ids]) => ids.length);
+  const unrelated = [...checked.evidenceIndex.values()].find((item) => {
+    const owner = ownership.get(item.id);
+    return owner?.partyId === ownerId && owner.topicId && owner.topicId !== question.topicId;
+  });
+  assert.ok(unrelated, "Use existing evidence from another researched topic, not fabricated evidence");
+  const fixture = structuredClone(guide);
+  fixture.questions.find(({ id }) => id === question.id).evidenceByParty[ownerId] = [unrelated.id];
+  assert.equal(app.validateIssueGuide(fixture, research, checked.evidenceIndex).valid, false);
+  assert.deepEqual(app.buildIssueRows(research, fixture, question.id), []);
+});
+
+test("each delivered question preserves exact per-party links and order in every evidence mode", () => {
+  assert.ok(guide, "Integration blocker: issue guide absent");
+  const expected = app.currentParties(research).map(({ id }) => id);
+  for (const question of guide.questions) {
+    for (const filter of ["all", "declared", "documented", "context"]) {
+      const rows = app.buildIssueRows(research, guide, question.id, filter);
+      assert.deepEqual(rows.map(({ party }) => party.id), expected);
+      for (const row of rows) {
+        assert.deepEqual(row.linkedEvidence.map(({ id }) => id), question.evidenceByParty[row.party.id]);
+        for (const item of row.evidence) assert.ok(question.evidenceByParty[row.party.id].includes(item.id));
       }
     }
   }
-  assert.equal(rated + missing, 448);
-  assert.equal(rated, quiz.QUIZ_FACT_CHECK.sourcedRatings);
-  assert.equal(missing, quiz.QUIZ_FACT_CHECK.missingRatings);
 });
 
-test("ballots and shared-list components cannot revert to obsolete letters", () => {
-  for (const [id, letters] of Object.entries({ beyachad:"רק", otzma_yehudit:"ב", noam:"ני", hadash_taal:"ודם", balad:"ודם" })) {
-    assert.equal(party(id).ballotLetters, letters);
-    assert.equal(app.PARTY_BALLOT_LETTERS[id], letters);
+test("ballot labels need explicit source references; unknown letters have no fallback", () => {
+  const data = clone();
+  const party = data.parties[0];
+  party.ballotLetters = "בדיקת תצוגה";
+  delete party.ballotSourceIds;
+  if (data.roster) {
+    const entry = data.roster.entries.find(({ id }) => id === party.id);
+    entry.ballotLetters = null;
   }
-  const snapshot = structuredClone(research.parties);
-  app.apply2026PartyUpdates(snapshot);
-  assert.deepEqual(snapshot, research.parties);
-  assert.notEqual(research.coverage.partyCoverageBasis, "confirmed_official_list");
-  assert.notEqual(research.election.listConfirmationStatus, "confirmed");
+  assert.equal(app.ballotInfo(party, data), null);
+  party.ballotSourceIds = [data.sources[0].id];
+  if (data.roster) assert.equal(app.ballotInfo(party, data), null, "Unknown current-roster letters cannot fall back to older party metadata");
+  delete data.roster;
+  assert.deepEqual(app.ballotInfo(party, data), { letters: party.ballotLetters, sourceIds: party.ballotSourceIds });
+  party.ballotLetters = null;
+  assert.equal(app.ballotInfo(party, data), null);
 });
 
-test("leadership and historical candidacy distinctions are preserved", () => {
-  assert.equal(party("hadash_taal").leaderSummaries[0].id, "yousef_jabareen");
-  assert.equal(party("utj").leaderSummaries[0].id, "yaakov_asher");
-  assert.match(party("balad").leaderSummaries[0].candidacyEvidence.summaryHe, /פרש/);
-  assert.match(party("utj").leaderSummaries.find(l => l.id === "moshe_gafni").publicRole.summaryHe, /הוסר/);
-  assert.equal(app.getPartyLeaderNames(party("likud")), "בנימין נתניהו");
-  assert.doesNotMatch(app.getPartyLeaderNames(party("utj")), /משה גפני/);
-});
-
-test("conversion does not equate Orthodox decentralization with Reform recognition", () => {
-  const q = question("q_conversion_reform");
-  assert.match(q.statement, /אורתודוקסי/);
-  assert.doesNotMatch(q.statement, /רפורמים|קונסרבטיבים/);
-  assert.equal(q.stances.beyachad.val, 2);
-  assert.match(q.stances.beyachad.note, /אין כאן ייחוס/);
-});
-
-test("time-sensitive questions do not assert ongoing captivity or an unpassed death-penalty law", () => {
-  assert.match(question("q_hostage_deal").statement, /עתידי/);
-  assert.match(question("q_hostage_deal").explanation, /26 בינואר 2026/);
-  assert.match(question("q_death_penalty").explanation, /30 במרץ 2026/);
-  assert.doesNotMatch(question("q_mandatory_civil_service").statement, /כתנאי לזכויות אזרחיות/);
-});
-
-test("unknown is distinct from an actual documented zero", () => {
-  assert.equal(app.hasRatedStance({ val:null, status:"missing" }), false);
-  assert.equal(app.hasRatedStance({ val:0, status:"assessment" }), true);
-  assert.equal(app.hasRatedStance({ val:0, status:"missing" }), false);
-  assert.equal(app.hasRatedStance({ val:"0" }), false);
-  assert.equal(app.hasRatedStance({ val:3 }), false);
-});
-
-test("an unanswered-evidence question never creates a fake 50% or neutral match", () => {
-  assert.equal(app.loadData(structuredClone(research)), true);
-  app.quizState.answers.clear();
-  app.quizState.answers.set("q_hightech_taxation_innovation", { stance:2, important:true });
-  const results = app.calculateMatchResults();
-  assert.equal(results.length, 14);
-  for (const result of results) {
-    assert.equal(result.matchPercentage, null);
-    assert.equal(result.matchedQuestionCount, 0);
-    assert.equal(result.missingQuestionCount, 1);
-    assert.equal(result.agreements.length, 0);
-    assert.equal(result.disagreements.length, 0);
-  }
-});
-
-test("unsupported answers are excluded from both numerator and denominator", () => {
-  app.quizState.answers.clear();
-  app.quizState.answers.set("q_term_limits", { stance:2, important:false });
-  app.quizState.answers.set("q_hightech_taxation_innovation", { stance:-2, important:true });
-  const result = app.calculateMatchResults().find(r => r.party.id === "yisrael_beitenu");
-  assert.equal(result.matchPercentage, 100);
-  assert.equal(result.matchedQuestionCount, 1);
-  assert.equal(result.missingQuestionCount, 1);
-});
-
-test("known answers still use the existing distance and importance weighting", () => {
-  app.quizState.answers.clear();
-  app.quizState.answers.set("q_core_curriculum", { stance:2, important:true });
-  app.quizState.answers.set("q_gaza_day_after", { stance:-2, important:false });
-  const result = app.calculateMatchResults().find(r => r.party.id === "yisrael_beitenu");
-  assert.equal(result.matchPercentage, 67);
-  assert.equal(result.matchedQuestionCount, 2);
-  assert.equal(result.missingQuestionCount, 0);
-  app.quizState.answers.clear();
-});
-
-test("legacy policy modules derive from the current canonical source", () => {
-  const parts = [require("../policy_data_part1.js"), require("../policy_data_part2.js"), require("../policy_data_part3.js")];
-  assert.deepEqual(new Set(parts.flatMap(p => Object.keys(p))), new Set(research.parties.map(p => p.id)));
-  for (const part of parts) for (const [id, positions] of Object.entries(part)) {
-    for (const [topic, value] of Object.entries(positions)) {
-      assert.deepEqual(value.position, party(id).topicPositions[topic].positions[0] || null);
-      assert.deepEqual(value.gaps, party(id).topicPositions[topic].gaps);
-    }
-  }
+test("optional roster, aliases and ballot references validate without mutating legacy research", () => {
+  const data = clone();
+  delete data.roster;
+  data.parties[0].aliases = ["שם חלופי לבדיקת מבנה"];
+  data.parties[0].componentNames = ["מרכיב לבדיקת מבנה"];
+  data.parties[0].ballotSourceIds = [data.sources[0].id];
+  assert.equal(app.validateResearch(data).valid, true);
+  assert.equal(app.nameMatches(data.parties[0], "שם חלופי"), true);
+  data.parties[0].ballotSourceIds = ["unresolvable"];
+  assert.equal(app.validateResearch(data).valid, false);
 });

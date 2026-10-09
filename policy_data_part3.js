@@ -1,8 +1,7 @@
 "use strict";
 
 const research = require("./data/research.json");
-const ids = new Set(["raam", "hadash_taal", "noam", "yashar"]);
-module.exports = Object.fromEntries(research.parties.filter(p => ids.has(p.id)).map(p => [
+module.exports = Object.fromEntries(research.parties.filter((_, index) => index % 3 === 2).map(p => [
   p.id,
   Object.fromEntries(Object.entries(p.topicPositions).map(([topic, bucket]) => [
     topic,

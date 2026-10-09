@@ -1,10 +1,10 @@
 "use strict";
 
-const { serializeResearch } = require("./assemble_research.js");
+const { serializeResearch, serializeIssueGuide, serializeArtifacts } = require("./assemble_research.js");
 
 if (require.main === module) {
-  serializeResearch();
-  console.log("Legacy enrichment command: serialized the canonical research only; no facts or promises generated.");
+  serializeArtifacts();
+  console.log("Serialized canonical research and issue guide; no facts, ratings or promises generated.");
 }
 
-module.exports = { serializeResearch };
+module.exports = { serializeResearch, serializeIssueGuide, serializeArtifacts };

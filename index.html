@@ -4,457 +4,201 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
-    <meta name="description" content="ממשק מידע עצמאי בעברית לקריאת מקורות, היכרות עם רשימות והשוואה ללא דירוג או המלצות.">
-    <title>בחירות בישראל — לקרוא, להבין, להשוות</title>
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="מבט — מרחב עצמאי לקריאת מידע על הבחירות בישראל. רשימות, שאלות ומקורות, ללא דירוג וללא המלצות הצבעה.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <title>מבט — בחירות בישראל, עם המקורות</title>
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <script defer src="data.js"></script>
-    <script defer src="quiz-data.js"></script>
+    <script defer src="issue-data.js"></script>
     <script defer src="app.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">דילוג לתוכן המרכזי</a>
     <header class="site-header">
-      <div class="container">
-        <a class="brand" href="#intro" aria-label="בחירות בישראל — תחילת העמוד">
-          <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-            <rect x="4" y="5" width="24" height="23" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/>
-            <path d="M11 12h10M11 17h10M11 22h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-          </svg>
-          <span>בחירות בישראל</span>
-        </a>
-        <nav aria-label="ניווט ראשי">
-          <button id="nav-btn-quiz" class="button button--primary" type="button" data-action="nav-quiz">🎯 שאלון התאמה</button>
-          <button id="nav-btn-matrix" class="button button--quiet" type="button" data-action="nav-matrix">📊 מטריצת השוואה</button>
-          <button id="nav-btn-browse" class="button button--quiet" type="button" data-action="nav-browse">📚 מאגר מפלגות</button>
-          <a href="#methodology">על המידע</a>
+      <div class="container header-inner">
+        <button type="button" class="brand" data-view="overview" aria-label="מבט — לעמוד הפתיחה">
+          <img src="assets/mark.svg" width="42" height="42" alt="">
+          <span><strong>מבט</strong><span class="brand-caption">בחירות בישראל</span></span>
+        </button>
+        <nav class="main-nav" aria-label="ניווט ראשי">
+          <button type="button" data-view="overview" aria-current="page">הרשימות</button>
+          <button type="button" data-view="explore">מפת הנושאים</button>
+          <button type="button" data-view="compare">השוואה ומקורות <span id="nav-count" class="nav-count" hidden></span></button>
         </nav>
+        <span class="header-note">מידע ציבורי. קריאה עצמאית.</span>
       </div>
     </header>
 
-    <nav id="portal-tab-nav" class="portal-tabs-nav" aria-label="ניווט ראשי בפורטל">
-      <div class="container">
-        <div class="portal-tabs" role="tablist">
-          <button id="tab-btn-quiz" class="portal-tab is-active" type="button" data-action="nav-quiz" role="tab" aria-selected="true">
-            <span class="portal-tab-icon" aria-hidden="true">🎯</span>
-            <span class="portal-tab-text">שאלון התאמה (מצפן עמדות)</span>
-          </button>
-          <button id="tab-btn-matrix" class="portal-tab" type="button" data-action="nav-matrix" role="tab" aria-selected="false">
-            <span class="portal-tab-icon" aria-hidden="true">📊</span>
-            <span class="portal-tab-text">מטריצת השוואת עמדות (כל המפלגות והנושאים זו לצד זו)</span>
-          </button>
-          <button id="tab-btn-browse" class="portal-tab" type="button" data-action="nav-browse" role="tab" aria-selected="false">
-            <span class="portal-tab-icon" aria-hidden="true">📚</span>
-            <span class="portal-tab-text">מאגר מפלגות ומצעים</span>
-          </button>
-        </div>
-      </div>
-    </nav>
-
     <main id="main" class="container" tabindex="-1">
-      <section id="intro" class="hero" aria-labelledby="intro-title">
-        <div class="hero-copy">
-          <p class="eyebrow">בחירות 2026 בישראל · שאלון עמדות וקריאה במקורות</p>
-          <h1 id="intro-title">איזו מפלגה מתאימה<br>לעמדות שלכם?</h1>
-          <p class="section-copy">32 שאלות בביטחון, משפט, כלכלה, דת ומדינה, שירות וחברה מול 14 מסגרות פוליטיות. החפיפה מחושבת רק כשיש תיעוד מתאים; הדירוג הוא פרשנות עריכתית, לא מדד מדעי או המלצת הצבעה. חד״ש, תע״ל ובל״ד חולקות פתק ברשימה המשותפת.</p>
-          <div class="form-actions">
-            <button class="button button--primary" type="button" data-action="start-quiz">התחילו את שאלון ההתאמה (מצפן עמדות)</button>
-            <button class="button button--secondary" type="button" data-action="explore-all">לכל הכרטיסים במאגר ללא שאלון</button>
-          </div>
-          <p>פרטיות מלאה · חישוב מקומי בדפדפן בלבד · ללא איסוף נתונים או המלצות הצבעה</p>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <svg viewBox="0 0 440 350" width="440" height="350" focusable="false">
-            <circle cx="224" cy="174" r="142" fill="#e9eee9"/>
-            <circle cx="342" cy="69" r="20" fill="#dbc4ab"/>
-            <circle cx="91" cy="274" r="12" fill="#7d9892"/>
-            <path d="M79 139c-13-63 57-104 112-76M342 232c40-46 20-103-8-125" fill="none" stroke="#a0b4ad" stroke-width="2" stroke-dasharray="5 8"/>
-            <g transform="rotate(-8 164 180)">
-              <rect x="87" y="79" width="169" height="218" rx="15" fill="#faf9f5" stroke="#b8c5bd" stroke-width="2"/>
-              <rect x="109" y="103" width="56" height="8" rx="4" fill="#b3c7bf"/>
-              <rect x="109" y="128" width="125" height="13" rx="5" fill="#354b45"/>
-              <path d="M111 162h122M111 175h98M111 189h112M111 221h122M111 235h89" stroke="#c8cfc7" stroke-width="6" stroke-linecap="round"/>
-              <rect x="109" y="258" width="59" height="13" rx="6" fill="#dce6df"/>
-            </g>
-            <g transform="rotate(9 280 195)">
-              <rect x="191" y="120" width="162" height="190" rx="15" fill="#fffdfa" stroke="#b9c7be" stroke-width="2"/>
-              <circle cx="221" cy="151" r="11" fill="#c8dbd3"/>
-              <path d="M245 147h81M245 157h61M216 184h109M216 198h95M216 213h109" stroke="#bbc9c1" stroke-width="6" stroke-linecap="round"/>
-              <rect x="215" y="240" width="112" height="42" rx="8" fill="#edf1ec"/>
-              <path d="M233 261h77" stroke="#6d8b7e" stroke-width="5" stroke-linecap="round"/>
-            </g>
-          </svg>
-        </div>
+      <noscript><div class="empty-state"><h1>המידע צריך JavaScript כדי להופיע.</h1><p>האתר קורא קובצי נתונים מקומיים, ללא התקנה וללא חשבון. אפשר לקרוא את קובצי המחקר גם ישירות מתיקיית האתר.</p></div></noscript>
+      <section id="data-state" class="data-state" aria-labelledby="data-state-title" hidden>
+        <h2 id="data-state-title">המידע אינו זמין כרגע</h2>
+        <p id="data-state-message"></p>
+        <details><summary>פרטים טכניים</summary><ul id="data-problems"></ul></details>
       </section>
 
-      <section id="research-metadata" class="metadata-strip" aria-label="עדכניות והיקף המאגר">
-        <div><span>המידע נכון ל־</span><strong>אוקטובר 2026</strong></div>
-        <div><span>עדכון המאגר</span><strong>ביקורת מקורות · 9 באוקטובר 2026</strong></div>
-        <div><span>היקף הכיסוי</span><strong>14 מסגרות, לא 14 פתקי קלפי נפרדים</strong></div>
-      </section>
-      <p id="source-coverage-summary" class="section-copy" hidden></p>
-
-      <section id="data-notice" class="notice notice--warning" aria-labelledby="data-notice-title" hidden>
-        <h2 id="data-notice-title">מגבלות הנתונים והשאלון</h2>
-        <p>לא לכל מסגרת יש עמדה מתועדת על כל שאלה. פער אינו ניטרליות ואינו נספר בהתאמה.</p>
-      </section>
-
-      <section id="election-information" class="notice" aria-labelledby="election-title">
-        <h2 id="election-title" class="section-heading">מועד הבחירות ומעמד הרשימות</h2>
-        <div id="election-details">
-          <p>המועד המפורסם לבחירות לכנסת ה-26 הוא 27 באוקטובר 2026. המאגר אינו רשימת מועמדים רשמית מלאה: לפי הדיווחים הוקצו אותיות ל-38 רשימות, וחד״ש, תע״ל ובל״ד מתמודדות יחד ברשימה המשותפת.</p>
-        </div>
-      </section>
-
-      <!-- Match Questionnaire Section -->
-      <section id="quiz-section" class="card quiz-card" aria-labelledby="quiz-section-title" hidden>
-        <header class="quiz-header">
-          <div class="quiz-meta-top">
-            <span id="quiz-step-indicator" class="quiz-step-indicator">שאלה 1</span>
-            <span id="quiz-category-tag" class="quiz-category-tag">ביטחון ומדיניות חוץ</span>
-          </div>
-          <div class="quiz-progress-track" aria-hidden="true">
-            <div id="quiz-progress-bar" class="quiz-progress-fill" style="width: 0%;"></div>
-          </div>
-        </header>
-
-        <div class="quiz-card-body">
-          <h2 id="quiz-section-title" class="quiz-title" tabindex="-1"></h2>
-          <p id="quiz-question-statement" class="quiz-statement"></p>
-          <div id="quiz-question-explanation" class="quiz-explanation-box"></div>
-
-          <fieldset class="quiz-stances-fieldset">
-            <legend class="visually-hidden">בחרו את עמדתכם בנושא זה</legend>
-            <div id="quiz-options-group" class="quiz-options-grid" role="radiogroup" aria-labelledby="quiz-question-statement">
-              <button type="button" class="quiz-option-btn" data-action="select-stance" data-stance="2">
-                <span class="stance-emoji">🟢</span>
-                <span class="stance-name">בעד חזק</span>
-              </button>
-              <button type="button" class="quiz-option-btn" data-action="select-stance" data-stance="1">
-                <span class="stance-emoji">🟩</span>
-                <span class="stance-name">בעד</span>
-              </button>
-              <button type="button" class="quiz-option-btn" data-action="select-stance" data-stance="0">
-                <span class="stance-emoji">⚪</span>
-                <span class="stance-name">נמנע / אין דעה</span>
-              </button>
-              <button type="button" class="quiz-option-btn" data-action="select-stance" data-stance="-1">
-                <span class="stance-emoji">🟧</span>
-                <span class="stance-name">נגד</span>
-              </button>
-              <button type="button" class="quiz-option-btn" data-action="select-stance" data-stance="-2">
-                <span class="stance-emoji">🔴</span>
-                <span class="stance-name">נגד חזק</span>
-              </button>
+      <section id="view-overview" class="view" aria-labelledby="overview-title">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow hero-eyebrow"><span class="small-rule" aria-hidden="true"></span> מבט על הבחירות · מאגר עצמאי</p>
+            <h1 id="overview-title" tabindex="-1">פחות רעש.<br><span>יותר הקשר.</span></h1>
+            <p class="hero-description">הרשימות, הסוגיות ומה שכתוב במקורות.<br>מרחב לקריאה עצמאית — בלי דירוג מפלגות ובלי המלצות הצבעה.</p>
+            <div class="hero-actions">
+              <button type="button" class="button button--light" data-action="start-reading">מה תרצו להבין? <span aria-hidden="true">←</span></button>
+              <button type="button" class="button button--on-dark" data-action="show-roster">להיכרות עם הרשימות</button>
             </div>
-          </fieldset>
-
-          <div class="quiz-important-wrapper">
-            <label class="quiz-important-label" for="quiz-important-toggle">
-              <input type="checkbox" id="quiz-important-toggle">
-              <span class="quiz-important-star" aria-hidden="true">⭐</span>
-              <span>סמנו כנושא בעל חשיבות עליונה עבורכם (משקל כפול בשקלול ההתאמה)</span>
-            </label>
+            <p class="hero-footnote">בלי חשבון · בלי שאלות על העמדות שלכם</p>
           </div>
+          <figure class="hero-art">
+            <img src="assets/reading-room.svg" width="520" height="410" alt="">
+            <figcaption>שואלים. קוראים. רואים את ההקשר.</figcaption>
+          </figure>
         </div>
+        <dl id="research-metadata" class="metadata-grid" aria-label="תאריך והיקף המידע"></dl>
 
-        <footer class="quiz-footer-actions">
-          <button id="quiz-btn-prev" class="button button--secondary" type="button" data-action="quiz-prev" disabled>⭢ שאלה קודמת</button>
-          <button id="quiz-btn-skip" class="button button--quiet" type="button" data-action="quiz-skip">דלג לשאלה הבאה</button>
-          <button id="quiz-btn-next" class="button button--primary" type="button" data-action="quiz-next">שאלה הבאה ⭠</button>
-        </footer>
+        <section class="section-block" aria-labelledby="topics-preview-title">
+          <div class="section-heading-row">
+            <div><p class="eyebrow">מפת הנושאים</p><h2 id="topics-preview-title">מתחילים בשאלה.</h2></div>
+            <button type="button" class="text-button" data-action="start-reading">לבניית מסלול קריאה <span aria-hidden="true">←</span></button>
+          </div>
+          <div id="topic-shortcuts" class="topic-shortcuts"></div>
+        </section>
+
+        <section id="roster" class="section-block roster-section" aria-labelledby="roster-title">
+          <div class="section-heading-row">
+            <div><p class="eyebrow">היכרות, לא דירוג</p><h2 id="roster-title" tabindex="-1">הרשימות במאגר.</h2></div>
+            <p class="section-aside">אותו מקום לכל רשימה.<br>תמיד לפי סדר א״ב.</p>
+          </div>
+          <div id="roster-basis" class="roster-basis"></div>
+          <div class="roster-toolbar">
+            <div class="search-field">
+              <label for="name-search">חיפוש לפי שם רשימה או מרכיב ברשימה</label>
+              <div class="search-input-wrap"><span aria-hidden="true">⌕</span><input id="name-search" type="search" autocomplete="off" spellcheck="false" placeholder="איזו רשימה לחפש?"><button type="button" class="text-button" data-action="clear-search" aria-label="ניקוי חיפוש לפי שם">ניקוי</button></div>
+            </div>
+            <div class="roster-tools"><p id="roster-count" role="status"></p><button type="button" class="button button--outline" data-view="compare">לקריאה זו לצד זו <span id="selection-count">0 / 4</span></button></div>
+          </div>
+          <div id="party-grid" class="party-grid"></div>
+        </section>
       </section>
 
-      <!-- Match Results Section -->
-      <section id="quiz-results" class="quiz-results-container" aria-labelledby="quiz-results-heading" hidden>
-        <header class="quiz-results-header card">
-          <p class="eyebrow">תוצאות שאלון ההתאמה האישית</p>
-          <h2 id="quiz-results-heading" class="section-heading" tabindex="-1">אחוזי ההתאמה לעמדותיכם</h2>
-          <p class="section-copy">השקלול משתמש רק בעמדות שיש להן אסמכתאות לשאלה. פערים אינם נספרים, ולכן מספר השאלות המכוסות שונה בין מסגרות וחייבים לקרוא אותו לצד האחוזים. הנימוקים הם סיכומים עריכתיים, לא ציטוטים ישירים.</p>
-          
-          <div class="form-actions results-toolbar-actions">
-            <button id="btn-share-results" class="button button--primary" type="button" data-action="share-results">📋 העתקת כרטיס תוצאות</button>
-            <button class="button button--secondary" type="button" data-action="quiz-edit-answers">עריכת תשובות</button>
-            <button class="button button--quiet" type="button" data-action="quiz-restart">איפוס שאלון</button>
-            <button class="button button--quiet" type="button" data-action="explore-all">למאגר המפלגות המלא</button>
-          </div>
-        </header>
-
-        <!-- Top 3 Highlights -->
-        <section class="podium-section" aria-label="המפלגות בעלות החפיפה הגבוהה ביותר">
-          <h3 class="podium-heading">חפיפה במידע הזמין — יש לבדוק את הכיסוי</h3>
-          <div id="quiz-podium-cards" class="podium-grid"></div>
-        </section>
-
-        <!-- Complete 14 Parties Ranking -->
-        <section class="leaderboard-section card" aria-label="דירוג התאמה מלא לכל המפלגות">
-          <div class="leaderboard-header">
-            <h3>השוואה ל-14 המסגרות במאגר</h3>
-            <p class="section-copy">הכרטיס מציג את מספר העמדות המתועדות, החפיפה והפערים. כשאין בסיס מתועד בשאלות שנענו, לא מוצג אחוז.</p>
-          </div>
-          <div id="quiz-ranking-items" class="ranking-list"></div>
-        </section>
-
-        <!-- Question-by-Question Dissection Section -->
-        <section id="quiz-questions-dissection" class="card dissection-section" aria-labelledby="dissection-title">
-          <div class="dissection-header">
-            <p class="eyebrow">צלילה עמוקה לכל סוגיה</p>
-            <h3 id="dissection-title" class="dissection-heading">ניתוח מפורט: עמדותיך מול המפלגות בכל שאלה</h3>
-            <p class="section-copy">כל שאלה שנענתה מול העמדות שיש להן מקורות, נימוקי הדירוג והפערים שלא נספרו. סיכום של מקור אינו ציטוט מילולי.</p>
-          </div>
-
-          <!-- Filter tabs to view questions by topic -->
-          <div class="dissection-filters-toolbar" role="toolbar" aria-label="סינון שאלות לפי תחום">
-            <span class="dissection-filter-heading">סינון לפי תחום:</span>
-            <div id="dissection-topic-filters" class="dissection-filter-buttons" role="tablist" aria-label="סינון שאלות לפי תחום">
-              <button type="button" class="dissection-filter-btn is-active" data-action="filter-dissection" data-topic="all" role="tab" aria-selected="true">כל השאלות שנענו</button>
-              <button type="button" class="dissection-filter-btn" data-action="filter-dissection" data-topic="security_foreign_relations" role="tab" aria-selected="false">🛡️ ביטחון</button>
-              <button type="button" class="dissection-filter-btn" data-action="filter-dissection" data-topic="economy_cost_of_living" role="tab" aria-selected="false">💰 כלכלה</button>
-              <button type="button" class="dissection-filter-btn" data-action="filter-dissection" data-topic="institutions_democracy" role="tab" aria-selected="false">⚖️ משפט</button>
-              <button type="button" class="dissection-filter-btn" data-action="filter-dissection" data-topic="religion_state" role="tab" aria-selected="false">✡️ דת ומדינה</button>
-              <button type="button" class="dissection-filter-btn" data-action="filter-dissection" data-topic="public_services_equality" role="tab" aria-selected="false">🤝 שוויון</button>
-              <button type="button" class="dissection-filter-btn" data-action="filter-dissection" data-topic="environment_infrastructure" role="tab" aria-selected="false">🌱 סביבה</button>
+      <section id="view-explore" class="view" aria-labelledby="explore-title" hidden>
+        <div id="reading-builder">
+          <header class="view-heading">
+            <p class="eyebrow">מסלול קריאה · שלושה צעדים</p>
+            <h1 id="explore-title" tabindex="-1">סקרנות היא נקודת פתיחה.</h1>
+            <p>בוחרים מה להבין ואיך לקרוא. לא נשאל במה אתם מאמינים, ולא נבחר מפלגות עבורכם.</p>
+          </header>
+          <div class="builder-layout">
+            <aside class="reading-note">
+              <img src="assets/topic-society.svg" width="100" height="100" alt="">
+              <h2>הנושא משתנה.<br>הרשימות לא.</h2>
+              <p>בכל שאלה מוצגות כל הרשימות שבמאגר, באותו סדר. גם כשאין לגביהן תיעוד מתאים.</p>
+              <p class="small-copy">הבחירות כאן נשארות בזיכרון העמוד בלבד ונמחקות ברענון.</p>
+            </aside>
+            <div class="builder-card">
+              <ol id="reading-steps" class="reading-steps" aria-label="התקדמות במסלול הקריאה">
+                <li aria-current="step"><span>1</span> נושאים</li><li><span>2</span> סוג תיעוד</li><li><span>3</span> עומק קריאה</li>
+              </ol>
+              <progress id="reading-progress" value="1" max="3" aria-label="צעד במסלול הקריאה">1 מתוך 3</progress>
+              <fieldset id="step-topics" class="wizard-step">
+                <legend tabindex="-1">מה תרצו להבין יותר?</legend>
+                <p class="field-description">אפשר לבחור כמה תחומים. הבחירה משנה את השאלות, לא את הרשימות שמוצגות.</p>
+                <div class="inline-actions"><button type="button" class="text-button" data-action="all-topics">כל התחומים</button><button type="button" class="text-button" data-action="no-topics">ניקוי הבחירה</button></div>
+                <div id="topic-options" class="topic-options"></div>
+              </fieldset>
+              <fieldset id="step-evidence" class="wizard-step" hidden>
+                <legend tabindex="-1">מאיזה סוג מידע להתחיל?</legend>
+                <p class="field-description">אפשר לשנות זאת בהמשך. הפערים במידע נשארים גלויים בכל בחירה.</p>
+                <div class="choice-list">
+                  <label class="choice"><input type="radio" name="evidence" value="all" checked><span><strong>התמונה הרחבה</strong><span>הצהרות, הבטחות, רשומות ודיווח — עם הבחנה ביניהם.</span></span></label>
+                  <label class="choice"><input type="radio" name="evidence" value="declared"><span><strong>מה נאמר ומה הובטח</strong><span>עמדות והבטחות מיוחסות. הצהרה אינה הוכחה לביצוע.</span></span></label>
+                  <label class="choice"><input type="radio" name="evidence" value="documented"><span><strong>מה תועד שנעשה</strong><span>מעשים ורשומות, עם תאריך וייחוס כשיש כאלה.</span></span></label>
+                  <label class="choice"><input type="radio" name="evidence" value="context"><span><strong>דיווח והקשר</strong><span>מידע המספק רקע, בלי להפוך אותו לעמדה רשמית.</span></span></label>
+                </div>
+              </fieldset>
+              <fieldset id="step-depth" class="wizard-step" hidden>
+                <legend tabindex="-1">כמה להעמיק עכשיו?</legend>
+                <p class="field-description">המקורות, התאריכים וההסתייגויות נגישים בשתי התצוגות.</p>
+                <div class="choice-list">
+                  <label class="choice"><input type="radio" name="depth" value="brief" checked><span><strong>מבט קצר</strong><span>מקטע תיעוד ראשון לכל רשימה, והרחבה לשאר המידע.</span></span></label>
+                  <label class="choice"><input type="radio" name="depth" value="deep"><span><strong>קריאה מעמיקה</strong><span>כל מקטעי התיעוד המקושרים לשאלה פתוחים לקריאה.</span></span></label>
+                </div>
+              </fieldset>
+              <p id="wizard-error" class="field-error" role="alert" hidden></p>
+              <div class="wizard-actions">
+                <button id="wizard-back" type="button" class="button button--outline" data-action="wizard-back" disabled>חזרה</button>
+                <span id="wizard-step-label" class="small-copy">צעד 1 מתוך 3</span>
+                <button id="wizard-next" type="button" class="button button--primary" data-action="wizard-next">לסוג התיעוד <span aria-hidden="true">←</span></button>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Questions Dissection List -->
-          <div id="dissection-questions-list" class="dissection-list"></div>
-        </section>
-
-        <section class="notice" aria-label="הערת שקיפות ופרטיות">
-          <p><strong>הערת שקיפות ופרטיות:</strong> שאלון זה מהווה כלי עזר להשוואת מצעים ועמדות באופן אובייקטיבי ושקוף. הוא אינו מהווה המלצת הצבעה או ניבוי פוליטי. כל הנתונים מעובדים בדפדפן המקומי שלכם בלבד ולא נשמרים או נשלחים לשום מקום.</p>
-        </section>
-      </section>
-
-      <!-- Section #comparison-matrix-section (מטריצת השוואת עמדות מלאה) -->
-      <section id="comparison-matrix-section" class="matrix-section card" aria-labelledby="matrix-title" hidden>
-        <header class="matrix-header">
-          <div class="matrix-header-top">
-            <p class="eyebrow">השוואת עמדות מקיפה ורוחבית</p>
-            <h2 id="matrix-title" class="section-heading" tabindex="-1">מטריצת השוואת עמדות מלאה</h2>
-            <p class="section-copy">כל 32 הדילמות הלאומיות מול 14 המפלגות זו לצד זו, על פי מצעי המפלגות והרשומות הציבוריות. בחרו תחום לסינון ולחצו על כל עמדה לקריאת הנימוק וההסבר המלא מתוך המצע.</p>
-          </div>
-
-          <!-- Interactive filter by category -->
-          <div class="matrix-filters-toolbar">
-            <span class="matrix-filter-heading">סינון לפי תחום:</span>
-            <div id="matrix-category-filters" class="matrix-filter-buttons" role="radiogroup" aria-label="סינון מטריצה לפי תחום">
-              <button type="button" class="matrix-filter-btn is-active" data-action="filter-matrix" data-category="all" aria-pressed="true">כל 32 הנושאים</button>
-              <button type="button" class="matrix-filter-btn" data-action="filter-matrix" data-category="security_foreign_relations" aria-pressed="false">🛡️ ביטחון (6)</button>
-              <button type="button" class="matrix-filter-btn" data-action="filter-matrix" data-category="economy_cost_of_living" aria-pressed="false">💰 כלכלה (6)</button>
-              <button type="button" class="matrix-filter-btn" data-action="filter-matrix" data-category="institutions_democracy" aria-pressed="false">⚖️ משפט (6)</button>
-              <button type="button" class="matrix-filter-btn" data-action="filter-matrix" data-category="religion_state" aria-pressed="false">✡️ דת ומדינה (5)</button>
-              <button type="button" class="matrix-filter-btn" data-action="filter-matrix" data-category="public_services_equality" aria-pressed="false">🤝 שוויון (5)</button>
-              <button type="button" class="matrix-filter-btn" data-action="filter-matrix" data-category="environment_infrastructure" aria-pressed="false">🌱 סביבה (4)</button>
+        <section id="reading-results" aria-labelledby="reading-title" hidden>
+          <header class="view-heading heading-with-action">
+            <div><p class="eyebrow">מפת הנושאים · קריאה במקורות</p><h1 id="reading-title" tabindex="-1">נושא אחד. כל הרשימות.</h1><p id="reading-summary"></p></div>
+            <button type="button" class="button button--outline" data-action="edit-reading">עריכת מסלול הקריאה</button>
+          </header>
+          <div id="guide-state" class="empty-state" hidden></div>
+          <div id="reading-content">
+            <div class="reading-toolbar">
+              <label class="select-field question-field" for="reading-question">השאלה שקוראים עכשיו<select id="reading-question"></select></label>
+              <label class="select-field" for="reading-filter">סוג התיעוד<select id="reading-filter"><option value="all">כל סוגי המידע</option><option value="declared">הצהרות והבטחות</option><option value="documented">מעשים ורשומות</option><option value="context">דיווח והקשר</option></select></label>
+              <label class="select-field" for="reading-depth">עומק הקריאה<select id="reading-depth"><option value="brief">מבט קצר</option><option value="deep">קריאה מעמיקה</option></select></label>
             </div>
-          </div>
-
-          <!-- Stance Legend -->
-          <div class="matrix-legend" aria-label="מקרא עמדות במטריצה">
-            <span class="legend-badge legend-for">🟢 בעד / תמיכה</span>
-            <span class="legend-badge legend-against">🔴 נגד / התנגדות</span>
-            <span class="legend-badge legend-neutral">⚪ עמדה מעורבת או פער — יש לקרוא את הנימוק</span>
-            <span class="legend-hint">💡 לחיצה על כל תג מציגה את נימוק המפלגה</span>
-          </div>
-        </header>
-
-        <div class="matrix-table-wrapper" tabindex="0" role="region" aria-label="טבלת השוואת עמדות מפלגות">
-          <table class="matrix-table">
-            <thead>
-              <tr id="matrix-header-row">
-                <th class="matrix-th-dilemma" scope="col">סוגיה / דילמה (32 נושאים)</th>
-                <!-- Party ths dynamically generated -->
-              </tr>
-            </thead>
-            <tbody id="matrix-tbody">
-              <!-- Dynamically generated rows -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="questionnaire" class="questionnaire card" aria-labelledby="questionnaire-title">
-        <p class="eyebrow">מסלול הקריאה שלכם</p>
-        <h2 id="questionnaire-title" class="section-heading">מה תרצו להכיר?</h2>
-        <p class="section-copy">שלוש בחירות קצרות קובעות את המידע המוצג בכל הכרטיסים — לא אילו ארגונים יוצגו.</p>
-        <ol class="stepper" aria-label="שלבי בחירת המידע">
-          <li class="step is-active" data-step="1" aria-current="step"><span>1</span> נושאים</li>
-          <li class="step" data-step="2"><span>2</span> סוג המידע</li>
-          <li class="step" data-step="3"><span>3</span> עומק הקריאה</li>
-        </ol>
-
-        <div id="questionnaire-form">
-          <fieldset id="step-topics" aria-describedby="topics-help">
-            <legend>שלב 1 מתוך 3 · נושאים</legend>
-            <h3 id="step-topics-title" class="section-heading" tabindex="-1">על אילו נושאים תרצו לקרוא?</h3>
-            <p id="topics-help">בחרו נושא אחד לפחות. כל ששת הנושאים נבחרו כברירת מחדל.</p>
-            <div class="form-actions">
-              <button class="button button--quiet" type="button" data-action="select-all-topics">בחירת כל הנושאים</button>
-              <span id="topic-count">6 נושאים נבחרו</span>
-            </div>
-            <div id="topic-options" class="topic-grid"></div>
-            <p id="topics-error" class="notice notice--warning" tabindex="-1" hidden>בחרו נושא אחד לפחות כדי להמשיך.</p>
-          </fieldset>
-
-          <fieldset id="step-evidence" hidden>
-            <legend>שלב 2 מתוך 3 · סוג המידע</legend>
-            <h3 id="step-evidence-title" class="section-heading" tabindex="-1">איזה סוג מידע תרצו לראות?</h3>
-            <p>ההבחנה היא בין הצהרה, תיעוד ודיווח. חוסרים והסתייגויות נשארים גלויים בכל תצוגה.</p>
-            <label class="choice-option is-selected">
-              <input type="radio" name="evidence" value="all" checked>
-              <span><strong>כל סוגי המידע</strong><small>עמדות, הבטחות, מעשים מתועדים ודיווח בהקשר</small></span>
-            </label>
-            <label class="choice-option">
-              <input type="radio" name="evidence" value="declared">
-              <span><strong>עמדות והבטחות מוצהרות</strong><small>מה שהשחקנים הציבוריים הצהירו או התחייבו לעשות</small></span>
-            </label>
-            <label class="choice-option">
-              <input type="radio" name="evidence" value="documented">
-              <span><strong>מעשים ורשומות מתועדים</strong><small>פעולות ורשומות המיוחסות לשחקן ולמועד המתועדים</small></span>
-            </label>
-            <label class="choice-option">
-              <input type="radio" name="evidence" value="context">
-              <span><strong>דיווח והקשר</strong><small>דיווח מיוחס למקור, עם תאריך ומגבלות</small></span>
-            </label>
-          </fieldset>
-
-          <fieldset id="step-depth" hidden>
-            <legend>שלב 3 מתוך 3 · עומק הקריאה</legend>
-            <h3 id="step-depth-title" class="section-heading" tabindex="-1">כמה פירוט להציג?</h3>
-            <label class="choice-option is-selected">
-              <input type="radio" name="depth" value="overview" checked>
-              <span><strong>סקירה קצרה</strong><small>הסיכומים המקוריים, מעמד הראיות, המקורות וכל ההסתייגויות החיוניות</small></span>
-            </label>
-            <label class="choice-option">
-              <input type="radio" name="depth" value="detail">
-              <span><strong>קריאה מפורטת</strong><small>גם הרחבות המחקר והקשר נוסף; אותם מקורות ואותם חוסרים</small></span>
-            </label>
-            <p id="reading-summary" class="notice"></p>
-          </fieldset>
-
-          <div class="form-actions">
-            <button id="questionnaire-back" class="button button--secondary" type="button" data-action="back" hidden>חזרה</button>
-            <button id="questionnaire-next" class="button button--primary" type="button">המשך לסוג המידע</button>
-            <button class="button button--quiet" type="button" data-action="reset">איפוס והתחלה מחדש</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="results" aria-labelledby="results-title" hidden>
-        <p class="eyebrow">המידע, לצד המקורות</p>
-        <h2 id="results-title" class="section-heading" tabindex="-1">הארגונים והמסגרות שבמאגר</h2>
-        <p class="section-copy">אוסף מחקר מוגבל, לא רשימת קלפי מאושרת. סדר א״ב עברי קבוע, עם אותם נושאים וסוגי מידע בכל כרטיס.</p>
-        <div id="results-coverage" class="notice"></div>
-        <div id="results-selection" class="metadata-strip" aria-label="תצוגת הקריאה שנבחרה"></div>
-        <div class="results-toolbar">
-          <div>
-            <label for="party-search">חיפוש לפי שם</label>
-            <input id="party-search" type="search" maxlength="150" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="search-help" placeholder="שם ארגון או מנהיג/ה">
-            <p id="search-help">חיפוש בשמות הארגונים והמסגרות ובשמות ציבוריים של מנהיגים בלבד.</p>
-          </div>
-          <button id="clear-search" class="button button--quiet" type="button" data-action="clear-search">ניקוי החיפוש</button>
-          <button class="button button--secondary" type="button" data-action="edit-questionnaire">שינוי מסלול הקריאה</button>
-          <button class="button button--quiet" type="button" data-action="reset">איפוס</button>
-          <p id="results-count"></p>
-        </div>
-        <aside class="comparison-tray" aria-label="בחירה מפורשת להשוואה">
-          <div>
-            <strong>השוואה לבחירתכם</strong>
-            <p id="comparison-count">0 מתוך 4 כרטיסים נבחרו</p>
-          </div>
-          <p id="comparison-limit">אפשר לבחור עד ארבעה כרטיסים. אין בחירה אוטומטית.</p>
-          <div id="comparison-selections" class="form-actions"></div>
-          <div class="form-actions">
-            <button class="button button--secondary" type="button" data-action="show-comparison">לצפייה בהשוואה</button>
-            <button id="clear-comparison" class="button button--quiet" type="button" data-action="clear-comparison" disabled>ניקוי ההשוואה</button>
-          </div>
-        </aside>
-        <div id="party-grid" class="party-grid"></div>
-        <div id="results-empty" class="empty-state" hidden></div>
-      </section>
-
-      <section id="comparison" aria-labelledby="comparison-title" hidden>
-        <p class="eyebrow">אותם נושאים · אותה מתכונת</p>
-        <h2 id="comparison-title" class="section-heading" tabindex="-1">קריאה זו לצד זו</h2>
-        <p class="section-copy">רק הכרטיסים שבחרתם במפורש, לפי סדר א״ב — לא לפי סדר הבחירה. החיפוש בשמות אינו משנה את ההשוואה או מאמת השתתפות בבחירות.</p>
-        <div id="comparison-grid" class="comparison-grid"></div>
-        <div id="comparison-empty" class="empty-state">
-          <h3>עדיין לא נבחרו כרטיסים להשוואה</h3>
-          <p>אפשר להוסיף עד ארבעה כרטיסים בעזרת כפתור ההשוואה בכל כרטיס.</p>
-          <button class="button button--secondary" type="button" data-action="back-to-results">חזרה לכרטיסים</button>
-        </div>
-      </section>
-
-      <section id="methodology" aria-labelledby="methodology-title">
-        <p class="eyebrow">איך קוראים את המידע</p>
-        <h2 id="methodology-title" class="section-heading">מקורות, פרשנות ומגבלות</h2>
-        <p class="section-copy">כלי מקומי להשוואת מידע מפלגתי, דיווחים ומחקר. מקורות מפלגתיים מתעדים הבטחות, לא ביצוע; חלק מהמידע היסטורי. בדיקת מבנה הנתונים אינה אימות עובדתי.</p>
-        <div class="methodology-grid">
-          <article class="card">
-            <h3>עמדה מיוחסת ודירוג פרשני</h3>
-            <p>מקור מתאים מוצג לצד הדירוג. הסולם ‎-2 עד ‎+2 הוא כלי עריכתי ולא סולם רשמי של המפלגות. עמדה כללית אינה מוכיחה תמיכה בכל רכיב של שאלה מורכבת.</p>
-          </article>
-          <article class="card">
-            <h3>הצהרה, הצעה וביצוע הם דברים שונים</h3>
-            <p>הצעת חוק או קריאה ראשונה אינן חוק שהושלם. פעולה של ממשלה קודמת אינה פעולה של רשימה חדשה; רשומה היסטורית אינה בהכרח התחייבות לבחירות 2026.</p>
-          </article>
-          <article class="card">
-            <h3>חוסר תיעוד אינו עמדה</h3>
-            <p>כשאין אסמכתה מתאימה, מסמנים פער ולא ממציאים הבטחה, ציטוט או עמדה ניטרלית. פערים אינם נספרים בחישוב החפיפה.</p>
-          </article>
-        </div>
-        <section class="card" aria-labelledby="coverage-title">
-          <h3 id="coverage-title">היקף המאגר ומסגרת הכיסוי</h3>
-          <div id="coverage-details">
-            <p>14 מסגרות להשוואה, לא כלל הרשימות המתמודדות. חד״ש, תע״ל ובל״ד מרכיבות יחד את הרשימה המשותפת באותיות ודם; הציונות הדתית וזהות חתמו על בלוק טכני. אין מצע מלא ומאומת לכל מסגרת בכל נושא.</p>
+            <header id="issue-intro" class="issue-intro">
+              <img id="issue-image" src="assets/topic-civic.svg" width="88" height="88" alt="">
+              <div><p id="issue-topic" class="eyebrow"></p><h2 id="issue-title" tabindex="-1"></h2><p id="issue-prompt"></p><details><summary>הקשר לשאלה</summary><p id="issue-explanation"></p></details></div>
+            </header>
+            <div class="reading-pagination"><button type="button" class="button button--small button--outline" id="question-previous" data-action="question-previous">השאלה הקודמת</button><p id="question-position"></p><button type="button" class="button button--small button--outline" id="question-next" data-action="question-next">השאלה הבאה</button></div>
+            <p id="reading-coverage" class="reading-coverage"></p>
+            <div id="issue-rows" class="issue-rows"></div>
           </div>
         </section>
       </section>
-      <noscript>
-        <section class="notice notice--warning">
-          <h2>נדרש JavaScript מקומי להפעלת כלי הקריאה</h2>
-          <p>הפעילו JavaScript ופתחו מחדש את הקובץ. אין צורך בחשבון, בשרת או בחיבור כדי לקרוא את המידע הכלול.</p>
+
+      <section id="view-compare" class="view" aria-labelledby="compare-title" hidden>
+        <header class="view-heading"><p class="eyebrow">השוואה ומקורות</p><h1 id="compare-title" tabindex="-1">זו לצד זו. בקצב שלכם.</h1><p>בוחרים במפורש עד ארבע רשימות וקוראים את אותו נושא. הסדר תמיד אלפביתי; אין ציון, דירוג או המלצה.</p></header>
+        <details id="comparison-picker" class="comparison-picker">
+          <summary>בחירת רשימות להשוואה <span id="picker-count" class="count-label">0 מתוך 4</span></summary>
+          <p class="small-copy">רק אתם בוחרים מה יוצג כאן. בחירת נושא אינה מוסיפה או מסירה רשימות.</p>
+          <div id="comparison-options" class="comparison-options"></div>
+          <button type="button" class="text-button" data-action="clear-comparison">ניקוי רשימות ההשוואה</button>
+        </details>
+        <div id="comparison-empty" class="empty-state"><img src="assets/topic-civic.svg" width="80" height="80" alt=""><h2>מניחים את המידע זה לצד זה.</h2><p>סמנו רשימות במאגר או פתחו את ״בחירת רשימות להשוואה״ למעלה. אפשר להתחיל גם ברשימה אחת.</p></div>
+        <div id="comparison-content" hidden>
+          <div class="reading-toolbar"><label class="select-field question-field" for="comparison-question">שאלה משותפת להשוואה<select id="comparison-question"></select></label><p class="small-copy">כל סוגי התיעוד המקושרים לשאלה, עם מקורות ופערים.</p></div>
+          <div id="comparison-question-context" class="comparison-question-context"></div>
+          <div id="comparison-grid" class="comparison-grid" aria-label="רשימות שנבחרו, בסדר א״ב"></div>
+        </div>
+        <section id="methodology" class="section-block" aria-labelledby="methodology-title">
+          <div class="section-heading-row"><div><p class="eyebrow">מה נמצא מאחורי המילים</p><h2 id="methodology-title">גם למידע יש הקשר.</h2></div><button type="button" class="text-button" data-action="coverage">לתאריכים, להיקף ולמגבלות <span aria-hidden="true">←</span></button></div>
+          <div class="method-grid">
+            <article><span class="method-number" aria-hidden="true">01</span><h3>הצהרה אינה ביצוע</h3><p>פרסום מפלגתי מתעד מה נאמר או הובטח. רשומה היסטורית מתארת אירוע מיוחס, לא בהכרח עמדה נוכחית.</p></article>
+            <article><span class="method-number" aria-hidden="true">02</span><h3>חוסר מידע אינו עמדה</h3><p>אין תיעוד מקושר? זהו פער במחקר — לא תמיכה, התנגדות או ניטרליות. לא משלימים פערים בניחוש.</p></article>
+            <article><span class="method-number" aria-hidden="true">03</span><h3>קוראים גם את המקור</h3><p>לכל מקטע יש תאריך והפניות או סימון פער. סוג המקור, הערות הגישה וההסתייגויות זמינים בפתיחת המקורות.</p></article>
+          </div>
+          <details class="method-detail"><summary>איך נקבעים הסדר והכיסוי?</summary><p>כל הרשימות שבמאגר מופיעות לפי סדר א״ב בעברית, גם כשחסר מידע בנושא מסוים. חיפוש לפי שם מסנן רק את מאגר השמות. בחירת נושא או סוג תיעוד אינה מסננת או מדרגת רשימות. בהשוואה מוצגות רק הרשימות שבחרתם במפורש.</p><p>רשומות שסומנו כנדחות או כפורשות אינן מוצגות כרשימות מתמודדות. שלמות המיפוי ומעמד הרשימות נקבעים לפי קובץ המחקר והמקורות, לא לפי מספר הכרטיסים.</p></details>
+          <details class="method-detail"><summary>פרטיות וגבולות השירות</summary><p>האתר אינו שואל על אמונות פוליטיות, אינו מחשב התאמה, ואינו שומר או שולח את בחירות הקריאה. אין עוגיות, אחסון מקומי, חשבון או שירות אנליטיקה בקוד האתר. רענון או איפוס מחזירים את התצוגה להתחלה.</p><p>באתר המתארח ב־GitHub Pages, המארח ורשת ההפצה עשויים להחזיק יומני גישה ומטמונים שאינם בשליטת האתר. פתיחת מקור חיצוני היא ביקור באתר אחר, הכפוף למדיניותו. הקישור נפתח ללא הפניית כתובת העמוד הזה.</p></details>
+          <details id="source-library" class="method-detail"><summary>ספריית המקורות <span id="source-count" class="count-label"></span></summary><p class="small-copy">הופעת מקור כאן אינה אישור לנכונות כל טענה. יש לקרוא את סוג המקור, התאריך והערות הגישה.</p><div id="source-directory" class="source-directory"></div></details>
         </section>
-      </noscript>
+      </section>
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <span>בחירות בישראל · מידע לקריאה עצמאית</span>
-        <a href="#methodology">מתודולוגיה ומגבלות</a>
-      </div>
+      <div class="container footer-inner"><div><strong>מבט <span aria-hidden="true">/</span> בחירות בישראל</strong><p>מיזם מידע עצמאי. לא אתר ועדת הבחירות ולא המלצת הצבעה.</p><p>בחירות הקריאה נשמרות בזיכרון העמוד בלבד, עד רענון או איפוס.</p></div><button type="button" class="button button--outline" data-action="reset">איפוס התצוגה</button></div>
     </footer>
 
+    <dialog id="profile-dialog" class="dialog profile-dialog" aria-labelledby="profile-title">
+      <header class="dialog-header"><div><p class="eyebrow">מבט מקרוב</p><h2 id="profile-title" tabindex="-1"></h2></div><button type="button" class="close-button" data-close="profile-dialog" aria-label="סגירת חלון הפרטים">×</button></header>
+      <div id="profile-body" class="dialog-body"></div>
+    </dialog>
+    <dialog id="source-dialog" class="dialog source-dialog" aria-labelledby="source-title">
+      <header class="dialog-header"><div><p class="eyebrow">מאחורי המידע</p><h2 id="source-title" tabindex="-1">מקורות והערות</h2></div><button type="button" class="close-button" data-close="source-dialog" aria-label="סגירת חלון המקורות">×</button></header>
+      <div id="source-body" class="dialog-body"></div>
+    </dialog>
     <p id="live-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
-
-    <dialog id="profile-dialog" class="dialog" aria-labelledby="profile-dialog-title">
-      <div class="dialog-content">
-        <header class="dialog-header">
-          <h2 id="profile-dialog-title" tabindex="-1">פרופיל ציבורי</h2>
-          <button class="button button--quiet" type="button" data-action="close-profile" aria-label="סגירת הפרופיל">סגירה</button>
-        </header>
-        <div id="profile-dialog-body"></div>
-      </div>
-    </dialog>
-    <dialog id="source-dialog" class="dialog" aria-labelledby="source-dialog-title">
-      <div class="dialog-content">
-        <header class="dialog-header">
-          <h2 id="source-dialog-title" tabindex="-1">מקורות והערות</h2>
-          <button class="button button--quiet" type="button" data-action="close-sources" aria-label="סגירת פרטי המקורות">סגירה</button>
-        </header>
-        <div id="source-dialog-body"></div>
-      </div>
-    </dialog>
-
-    <dialog id="stance-dialog" class="dialog" aria-labelledby="stance-dialog-title">
-      <div class="dialog-content">
-        <header class="dialog-header">
-          <h2 id="stance-dialog-title" tabindex="-1">עמדת המפלגה ונימוק</h2>
-          <button class="button button--quiet" type="button" data-action="close-stance" aria-label="סגירת פרטי העמדה">סגירה</button>
-        </header>
-        <div id="stance-dialog-body"></div>
-      </div>
-    </dialog>
-
-    <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
   </body>
 </html>

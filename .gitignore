@@ -10,8 +10,11 @@
 .squad-workstream
 
 # Browser test profiles
-tali-browser-state/
-tali-integration-browser/
-test-quiz-browser.cjs
-*.png
+/tali-browser-state/
+/tali-integration-browser/
+/test-quiz-browser.cjs
+
+# Allowlisted Pages output and deployment-test fixtures
+/.pages-artifact/
+/.pages-test-fixtures/
 *.log
