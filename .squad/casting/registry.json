@@ -1,0 +1,74 @@
+{
+  "agents": {
+    "lead": {
+      "persistent_name": "Shepard",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "research": {
+      "persistent_name": "Liara",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "evidence-editor": {
+      "persistent_name": "Garrus",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "profiles": {
+      "persistent_name": "Miranda",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "methodology": {
+      "persistent_name": "Mordin",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "frontend": {
+      "persistent_name": "Tali",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "design": {
+      "persistent_name": "Kasumi",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "data-engineering": {
+      "persistent_name": "EDI",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "qa": {
+      "persistent_name": "Joker",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "neutrality-reviewer": {
+      "persistent_name": "Samara",
+      "universe": "Mass Effect",
+      "created_at": "2026-10-07T23:43:56.989+03:00",
+      "legacy_named": false,
+      "status": "active"
+    }
+  }
+}

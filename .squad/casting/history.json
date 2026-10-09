@@ -1,0 +1,27 @@
+{
+  "universe_usage_history": [
+    {
+      "universe": "Mass Effect",
+      "assignment_id": "israel-elections-2026-bced9684-20261007T234356989",
+      "used_at": "2026-10-07T23:43:56.989+03:00"
+    }
+  ],
+  "assignment_cast_snapshots": {
+    "israel-elections-2026-bced9684-20261007T234356989": {
+      "universe": "Mass Effect",
+      "agents": {
+        "lead": "Shepard",
+        "research": "Liara",
+        "evidence-editor": "Garrus",
+        "profiles": "Miranda",
+        "methodology": "Mordin",
+        "frontend": "Tali",
+        "design": "Kasumi",
+        "data-engineering": "EDI",
+        "qa": "Joker",
+        "neutrality-reviewer": "Samara"
+      },
+      "created_at": "2026-10-07T23:43:56.989+03:00"
+    }
+  }
+}

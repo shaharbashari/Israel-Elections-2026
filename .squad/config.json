@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "defaultModel": "gemini-3.8-flash",
+  "stateBackend": "local",
+  "defaultModel": "gpt-6.1-sol"
+}
