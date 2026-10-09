@@ -550,6 +550,8 @@ details[open] > :not(summary) { animation: reveal 150ms ease-out; }
 .compass-card > * { position: relative; }
 .compass-card img { border-radius: 18px; background: var(--violet-soft); padding: 8px; }
 .compass-progress { color: var(--violet); font-weight: 800; letter-spacing: .04em; }
+.compass-track { block-size: 8px; border-radius: 999px; background: #eceaf3; overflow: hidden; }
+.compass-track span { display: block; block-size: 100%; inline-size: calc(var(--step) * 1%); background: linear-gradient(90deg, #5940c6, #d45b78, #e0a100, #1f7a56); }
 .compass-prompt { font-size: 1.35rem; font-weight: 800; }
 .compass-scale { display: flex; flex-wrap: wrap; gap: 8px; }
 .compass-choice {

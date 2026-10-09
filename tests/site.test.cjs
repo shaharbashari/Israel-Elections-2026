@@ -22,6 +22,8 @@ test("compass scores documented overlap only and does not recommend a vote", () 
   assert.doesNotMatch(source, /\bnavigator\.(?:share|clipboard)\b|\bBlob\s*\(|download\s*=/u);
   assert.match(html, /אינו המלצת הצבעה/u);
   assert.match(html, /מצפן עמדות/u);
+  assert.doesNotMatch(source, /רשימות קודדו|compass-results|לתוצאות עם התשובות/u);
+  assert.match(source, /התוצאה מופיעה רק אחרי הטענה האחרונה/u);
   assert.match(html, /ללא דירוג|בלי דירוג|לא דירוג/u);
   assert.equal(app.COMPASS_MINIMUM, 3);
   const questions = [{ id: "q", titleHe: "שאלה", stances: [{ partyId: "a", value: 2, evidenceId: "e1", readingHe: "קריאה" }] }];
