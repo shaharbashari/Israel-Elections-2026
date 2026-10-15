@@ -24,6 +24,8 @@ test("compass scores documented overlap only and does not recommend a vote", () 
   assert.match(html, /מצפן בחירות/u);
   assert.doesNotMatch(source, /רשימות קודדו|compass-results|לתוצאות עם התשובות/u);
   assert.match(source, /התוצאה מופיעה רק אחרי הטענה האחרונה/u);
+  assert.match(source, /התחל שאלון/u);
+  assert.match(source, /compass-start/u);
   assert.match(source, /compass-context/u);
   assert.match(html, /data-learning-nav hidden/u);
   assert.match(html, /ללא דירוג|בלי דירוג|לא דירוג/u);

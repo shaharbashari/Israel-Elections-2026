@@ -566,6 +566,9 @@ details[open] > :not(summary) { animation: reveal 150ms ease-out; }
   border-inline-start: 4px solid var(--violet); color: var(--ink); font-size: .96rem;
 }
 .compass-post-learn { display: grid; gap: 12px; margin-block-start: 28px; background: linear-gradient(135deg, #f5f2ff, #fffefa); }
+.compass-topic-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; padding: 0; list-style: none; }
+.compass-topic-pills li { padding: .35rem .8rem; border-radius: 999px; background: #ffffff1c; border: 1px solid #ffffff30; color: #f6f4ff; font-size: .88rem; font-weight: 700; }
+.compass-start-btn { font-size: 1.15rem; padding: .85rem 1.7rem; }
 .compass-scale { display: flex; flex-wrap: wrap; gap: 8px; }
 .compass-choice {
   border: 1px solid #c9c6d4; background: #fff; color: var(--ink);

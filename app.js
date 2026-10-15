@@ -702,7 +702,7 @@
   }
 
   function createReadingState() {
-    return { view: "overview", step: 1, topics: new Set(), evidence: "all", depth: "brief", search: "", comparison: new Set(), reading: false, questionId: null, comparisonQuestionId: null, compassIndex: 0, compassDone: false, compassContextOpen: false, compassAnswers: new Map(), compassWeights: new Set(), compassOpen: null };
+    return { view: "overview", step: 1, topics: new Set(), evidence: "all", depth: "brief", search: "", comparison: new Set(), reading: false, questionId: null, comparisonQuestionId: null, compassStarted: false, compassIndex: 0, compassDone: false, compassContextOpen: false, compassAnswers: new Map(), compassWeights: new Set(), compassOpen: null };
   }
 
   function resetReadingState(target) {
@@ -1253,6 +1253,37 @@
       return;
     }
     const total = COMPASS.questions.length;
+    if (!state.compassStarted && !state.compassDone) {
+      root.replaceChildren();
+      const hero = element("div", "hero compass-welcome");
+      const copy = element("div", "hero-copy");
+      copy.append(element("p", "eyebrow hero-eyebrow", "מצפן בחירות 2026 · התאמה אישית מבוססת מקורות"));
+      const heroTitle = element("h1", "", "איזו מפלגה באמת מתאימה לעמדות שלכם?");
+      heroTitle.id = "compass-title";
+      heroTitle.tabIndex = -1;
+      copy.append(heroTitle);
+      paragraph(copy, "ענו על השאלות שבלב השיח הישראלי — איראן והגרעין, לבנון, היום שאחרי בעזה, הסכמי אברהם, היחסים עם ארה״ב, יוקר המחיה, שוויון בנטל, מערכת המשפט ודת ומדינה — וגלו איזו מפלגה הכי קרובה להעדפות שלכם.", "hero-description");
+      const domains = element("ul", "compass-topic-pills");
+      ["ביטחון, איראן והצפון", "עזה, הסכמי אברהם וארה״ב", "שוויון בנטל וחינוך", "משפט ודמוקרטיה", "יוקר המחיה ודיור", "דת ומדינה", "ביטחון פנים וסביבה"].forEach((label) => {
+        domains.append(element("li", "", label));
+      });
+      copy.append(domains);
+      const heroActions = element("div", "hero-actions");
+      const startBtn = button("התחל שאלון ←", "compass-start", "button button--light compass-start-btn");
+      heroActions.append(startBtn);
+      copy.append(heroActions);
+      paragraph(copy, `${total} שאלות עם הסבר ורקע (?) לכל שאלה · התוצאה מופיעה רק אחרי הטענה האחרונה · התשובות נשארות בעמוד בלבד · אינו המלצת הצבעה`, "hero-footnote");
+      const figure = element("figure", "hero-art");
+      const img = element("img");
+      img.src = "assets/reading-room.svg";
+      img.width = 520;
+      img.height = 410;
+      img.alt = "";
+      figure.append(img, element("figcaption", "", "עונים על השאלון. מקבלים אחוז התאמה מדורג ונימוק מתועד לכל מפלגה."));
+      hero.append(copy, figure);
+      root.append(hero);
+      return;
+    }
     if (!state.compassDone) {
       const question = COMPASS.questions[state.compassIndex];
       const card = element("article", "compass-card");
@@ -1290,7 +1321,6 @@
       weight.append(box, element("span", "", "השאלה חשובה לי במיוחד. משקל כפול בחישוב."));
       const actions = element("div", "wizard-actions");
       const back = button("חזרה", "compass-back", "button button--outline");
-      back.disabled = state.compassIndex === 0;
       const skip = button("דילוג על השאלה", "compass-skip", "button button--outline");
       const next = button(state.compassIndex === total - 1 ? "סיום השאלון והצגת ההתאמה" : "לטענה הבאה", "compass-next", "button button--primary");
       actions.append(back, skip, next);
@@ -1649,6 +1679,11 @@
       state.comparison.clear();
       syncComparison();
       announce("רשימות ההשוואה נוקו.");
+    } else if (action === "compass-start") {
+      state.compassStarted = true;
+      state.compassContextOpen = false;
+      renderCompass();
+      focus($("compass-title"));
     } else if (action === "compass-context") {
       state.compassContextOpen = !state.compassContextOpen;
       renderCompass();
@@ -1663,6 +1698,7 @@
       if (question) state.compassAnswers.delete(question.id);
       state.compassContextOpen = false;
       if (state.compassIndex < COMPASS.questions.length - 1) state.compassIndex += 1;
+      else state.compassDone = true;
       renderCompass();
       focus($("compass-title"));
     } else if (action === "compass-next") {
@@ -1674,17 +1710,20 @@
     } else if (action === "compass-back") {
       state.compassContextOpen = false;
       if (state.compassDone) state.compassDone = false;
+      else if (state.compassIndex === 0) state.compassStarted = false;
       else state.compassIndex = Math.max(0, state.compassIndex - 1);
       renderCompass();
       focus($("compass-title"));
     } else if (action === "compass-edit" || action === "compass-clear" || action === "compass-open") {
       if (action === "compass-edit") {
+        state.compassStarted = true;
         state.compassDone = false;
         state.compassContextOpen = false;
       }
       if (action === "compass-clear") {
         state.compassAnswers = new Map();
         state.compassWeights = new Set();
+        state.compassStarted = false;
         state.compassIndex = 0;
         state.compassDone = false;
         state.compassContextOpen = false;
