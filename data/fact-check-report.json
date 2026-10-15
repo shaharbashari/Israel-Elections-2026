@@ -29,8 +29,8 @@
       "independent_reporting": 3,
       "party_official": 18
     },
-    "positions": 26,
-    "promises": 46,
+    "positions": 29,
+    "promises": 51,
     "records": 0,
     "contextualReporting": 0,
     "structuralGaps": 876,
@@ -39,7 +39,7 @@
     "issueQuestions": 43,
     "issueQuestionsWithEvidence": 35,
     "issueEvidenceLinks": 73,
-    "retainedClaims": 239,
+    "retainedClaims": 247,
     "retiredLegacySourceBackedEvidence": 208,
     "retiredLegacySources": 57,
     "retiredNumericalPolicyCells": 448,
@@ -74,11 +74,31 @@
       "contradictionsProvenByOriginalBlock": 0
     },
     "resolvedGroups": [
-      {"id": "U_IDI_TABLE", "claimCount": 39, "outcome": "removed_unverified_table_conjunctions_rebased_to_inspected_reporting"},
-      {"id": "U_YASHAR_IDENTITY", "claimCount": 2, "outcome": "checked_current_party_name_and_chair_search_alias_qualified"},
-      {"id": "U_POLICY_SECTIONS", "claimCount": 36, "outcome": "checked_exact_original_sections_attributed_declarations_only"},
-      {"id": "U_NOAM_ACCESS", "claimCount": 4, "outcome": "ordinary_redirect_and_readable_original_sections"},
-      {"id": "U_YASHAR_SERVICE", "claimCount": 1, "outcome": "checked_original_body_not_search_summary"}
+      {
+        "id": "U_IDI_TABLE",
+        "claimCount": 39,
+        "outcome": "removed_unverified_table_conjunctions_rebased_to_inspected_reporting"
+      },
+      {
+        "id": "U_YASHAR_IDENTITY",
+        "claimCount": 2,
+        "outcome": "checked_current_party_name_and_chair_search_alias_qualified"
+      },
+      {
+        "id": "U_POLICY_SECTIONS",
+        "claimCount": 36,
+        "outcome": "checked_exact_original_sections_attributed_declarations_only"
+      },
+      {
+        "id": "U_NOAM_ACCESS",
+        "claimCount": 4,
+        "outcome": "ordinary_redirect_and_readable_original_sections"
+      },
+      {
+        "id": "U_YASHAR_SERVICE",
+        "claimCount": 1,
+        "outcome": "checked_original_body_not_search_summary"
+      }
     ],
     "publicationDateFields": {
       "targeted": 11,
@@ -4041,6 +4061,110 @@
       "checkedStatus": "checked_reporting",
       "locatorHe": "הסעיפים על משיכת מועמדות וסיום ההליך",
       "supportNoteHe": "הפרדה עריכתית בין רשימות מדווחות, מרכיבים ומועמד יחיד; לא קביעה מוסמכת של פסילת מפלגה.",
+      "issueIds": []
+    },
+    {
+      "claimId": "e_beyachad_iran",
+      "evidenceId": "e_beyachad_iran",
+      "partyId": "beyachad",
+      "claimHe": "מציעה כי אם חיזבאללה פוגע בישראל — ישראל תפגע באיראן, לצד מניעת נשק גרעיני מאיראן ופעולה להאצת קריסת המשטר האיראני.",
+      "sourceIds": [
+        "s_beyachad_security"
+      ],
+      "checkedStatus": "checked_declaration",
+      "locatorHe": "קווי פעולה, סעיף 07: היפוך המשוואה מול איראן",
+      "supportNoteHe": "בסעיף מוצעים פגיעה באיראן בתגובה לפגיעת חיזבאללה בישראל, מניעת גרעין מאיראן והאצת קריסת המשטר. נקרא בגוף המקור; זוהי הצעה מיוחסת בלבד.",
+      "issueIds": []
+    },
+    {
+      "claimId": "e_beyachad_abraham_saudi",
+      "evidenceId": "e_beyachad_abraham_saudi",
+      "partyId": "beyachad",
+      "claimHe": "מציעה לחזק את הסכמי אברהם, לקדם נורמליזציה עם סעודיה ומדינות מפתח נוספות ולבנות ברית אזורית של הכוחות המתונים מול איראן.",
+      "sourceIds": [
+        "s_beyachad_security"
+      ],
+      "checkedStatus": "checked_declaration",
+      "locatorHe": "קווי פעולה, סעיף 09: מזרח תיכון חדש – של הזדמנויות",
+      "supportNoteHe": "בסעיף מוצעים חיזוק הסכמי אברהם, החזרת ועידת הנגב, קידום נורמליזציה עם סעודיה ואינדונזיה ובניית ברית מתונים מול איראן. נקרא בגוף המקור; זוהי הצעה מיוחסת בלבד.",
+      "issueIds": []
+    },
+    {
+      "claimId": "e_beyachad_us_ultimatum",
+      "evidenceId": "e_beyachad_us_ultimatum",
+      "partyId": "beyachad",
+      "claimHe": "מציעה לתאם עם ארצות הברית והעולם הצבת אולטימטום לפירוק חמאס מנשקו ולתקוף מיידית כל התעצמות או אימונים של חמאס.",
+      "sourceIds": [
+        "s_beyachad_security"
+      ],
+      "checkedStatus": "checked_declaration",
+      "locatorHe": "קווי פעולה, סעיף 05: תגובה על כל התעצמות",
+      "supportNoteHe": "בסעיף מוצעים תקיפה מיידית של כל התעצמות או אימונים של חמאס והצבת אולטימטום לפירוק חמאס מנשקו לאחר הכנת הצבא, ארה״ב והעולם. נקרא בגוף המקור; זוהי הצעה מיוחסת בלבד.",
+      "issueIds": []
+    },
+    {
+      "claimId": "e_beyachad_qatar",
+      "evidenceId": "e_beyachad_qatar",
+      "partyId": "beyachad",
+      "claimHe": "מציעה להכריז על קטאר כמדינת אויב, להוציא את קטאר וטורקיה מכל מעורבות בעזה ולהכניס במקומן את מצרים.",
+      "sourceIds": [
+        "s_beyachad_security"
+      ],
+      "checkedStatus": "checked_declaration",
+      "locatorHe": "קווי פעולה, סעיף 10: קטאר = מדינת אויב",
+      "supportNoteHe": "בסעיף מוצעים הכרזה על קטאר כמדינת אויב, הוצאת קטאר וטורקיה ממעורבות בעזה והכנסת מצרים במקומן. נקרא בגוף המקור; זוהי הצעה מיוחסת בלבד.",
+      "issueIds": []
+    },
+    {
+      "claimId": "e_beyachad_illegal_weapons",
+      "evidenceId": "e_beyachad_illegal_weapons",
+      "partyId": "beyachad",
+      "claimHe": "מציעה להתייחס להחזקת נשק לא חוקי כאל טרור, להפעיל חמ״ל משולב לאיסוף נשק וחילוט הון ולחסום צירי הברחה בגבולות.",
+      "sourceIds": [
+        "s_beyachad_security"
+      ],
+      "checkedStatus": "checked_declaration",
+      "locatorHe": "קווי פעולה, סעיף 11: נשק לא חוקי הוא טרור",
+      "supportNoteHe": "בסעיף מוצעים הגדרת נשק לא חוקי כטרור, הפעלת חמ״ל משולב לתפיסת נשק וחילוט הון וחסימת צירי הברחה בגבולות. נקרא בגוף המקור; זוהי הצעה מיוחסת בלבד.",
+      "issueIds": []
+    },
+    {
+      "claimId": "e_yisrael_beitenu_north_lebanon",
+      "evidenceId": "e_yisrael_beitenu_north_lebanon",
+      "partyId": "yisrael_beitenu",
+      "claimHe": "מציעה לקיים את רצועת הביטחון בשטח האויב, להרחיב בדחיפות את מערך המוצבים בגבול הצפון ולבסס תפיסת הכרעה ומכה מקדימה.",
+      "sourceIds": [
+        "s_yisrael_beitenu_platform"
+      ],
+      "checkedStatus": "checked_declaration",
+      "locatorHe": "ביטחון: ששת עקרונות תפיסת הביטחון (מכה מקדימה, העברת הלחימה לשטח האויב) ושדרוג צה״ל",
+      "supportNoteHe": "בפרק הביטחון מפורטים קיום רצועת הביטחון בשטח האויב, מכה מקדימה והרחבה דחופה של מערך המוצבים בגבול הצפון. נקרא בגוף המקור; זוהי הצעה מיוחסת בלבד.",
+      "issueIds": []
+    },
+    {
+      "claimId": "e_yisrael_beitenu_iran_missiles",
+      "evidenceId": "e_yisrael_beitenu_iran_missiles",
+      "partyId": "yisrael_beitenu",
+      "claimHe": "מציעה להקים חיל טילים לפגיעה ביעדים במדינות ללא גבול משותף ולהרחיב את חיל הים והמודיעין מול איראן, החות׳ים, תימן ועיראק.",
+      "sourceIds": [
+        "s_yisrael_beitenu_platform"
+      ],
+      "checkedStatus": "checked_declaration",
+      "locatorHe": "ביטחון: הפיכת צה״ל לצבא אימתני (חיל טילים, חיל הים, חיל המודיעין)",
+      "supportNoteHe": "בפרק הביטחון מוצעים הקמת חיל טילים לפגיעה במדינות ללא גבול משותף, חיזוק חיל הים מול איראן והחות׳ים בים האדום ופיתוח זירות מודיעין בעיראק ובתימן. נקרא בגוף המקור; זוהי הצעה מיוחסת בלבד.",
+      "issueIds": []
+    },
+    {
+      "claimId": "e_yisrael_beitenu_regional_deal",
+      "evidenceId": "e_yisrael_beitenu_regional_deal",
+      "partyId": "yisrael_beitenu",
+      "claimHe": "מציעה לקדם עסקת חבילה אזורית כוללת עם מדינות ערב המתונות מול ארגוני האסלאם הקיצוני וחיזבאללה, במקום הסדר נפרד עם הפלסטינים בלבד.",
+      "sourceIds": [
+        "s_yisrael_beitenu_platform"
+      ],
+      "checkedStatus": "checked_declaration",
+      "locatorHe": "מדיניות חוץ: הסכמים אזוריים ומדיניות חוץ",
+      "supportNoteHe": "בפרק מדיניות החוץ מוצעת עסקת חבילה אזורית כוללת עם מדינות ערב המתונות מול האסלאם הקיצוני וחיזבאללה, ונאמר שאין טעם בהסדר עם הפלסטינים בלבד. נקרא בגוף המקור; זוהי הצעה מיוחסת בלבד.",
       "issueIds": []
     }
   ],

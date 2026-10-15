@@ -2166,7 +2166,83 @@
               "contradictionIds": []
             }
           ],
-          "promises": [],
+          "promises": [
+            {
+              "id": "e_beyachad_iran",
+              "summaryHe": "מציעה כי אם חיזבאללה פוגע בישראל — ישראל תפגע באיראן, לצד מניעת נשק גרעיני מאיראן ופעולה להאצת קריסת המשטר האיראני.",
+              "detailHe": "סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
+              "status": "declared",
+              "sourceIds": [
+                "s_beyachad_security"
+              ],
+              "missingEvidenceLabelHe": null,
+              "uncertaintyLabelHe": null,
+              "asOfDate": "2026-10-09",
+              "eventDate": null,
+              "coverageNoteHe": null,
+              "contradictionIds": []
+            },
+            {
+              "id": "e_beyachad_abraham_saudi",
+              "summaryHe": "מציעה לחזק את הסכמי אברהם, לקדם נורמליזציה עם סעודיה ומדינות מפתח נוספות ולבנות ברית אזורית של הכוחות המתונים מול איראן.",
+              "detailHe": "סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
+              "status": "declared",
+              "sourceIds": [
+                "s_beyachad_security"
+              ],
+              "missingEvidenceLabelHe": null,
+              "uncertaintyLabelHe": null,
+              "asOfDate": "2026-10-09",
+              "eventDate": null,
+              "coverageNoteHe": null,
+              "contradictionIds": []
+            },
+            {
+              "id": "e_beyachad_us_ultimatum",
+              "summaryHe": "מציעה לתאם עם ארצות הברית והעולם הצבת אולטימטום לפירוק חמאס מנשקו ולתקוף מיידית כל התעצמות או אימונים של חמאס.",
+              "detailHe": "סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
+              "status": "declared",
+              "sourceIds": [
+                "s_beyachad_security"
+              ],
+              "missingEvidenceLabelHe": null,
+              "uncertaintyLabelHe": null,
+              "asOfDate": "2026-10-09",
+              "eventDate": null,
+              "coverageNoteHe": null,
+              "contradictionIds": []
+            },
+            {
+              "id": "e_beyachad_qatar",
+              "summaryHe": "מציעה להכריז על קטאר כמדינת אויב, להוציא את קטאר וטורקיה מכל מעורבות בעזה ולהכניס במקומן את מצרים.",
+              "detailHe": "סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
+              "status": "declared",
+              "sourceIds": [
+                "s_beyachad_security"
+              ],
+              "missingEvidenceLabelHe": null,
+              "uncertaintyLabelHe": null,
+              "asOfDate": "2026-10-09",
+              "eventDate": null,
+              "coverageNoteHe": null,
+              "contradictionIds": []
+            },
+            {
+              "id": "e_beyachad_illegal_weapons",
+              "summaryHe": "מציעה להתייחס להחזקת נשק לא חוקי כאל טרור, להפעיל חמ״ל משולב לאיסוף נשק וחילוט הון ולחסום צירי הברחה בגבולות.",
+              "detailHe": "סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
+              "status": "declared",
+              "sourceIds": [
+                "s_beyachad_security"
+              ],
+              "missingEvidenceLabelHe": null,
+              "uncertaintyLabelHe": null,
+              "asOfDate": "2026-10-09",
+              "eventDate": null,
+              "coverageNoteHe": null,
+              "contradictionIds": []
+            }
+          ],
           "records": [],
           "contextualReporting": [],
           "gaps": [
@@ -10845,6 +10921,51 @@
               "id": "e_yisrael_beitenu_captives",
               "summaryHe": "מציעה לבסס עסקאות עתידיות להשבת שבויים ונעדרים על דו״ח שמגר.",
               "detailHe": "הדו״ח עצמו לא נקרא, ולכן לא פורטו תנאיו. אין טענה על מצב השבי כיום. סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
+              "status": "declared",
+              "sourceIds": [
+                "s_yisrael_beitenu_platform"
+              ],
+              "missingEvidenceLabelHe": null,
+              "uncertaintyLabelHe": null,
+              "asOfDate": "2026-10-09",
+              "eventDate": null,
+              "coverageNoteHe": null,
+              "contradictionIds": []
+            },
+            {
+              "id": "e_yisrael_beitenu_north_lebanon",
+              "summaryHe": "מציעה לקיים את רצועת הביטחון בשטח האויב, להרחיב בדחיפות את מערך המוצבים בגבול הצפון ולבסס תפיסת הכרעה ומכה מקדימה.",
+              "detailHe": "סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
+              "status": "declared",
+              "sourceIds": [
+                "s_yisrael_beitenu_platform"
+              ],
+              "missingEvidenceLabelHe": null,
+              "uncertaintyLabelHe": null,
+              "asOfDate": "2026-10-09",
+              "eventDate": null,
+              "coverageNoteHe": null,
+              "contradictionIds": []
+            },
+            {
+              "id": "e_yisrael_beitenu_iran_missiles",
+              "summaryHe": "מציעה להקים חיל טילים לפגיעה ביעדים במדינות ללא גבול משותף ולהרחיב את חיל הים והמודיעין מול איראן, החות׳ים, תימן ועיראק.",
+              "detailHe": "סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
+              "status": "declared",
+              "sourceIds": [
+                "s_yisrael_beitenu_platform"
+              ],
+              "missingEvidenceLabelHe": null,
+              "uncertaintyLabelHe": null,
+              "asOfDate": "2026-10-09",
+              "eventDate": null,
+              "coverageNoteHe": null,
+              "contradictionIds": []
+            },
+            {
+              "id": "e_yisrael_beitenu_regional_deal",
+              "summaryHe": "מציעה לקדם עסקת חבילה אזורית כוללת עם מדינות ערב המתונות מול ארגוני האסלאם הקיצוני וחיזבאללה, במקום הסדר נפרד עם הפלסטינים בלבד.",
+              "detailHe": "סיכום מקורי של פרסום ארגוני שנקרא, לא ציטוט מילולי ולא אימות של ביצוע.",
               "status": "declared",
               "sourceIds": [
                 "s_yisrael_beitenu_platform"

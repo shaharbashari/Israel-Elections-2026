@@ -80,171 +80,195 @@
     version: 1,
     methodHe: "האחוז הוא חפיפה בין הכיוון שסימנתם לבין עמדה שקודדה מרשומת מחקר קיימת. הקוד הוא קריאה עריכתית של אותו תיעוד, לא ציון רשמי ולא המלצת הצבעה.",
     questions: [
-      { id: "settlements", topicId: "security_foreign_relations", domainHe: "ביטחון והסכסוך", titleHe: "ההתיישבות", promptHe: "יש לחזק את ההתיישבות הישראלית בכל חלקי הארץ.", stances: [
-        { partyId: "likud", value: 2, evidenceId: "e_likud_settlements", readingHe: "יש הצהרה על חיזוק ההתיישבות בכל חלקי הארץ. זהו הכיוון המפורש של הטענה, ולכן הקוד הוא 2." },
+      { id: "iran_equation", topicId: "security_foreign_relations", domainHe: "ביטחון, איראן והצפון", titleHe: "המשוואה מול איראן והגרעין", promptHe: "האם אתה תומך בתקיפה ישירה באיראן בתגובה לפגיעה של שלוחותיה בישראל, לצד פעולה למניעת נשק גרעיני והאצת קריסת המשטר האיראני?", contextHe: "רקע: במשך שנים התמקדה ישראל בעיקר בפגיעה בשלוחות איראן (כמו חיזבאללה וחמאס), בעוד טהרן מימנה וחימשה אותן. הוויכוח הציבורי עוסק בשאלה האם לגבות מחיר ישיר מאיראן עצמה על כל תקיפה של שלוחותיה ולפעול אקטיבית להפלת המשטר ולבלימת פרויקט הגרעין.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_iran", readingHe: "בתפיסת הביטחון מוצע כי אם חיזבאללה פוגע בישראל — ישראל תפגע באיראן, לצד מניעת גרעין והאצת קריסת המשטר. הקוד הוא 2." }
+      ]},
+      { id: "iran_deterrence", topicId: "security_foreign_relations", domainHe: "ביטחון, איראן והצפון", titleHe: "זרוע ארוכה מול איראן והחות׳ים", promptHe: "האם יש להקים חיל טילים ייעודי ולחזק את חיל הים והמודיעין כדי לפגוע ביעדים באיראן, בתימן ובעיראק?", contextHe: "רקע: המלחמה הרב־זירתית חשפה איומי טילים, כטב״מים ושיבוש נתיבי שיט בים האדום מצד איראן, החות׳ים בתימן ומיליציות בעיראק — מדינות שאין לישראל גבול יבשתי משותף איתן.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_iran_missiles", readingHe: "במצע מוצעים הקמת חיל טילים לפגיעה במדינות ללא גבול משותף והרחבת חיל הים והמודיעין מול איראן, החות׳ים, תימן ועיראק. הקוד הוא 2." }
+      ]},
+      { id: "lebanon_north", topicId: "security_foreign_relations", domainHe: "ביטחון, איראן והצפון", titleHe: "לבנון וגבול הצפון", promptHe: "האם יש לקיים רצועת ביטחון בשטח האויב מעבר לגבול ולהרחיב בדחיפות את מערך המוצבים בגבול הצפון?", contextHe: "רקע: לאחר פינוי יישובי הצפון והלחימה מול חיזבאללה בלבנון, מתנהל ויכוח האם להסתפק בהסדרים מדיניים או להחזיק מרחב חיץ בשטח האויב ולבצר מחדש את קו המוצבים.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_north_lebanon", readingHe: "במצע מוצעים קיום רצועת הביטחון בשטח האויב, מכה מקדימה והרחבה דחופה של מערך המוצבים בגבול הצפון. הקוד הוא 2." }
+      ]},
+      { id: "gaza_civil", topicId: "security_foreign_relations", domainHe: "ביטחון, עזה והסכסוך", titleHe: "היום שאחרי ברצועת עזה", promptHe: "האם על ישראל להימנע מניהול אזרחי של רצועת עזה ולהעביר את האחריות האזרחית לגורם חיצוני, תוך שמירה על חופש פעולה ביטחוני?", contextHe: "רקע: הדיון על ״היום שאחרי״ בעזה עוסק בשאלה מי ינהל את החיים האזרחיים ברצועה לאחר פירוק שלטון חמאס — ממשל צבאי ישראלי או גורם בינלאומי/אזורי מוסכם לצד שליטה ביטחונית ישראלית.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_gaza", readingHe: "התפיסה המתועדת דורשת פירוק חמאס מנשקו ומצהירה שאין לישראל עניין בניהול עזה. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_gaza", readingHe: "ההצעה מעבירה אחריות אזרחית בעזה לגורם בינלאומי מוסכם תוך שמירת חופש פעולה ביטחוני. הקוד הוא 2." }
+      ]},
+      { id: "us_hamas_ultimatum", topicId: "security_foreign_relations", domainHe: "מדיניות חוץ וארה״ב", titleHe: "תיאום עם ארה״ב ואולטימטום לחמאס", promptHe: "האם יש לתאם עם ארצות הברית הצבת אולטימטום לפירוק חמאס מנשקו ולתקוף מיידית כל ניסיון התעצמות או אימון ברצועה?", contextHe: "רקע: ארצות הברית היא בעלת הברית האסטרטגית המרכזית של ישראל והמתווכת הראשית בהסדרים האזוריים. השאלה עוסקת בשילוב בין תיאום מדיני עם ארה״ב לבין מדיניות של אפס הכלה ותקיפה מיידית מול כל הפרה של חמאס.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_us_ultimatum", readingHe: "בתפיסת הביטחון מוצע להכין מהלך עם ארה״ב והעולם להצבת אולטימטום לפירוק חמאס מנשקו ולתקוף מיידית כל התעצמות. הקוד הוא 2." }
+      ]},
+      { id: "abraham_accords", topicId: "security_foreign_relations", domainHe: "מדיניות חוץ וארה״ב", titleHe: "הסכמי אברהם ונורמליזציה עם סעודיה", promptHe: "האם יש לחזק את הסכמי אברהם ולקדם נורמליזציה עם סעודיה ומדינות מתונות נוספות כברית אזורית מול איראן?", contextHe: "רקע: הסכמי אברהם נחתמו ב־2020 בתיווך ארה״ב וכוננו יחסים רשמיים בין ישראל לאיחוד האמירויות, בחריין, מרוקו וסודאן. הדיון כיום עוסק בהרחבת ההסכמים לסעודיה ולהקמת קואליציה אזורית מול הציר האיראני.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_abraham_saudi", readingHe: "מוצע לחזק את הסכמי אברהם, לקדם נורמליזציה עם סעודיה ואינדונזיה ולבנות ברית אזורית של הכוחות המתונים מול איראן. הקוד הוא 2." }
+      ]},
+      { id: "peace_alliances", topicId: "security_foreign_relations", domainHe: "מדיניות חוץ וארה״ב", titleHe: "בריתות אסטרטגיות והרחבת מעגל השלום", promptHe: "האם יש להציב כיעד מרכזי את חיזוק הבריתות האסטרטגיות של ישראל בעולם והרחבת הסכמי השלום?", contextHe: "רקע: מעמדה הבינלאומי של ישראל, היחסים האסטרטגיים עם ארצות הברית ומדינות המערב והרחבת מעגל הנורמליזציה עומדים במוקד הוויכוח על חוסנה המדיני והביטחוני של המדינה.", stances: [
+        { partyId: "likud", value: 2, evidenceId: "e_likud_foreign", readingHe: "יש הצהרה מפורשת על הרחבת מעגל השלום וחיזוק בריתות אסטרטגיות של ישראל. הקוד הוא 2." }
+      ]},
+      { id: "regional_package", topicId: "security_foreign_relations", domainHe: "מדיניות חוץ וארה״ב", titleHe: "עסקת חבילה אזורית במקום הסדר פלסטיני נפרד", promptHe: "האם יש להעדיף עסקת חבילה אזורית כוללת עם מדינות ערב המתונות על פני ניסיון להגיע להסדר נפרד עם הפלסטינים בלבד?", contextHe: "רקע: לפי גישה זו, הסכסוך הוא אזורי ולא דו־צדדי בלבד, ולכן הסדר יציב אפשרי רק כחלק ממהלך רחב מול מדינות ערב המתונות המתמודדות גם הן מול האסלאם הקיצוני וחיזבאללה.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_regional_deal", readingHe: "במצע מדיניות החוץ מוצעת עסקת חבילה אזורית כוללת עם מדינות ערב המתונות במקום הסדר עם הפלסטינים בלבד. הקוד הוא 2." }
+      ]},
+      { id: "qatar_enemy", topicId: "security_foreign_relations", domainHe: "ביטחון, עזה והסכסוך", titleHe: "היחס לקטאר ולמעורבותה בעזה", promptHe: "האם יש להכריז על קטאר כמדינת אויב ולהוציא את קטאר וטורקיה מכל מעורבות ברצועת עזה?", contextHe: "רקע: קטאר העבירה לאורך שנים כספים לרצועת עזה ואירחה את הנהגת חמאס, לצד תפקידה כמתווכת. בישראל מתנהל ויכוח חריף האם להתייחס אליה כאל מדינת אויב ולהחליף את מעורבותה במצרים.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_qatar", readingHe: "בתפיסת הביטחון מוצע להכריז על קטאר כמדינת אויב, להוציא את קטאר וטורקיה ממעורבות בעזה ולהכניס במקומן את מצרים. הקוד הוא 2." }
+      ]},
+      { id: "captive_deals", topicId: "security_foreign_relations", domainHe: "ביטחון, עזה והסכסוך", titleHe: "עסקאות שבויים וחטופים (דוח שמגר)", promptHe: "האם יש לקבוע שעסקאות עתידיות להשבת שבויים ונעדרים יתבססו על הכללים המחמירים של דוח שמגר?", contextHe: "רקע: ועדת שמגר (בראשות נשיא בית המשפט העליון לשעבר מאיר שמגר) גיבשה לאחר עסקת שליט עקרונות שקובעים גבולות ברורים למשא ומתן ולמספר המחבלים שישוחררו בעסקאות חילופי שבויים, כדי לצמצם תמריץ לחטיפות עתידיות.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_captives", readingHe: "ההצעה המתועדת היא לבסס עסקאות עתידיות להשבת שבויים ונעדרים על דוח שמגר. הקוד הוא 2." }
+      ]},
+      { id: "settlements", topicId: "security_foreign_relations", domainHe: "ביטחון, עזה והסכסוך", titleHe: "חיזוק ההתיישבות", promptHe: "האם אתה תומך בחיזוק והרחבת ההתיישבות הישראלית בכל חלקי הארץ?", contextHe: "רקע: שאלת פיתוח ההתיישבות ביהודה ושומרון, בבקעת הירדן ובאזורי הספר והגבולות היא מאבני המחלוקת המרכזיות בין ימין לשמאל בישראל.", stances: [
+        { partyId: "likud", value: 2, evidenceId: "e_likud_settlements", readingHe: "יש הצהרה על חיזוק ההתיישבות בכל חלקי הארץ. הקוד הוא 2." },
         { partyId: "amcha_israel", value: 1, evidenceId: "e_amcha_israel_border_settlements", readingHe: "ההצעה מחזקת התיישבות בגבולות ובאזורים מאוימים, לא בכל חלקי הארץ. הקוד הוא 1." }
       ]},
-      { id: "sovereignty", topicId: "security_foreign_relations", domainHe: "ביטחון והסכסוך", titleHe: "ריבונות", promptHe: "יש לחזק את הריבונות הישראלית בכל חלקי הארץ.", stances: [
+      { id: "sovereignty", topicId: "security_foreign_relations", domainHe: "ביטחון, עזה והסכסוך", titleHe: "החלת ריבונות", promptHe: "האם יש לחזק ולהחיל את הריבונות הישראלית בכל חלקי הארץ?", contextHe: "רקע: הדיון על החלת ריבונות עוסק במעמד המשפטי והמדיני של שטחי יהודה ושומרון ובשאלה האם לקדם מהלכי ריבונות או לשמור על פתח להסדר מדיני.", stances: [
         { partyId: "likud", value: 2, evidenceId: "e_likud_sovereignty", readingHe: "יש הצהרה על חיזוק הריבונות בכל חלקי הארץ. הקוד הוא 2." }
       ]},
-      { id: "peace_alliances", topicId: "security_foreign_relations", domainHe: "ביטחון והסכסוך", titleHe: "מעגל השלום", promptHe: "יש להרחיב את מעגל השלום ואת הבריתות האסטרטגיות של ישראל.", stances: [
-        { partyId: "likud", value: 2, evidenceId: "e_likud_foreign", readingHe: "יש הצהרה על הרחבת מעגל השלום וחיזוק בריתות אסטרטגיות. הקוד הוא 2." }
-      ]},
-      { id: "gaza_civil", topicId: "security_foreign_relations", domainHe: "ביטחון והסכסוך", titleHe: "האחריות האזרחית בעזה", promptHe: "אין לישראל עניין לנהל את החיים האזרחיים ברצועת עזה.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_gaza", readingHe: "התפיסה המתועדת דורשת פירוק חמאס מנשקו ומצהירה שאין עניין בניהול עזה. הקוד הוא 2, רק לגבי הניהול האזרחי." },
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_gaza", readingHe: "ההצעה מעבירה אחריות אזרחית לגורם בינלאומי מוסכם. הקוד הוא 2 לגבי הניהול האזרחי, לא לגבי סגירת המעברים שבאותה רשומה." }
-      ]},
-      { id: "security_budget", topicId: "security_foreign_relations", domainHe: "ביטחון והסכסוך", titleHe: "תקציב הביטחון והשירותים", promptHe: "יש להפחית הוצאות צבאיות ולהעביר מימון ממלחמה ומהתנחלויות לשירותים חברתיים.", stances: [
+      { id: "security_budget", topicId: "security_foreign_relations", domainHe: "ביטחון, עזה והסכסוך", titleHe: "תקציב הביטחון מול תקציבים חברתיים", promptHe: "האם יש להפחית הוצאות צבאיות ולהפסיק מימון מלחמה והתנחלויות לטובת השקעה בשירותים חברתיים?", contextHe: "רקע: לאחר זינוק חד בהוצאות הביטחון בעקבות המלחמה, מתחדד הוויכוח על חלוקת תקציב המדינה בין התעצמות צבאית והתיישבות לבין תקציבי חינוך, בריאות ורווחה.", stances: [
         { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_spending", readingHe: "ההצעה המתועדת היא להפחית הוצאות צבאיות ולהפסיק מימון מלחמה והתנחלויות לטובת שירותים חברתיים. הקוד הוא 2." }
       ]},
-      { id: "captive_deals", topicId: "security_foreign_relations", domainHe: "ביטחון והסכסוך", titleHe: "עסקאות שבויים", promptHe: "יש לבסס עסקאות עתידיות להשבת שבויים ונעדרים על דוח שמגר.", stances: [
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_captives", readingHe: "ההצעה המתועדת היא לבסס עסקאות עתידיות על דוח שמגר. הקוד הוא 2. הטענה אינה מפרשת את הדוח מעבר למה שתועד." }
+      { id: "universal_service", topicId: "public_services_equality", domainHe: "שוויון בנטל, חינוך וחברה", titleHe: "שוויון בנטל וגיוס לכולם", promptHe: "האם אתה בעד שוויון בנטל — חובת שירות צבאי או אזרחי לכל אזרח בגיל 18, כולל צעירים חרדים, לצד סנקציות על משתמטים?", contextHe: "רקע: במשך עשרות שנים נהנו תלמידי ישיבות חרדים מדחיית שירות ופטור מגיוס, בעוד עומס השירות הסדיר והמילואים גדל משמעותית מאז 7 באוקטובר. הדיון עוסק בחובת גיוס לכולם ובשלילת תקציבים והטבות ממי שאינם משרתים.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_service", readingHe: "ההצעה המתועדת היא חובת שירות צבאי או אזרחי לכל אזרח בגיל 18, עם סנקציות על אי־שירות. הקוד הוא 2." },
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_service", readingHe: "ההצעה המתועדת היא חוק שירות ממלכתי לכל, בראש ובראשונה בצה״ל. הקוד הוא 2." },
+        { partyId: "miluimnikim_economic", value: 2, evidenceId: "e_miluimnikim_economic_service", readingHe: "ההצעה המתועדת היא שירות צבאי או אזרחי לכל אזרח, עם סנקציות והטבות. הקוד הוא 2." },
+        { partyId: "amcha_israel", value: 1, evidenceId: "e_amcha_israel_service", readingHe: "יש שירות צבאי למתאימים, שירות לאומי לאחרים ומסלול מצוינות תורנית. הקוד הוא 1." },
+        { partyId: "haredi_public", value: -2, evidenceId: "e_haredi_public_service", readingHe: "ההצעה מבקשת להגן על לומדי תורה מסנקציות. זהו כיוון מנוגד לחובת שירות לכל אזרח, ולכן הקוד הוא ‎-2." }
       ]},
-      { id: "competition", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "תחרות וריכוזיות", promptHe: "יש לפרק מונופולים, לצמצם ריכוזיות ורגולציה ולהגביר תחרות.", stances: [
+      { id: "avrech_allowances", topicId: "economy_cost_of_living", domainHe: "שוויון בנטל, חינוך וחברה", titleHe: "קצבאות אברכים והטבות למשרתים", promptHe: "האם יש לבטל קצבאות אברך והטבות ממשלתיות שמעודדות אי־שירות, ולהעדיף בסיוע את הציבור המשרת והעובד?", contextHe: "רקע: המדינה מתקצבת מוסדות תורניים ומעניקה הטבות שונות (כגון הנחות במעונות יום ובארנונה) שנתפסות אצל מבקריהן כתמריץ כלכלי לאי־גיוס ולאי־יציאה לעבודה.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_benefits", readingHe: "ההצעה המתועדת היא לבטל קצבאות אברך והטבות שמעודדות אי־שירות ולהעדיף את הציבור המשרת והעובד. הקוד הוא 2." }
+      ]},
+      { id: "core_funding", topicId: "public_services_equality", domainHe: "שוויון בנטל, חינוך וחברה", titleHe: "לימודי ליבה כתנאי לתקציב", promptHe: "האם יש להתנות מימון ציבורי למוסדות חינוך בלימודי ליבה מלאים (אנגלית, מתמטיקה ומדעים)?", contextHe: "רקע: חלק ממוסדות החינוך החרדיים מתוקצבים מקופת המדינה מבלי ללמד תוכנית ליבה מלאה של משרד החינוך, מה שמעורר ויכוח על השתלבות הבוגרים בשוק העבודה המודרני.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_core", readingHe: "ההצעה מתנה מימון ציבורי בלימודי ליבה מלאים. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_core", readingHe: "ההצעה דורשת לימודי ליבה לכל תלמיד ושלילת תקצוב ממוסד שאינו עומד בכך. הקוד הוא 2." },
+        { partyId: "yashar", value: 1, evidenceId: "e_yashar_core", readingHe: "ההצעה היא לימודי ליבה לכל ועדיפות לחינוך הממלכתי, בלי ניסוח של התניית תקצוב מפורשת. הקוד הוא 1." },
+        { partyId: "haredi_public", value: -1, evidenceId: "e_haredi_public_education", readingHe: "ההצעה שומרת על עצמאות החינוך החרדי לצד שיפור אנגלית ומתמטיקה, ומתנגדת לכפיית התניה חיצונית. הקוד הוא ‎-1." }
+      ]},
+      { id: "state_inquiry", topicId: "institutions_democracy", domainHe: "משטר, משפט ודמוקרטיה", titleHe: "ועדת חקירה ממלכתית ל־7 באוקטובר", promptHe: "האם יש להקים מיד ועדת חקירה ממלכתית לבדיקת מחדלי השבעה באוקטובר?", contextHe: "רקע: ועדת חקירה ממלכתית מוקמת לפי חוק ובראשה עומד שופט עליון שממנה נשיא בית המשפט העליון. הוויכוח הציבורי נסוב סביב הקמת ועדה ממלכתית עצמאית לעומת גוף בדיקה בהרכב אחר.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_inquiry", readingHe: "ההצעה המתועדת היא ועדת חקירה ממלכתית לאירועי שבעה באוקטובר. הקוד הוא 2." },
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_inquiry", readingHe: "ההצעה המתועדת היא ועדת חקירה ממלכתית לטבח, לעשור שקדם לו ולניהול המלחמה. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_inquiry", readingHe: "ההצעה המתועדת היא שוועדת חקירה ממלכתית תהיה החלטת הממשלה הראשונה. הקוד הוא 2." },
+        { partyId: "miluimnikim_economic", value: 1, evidenceId: "e_miluimnikim_economic_inquiry", readingHe: "יש קריאה לחקירת הכשלים, בלי לנקוב במפורש במנגנון של ועדה ממלכתית. הקוד הוא 1." }
+      ]},
+      { id: "override_clause", topicId: "institutions_democracy", domainHe: "משטר, משפט ודמוקרטיה", titleHe: "פסקת התגברות על בג״ץ", promptHe: "האם יש לחוקק פסקת התגברות שתאפשר לכנסת לחוקק מחדש חוקים שבג״ץ פסל?", contextHe: "רקע: פסקת ההתגברות עמדה בלב המחלוקת על הרפורמה המשפטית: תומכיה רואים בה חיזוק של ריבונות הכנסת והרוב הנבחר, ואילו מתנגדיה מזהירים מפני פגיעה בזכויות המיעוט ובבלמים ואיזונים.", stances: [
+        { partyId: "noam", value: 2, evidenceId: "e_noam_override", readingHe: "ההצעה המתועדת היא פסקת התגברות שמצמצמת את יכולת בג״ץ לבטל החלטות כנסת. הקוד הוא 2." }
+      ]},
+      { id: "judicial_independence", topicId: "institutions_democracy", domainHe: "משטר, משפט ודמוקרטיה", titleHe: "עצמאות מערכת המשפט", promptHe: "האם יש לבצר את עצמאות מערכת המשפט ואת יכולתה לבקר את החלטות השלטון ולהגן על זכויות המיעוט?", contextHe: "רקע: בישראל אין חוקה מלאה או שני בתי פרלמנט, ולכן בית המשפט העליון משמש כבלם המרכזי מול הרשות המבצעת והמחוקקת.", stances: [
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_judiciary", readingHe: "יש הצהרה על שמירת מערכת משפט עצמאית, זכויות המיעוט ושלטון החוק. הקוד הוא 2." }
+      ]},
+      { id: "attorney_general", topicId: "institutions_democracy", domainHe: "משטר, משפט ודמוקרטיה", titleHe: "פיצול תפקיד היועץ המשפטי לממשלה", promptHe: "האם יש לפצל את תפקיד היועץ המשפטי לממשלה ולקבוע שחוות דעתו תהיה בגדר ייעוץ בלבד, ללא וטו על החלטות הממשלה?", contextHe: "רקע: כיום היועמ״ש מחזיק בשני כובעים: ראש התביעה הכללית והפרשן המוסמך של החוק עבור הממשלה (שחוות דעתו מחייבת אותה). ההצעה מבקשת להפריד בין התפקידים ולהפוך את הייעוץ ללא־מחייב.", stances: [
+        { partyId: "noam", value: 2, evidenceId: "e_noam_attorney_general", readingHe: "ההצעה המתועדת היא פיצול התפקיד וצמצומו לייעוץ שאינו מטיל וטו. הקוד הוא 2." }
+      ]},
+      { id: "term_limits", topicId: "institutions_democracy", domainHe: "משטר, משפט ודמוקרטיה", titleHe: "הגבלת כהונת ראש הממשלה", promptHe: "האם יש להגביל בחוק את כהונת ראש הממשלה לשתי קדנציות?", contextHe: "רקע: בניגוד לנשיא ארה״ב או לנשיא המדינה בישראל, החוק הקיים אינו מגביל את מספר הקדנציות או השנים שבהן יכול לכהן ראש ממשלה.", stances: [
+        { partyId: "yashar", value: 2, evidenceId: "e_yashar_term_limits", readingHe: "ההצעה המתועדת היא הגבלת כהונה לשתי קדנציות. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_term_limits", readingHe: "ההצעה המתועדת היא הגבלת כהונת ראש הממשלה. הקוד הוא 2." }
+      ]},
+      { id: "constitution", topicId: "institutions_democracy", domainHe: "משטר, משפט ודמוקרטיה", titleHe: "כינון חוקה לישראל", promptHe: "האם יש לקדם חוקה שלמה שתעגן את זכויות האדם ותסדיר באופן קבוע את היחסים בין הרשויות?", contextHe: "רקע: מאז ״פשרת הררי״ ב־1950 נחקקו בישראל חוקי יסוד בזה אחר זה במקום חוקה מלאה ומשוריינת, מה שמוביל למשברים חוקתיים סביב שינוי כללי המשחק ברוב רגיל.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_constitution", readingHe: "ההצעה המתועדת היא חוקה שתעגן זכויות אדם ותסדיר יחסים בין רשויות. הקוד הוא 2." }
+      ]},
+      { id: "coalition_rule", topicId: "institutions_democracy", domainHe: "משטר, משפט ודמוקרטיה", titleHe: "ממשלה של מפלגות ציוניות בלבד", promptHe: "האם יש להרכיב ממשלה רק ממפלגות המוגדרות ציוניות, ללא מפלגות חרדיות או ערביות המוגדרות לא־ציוניות?", contextHe: "רקע: שאלת הקווים האדומים להרכבת קואליציה עומדת בלב מערכות הבחירות האחרונות ומשפיעה על היכולת לקדם רפורמות בגיוס, בכלכלה ובביטחון.", stances: [
+        { partyId: "miluimnikim_economic", value: 2, evidenceId: "e_miluimnikim_economic_coalition", readingHe: "ההצעה המתועדת של מרכיב המילואימניקים היא ממשלה ממפלגות שהוא מגדיר ציוניות, ללא מפלגות חרדיות או ערביות שהוא מגדיר לא־ציוניות. הקוד הוא 2." }
+      ]},
+      { id: "transparency", topicId: "institutions_democracy", domainHe: "משטר, משפט ודמוקרטיה", titleHe: "שקיפות שלטונית מלאה", promptHe: "האם יש לחייב שקיפות מלאה בתהליכי קבלת ההחלטות של הממשלה ובחשיפת אינטרסים ולוביסטים?", contextHe: "רקע: דרישות לשקיפות כוללות פרסום יומנים, פרוטוקולים, ניגודי עניינים וקשרים עם בעלי הון כדי לצמצם שחיתות שלטונית.", stances: [
+        { partyId: "pirates", value: 2, evidenceId: "e_pirates_transparency", readingHe: "יש הצהרה על שקיפות בתהליכי קבלת החלטות ובאינטרסים המשפיעים עליהם. הקוד הוא 2." }
+      ]},
+      { id: "competition", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "פירוק מונופולים והגברת תחרות", promptHe: "האם הדרך המרכזית להורדת יוקר המחיה היא פירוק מונופולים, צמצום ריכוזיות והפחתת רגולציה?", contextHe: "רקע: יוקר המחיה בישראל הוא מהגבוהים במדינות ה־OECD, בין היתר בשל ריכוזיות גבוהה בשוק המזון, היבוא והבנקאות וחסמים רגולטוריים.", stances: [
         { partyId: "likud", value: 2, evidenceId: "e_likud_market", readingHe: "יש הצהרה על שוק חופשי, צמצום רגולציה ותחרות. הקוד הוא 2." },
         { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_competition", readingHe: "ההצעה היא הפחתת רגולציה, פירוק מונופולים והגברת תחרות. הקוד הוא 2." },
         { partyId: "haredi_public", value: 2, evidenceId: "e_haredi_public_market", readingHe: "יש הצהרה על משק חופשי, תחרות ומסים נמוכים. הקוד הוא 2." },
         { partyId: "yashar", value: 2, evidenceId: "e_yashar_competition", readingHe: "ההצעה היא פירוק מוקדי ריכוזיות, חיזוק תחרות ואימוץ תקינה בינלאומית. הקוד הוא 2." },
         { partyId: "beyachad", value: 1, evidenceId: "e_beyachad_competition", readingHe: "ההצעה עוסקת בריכוזיות בשרשרת המזון, לא בצמצום רגולציה בכל המשק. הקוד הוא 1." }
       ]},
-      { id: "imports", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "יבוא ותקינה", promptHe: "יש להסיר חסמי יבוא ולאמץ תקינה בינלאומית.", stances: [
+      { id: "imports", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "פתיחת יבוא ותקינה אירופית", promptHe: "האם יש להסיר חסמי יבוא ולאמץ אוטומטית תקינה אירופית ובינלאומית כדי להוזיל מוצרים?", contextHe: "רקע: תקנים ישראליים ייחודיים ובדיקות מכס כפולות מייקרים יבוא של מזון, תמרוקים ומוצרי צריכה ומגבילים תחרות מול יבואנים בלעדיים.", stances: [
         { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_imports", readingHe: "ההצעה המתועדת היא להסיר חסמי יבוא ולאמץ תקינה אירופית. הקוד הוא 2." }
       ]},
-      { id: "agriculture", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "חקלאות מקומית ויבוא", promptHe: "יש לתמוך ישירות בחקלאות המקומית וגם לפתוח יבוא חקלאי.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_agriculture", readingHe: "ההצעה משלבת תמיכה כספית ישירה בחקלאות עם הפחתת מכסים ופתיחת יבוא. הקוד הוא 2 לשילוב הזה, לא לכל אחד מחלקיו בנפרד." }
+      { id: "agriculture", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "תמיכה ישירה בחקלאים לצד פתיחת יבוא", promptHe: "האם יש לעבור לתמיכה כספית ישירה בחקלאים בישראל ובמקביל להפחית מכסים ולפתוח את השוק ליבוא תוצרת חקלאית?", contextHe: "רקע: המחלוקת בענף החקלאות היא בין הגנה על ייצור מקומי באמצעות מכסי מגן ומכסות לבין הורדת מחירי הפירות והירקות לצרכן תוך פיצוי ישיר לחקלאים.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_agriculture", readingHe: "ההצעה משלבת תמיכה כספית ישירה בחקלאות עם הפחתת מכסים ופתיחת יבוא. הקוד הוא 2." }
       ]},
-      { id: "minimum_wage", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "שכר המינימום", promptHe: "יש להעלות את שכר המינימום ולהצמידו לשכר הממוצע.", stances: [
+      { id: "minimum_wage", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "העלאת שכר המינימום", promptHe: "האם יש להעלות משמעותית את שכר המינימום ולהצמידו לשכר הממוצע במשק?", contextHe: "רקע: מצדדי העלאת שכר המינימום טוענים שהיא הכרחית לצמצום העוני מול התייקרות המחירים, בעוד מתנגדיה חוששים מהכבדה על עסקים קטנים ומתדלוק אינפלציה.", stances: [
         { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_minimum_wage", readingHe: "ההצעה המתועדת היא להעלות את שכר המינימום ולהצמידו לשכר הממוצע. הקוד הוא 2." }
       ]},
-      { id: "public_housing", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "דיור ציבורי", promptHe: "יש להרחיב דיור ציבורי ולפקח על שכר דירה.", stances: [
+      { id: "public_housing", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "דיור ציבורי ופיקוח על שכר דירה", promptHe: "האם על המדינה להרחיב את הדיור הציבורי ולהטיל פיקוח על מחירי השכירות?", contextHe: "רקע: מלאי הדיור הציבורי בישראל הצטמצם לאורך השנים, ומחירי השכירות בערים זינקו ללא תקרת פיקוח חוקית על העלאות שכר דירה.", stances: [
         { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_housing", readingHe: "ההצעה המתועדת כוללת הרחבת דיור ציבורי ופיקוח על שכר דירה. הקוד הוא 2." }
       ]},
-      { id: "long_rent", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "שכירות ארוכה", promptHe: "יש להרחיב שכירות ארוכת טווח, כולל מסלול מסובסד.", stances: [
+      { id: "long_rent", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "שכירות ארוכת טווח ומסובסדת", promptHe: "האם יש להרחיב פרויקטים של שכירות ארוכת טווח, כולל מסלול מסובסד ותמריצים למשכירים בחוזים ארוכים?", contextHe: "רקע: שוק השכירות בישראל נשען ברובו על משכירים פרטיים בחוזים קצרים של שנה, מה שיוצר חוסר יציבות לזוגות צעירים ולמשפחות שידם אינה משגת לרכוש דירה.", stances: [
         { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_housing", readingHe: "ההצעה המתועדת כוללת שכירות ארוכת טווח ומסלול מסובסד. הקוד הוא 2." }
       ]},
-      { id: "periphery_housing", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "דיור בפריפריה", promptHe: "יש להשקיע בדיור בפריפריה.", stances: [
+      { id: "periphery_housing", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "השקעה בדיור בפריפריה", promptHe: "האם יש למקד השקעה ממשלתית בהרחבת היצע הדיור בפריפריה?", contextHe: "רקע: הרחבת הבנייה והתשתיות בגליל ובנגב נועדה הן להוזיל את מחירי הדיור לזוגות צעירים והן לחזק דמוגרפית וכלכלית את אזורי הספר.", stances: [
         { partyId: "likud", value: 2, evidenceId: "e_likud_housing", readingHe: "יש הצהרה על השקעה בדיור בפריפריה. הקוד הוא 2." }
       ]},
-      { id: "local_haredi_employment", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "תעסוקה במקום שיכון מרוחק", promptHe: "יש לחזק תעסוקה ומסחר ברשויות מקומיות, במקום שיכונים מרוחקים בלי תעסוקה.", stances: [
+      { id: "local_haredi_employment", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "אזורי תעסוקה במקום ערי שינה", promptHe: "האם יש לפתח אזורי תעסוקה ומסחר בתוך רשויות מקומיות חרדיות במקום הקמת שכונות מגורים מרוחקות ללא מקורות פרנסה?", contextHe: "רקע: ערים חרדיות רבות סובלות ממחסור בארנונה עסקית וממיעוט מקומות עבודה קרובים, דבר שמכביד על תקציב הרשות ועל השתלבות התושבים בתעסוקה.", stances: [
         { partyId: "haredi_public", value: 2, evidenceId: "e_haredi_public_housing", readingHe: "ההצעה מחזקת רשויות חרדיות באמצעות אזורי תעסוקה ומסחר במקום שיכונים מרוחקים בלי תעסוקה. הקוד הוא 2." }
       ]},
-      { id: "pensions", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "הכנסת גמלאים", promptHe: "יש להשלים הכנסה לגמלאים עד לגובה שכר המינימום.", stances: [
+      { id: "pensions", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "הבטחת הכנסת מינימום לקשישים", promptHe: "האם יש להעניק השלמת הכנסה לכל גמלאי בישראל עד לגובה שכר המינימום?", contextHe: "רקע: קשישים רבים שעלו לישראל בגיל מבוגר או עבדו במקצועות לא פנסיוניים מתקיימים מקצבת זקנה והשלמת הכנסה נמוכות מקו העוני.", stances: [
         { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_pensions", readingHe: "ההצעה המתועדת היא השלמת הכנסה לגמלאים עד לגובה שכר המינימום. הקוד הוא 2." }
       ]},
-      { id: "avrech_allowances", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "קצבאות אברך", promptHe: "יש לבטל קצבאות אברך והטבות שמעודדות אי־שירות.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_benefits", readingHe: "ההצעה המתועדת היא לבטל קצבאות אברך והטבות שמעודדות אי־שירות. הקוד הוא 2." }
-      ]},
-      { id: "corporate_tax", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "מס על תאגידים", promptHe: "יש לצמצם הטבות מס לתאגידים גדולים.", stances: [
+      { id: "corporate_tax", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "צמצום הטבות מס לתאגידים", promptHe: "האם יש לצמצם הטבות מס לתאגידים גדולים ולהגדיל את המיסוי על רווחי הון?", contextHe: "רקע: חוק עידוד השקעות הון מעניק שיעורי מס מופחתים לחברות גדולות ויצואניות. מבקריו טוענים שיש לצמצם הטבות אלו לטובת הקלה על מעמד הביניים והשירותים הציבוריים.", stances: [
         { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_tax", readingHe: "ההצעה המתועדת כוללת צמצום הטבות מס לתאגידים גדולים. הקוד הוא 2." }
       ]},
-      { id: "labor_rights", topicId: "economy_cost_of_living", domainHe: "כלכלה ויוקר המחיה", titleHe: "זכויות עובדים", promptHe: "יש לאכוף באופן מלא דיני עבודה ושכר מינימום.", stances: [
+      { id: "labor_rights", topicId: "economy_cost_of_living", domainHe: "יוקר המחיה, כלכלה ודיור", titleHe: "אכיפת דיני עבודה ובטיחות", promptHe: "האם יש להחמיר את האכיפה הממשלתית של דיני עבודה, תשלום שכר מינימום ובטיחות בענפי הבנייה והתעשייה?", contextHe: "רקע: תאונות עבודה באתרי בנייה והפרות של זכויות שכר ופנסיה פוגעות בעובדים מוחלשים על רקע מחסור במפקחי עבודה.", stances: [
         { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_workers", readingHe: "יש הצהרה על אכיפה מלאה של דיני עבודה, שכר מינימום ובטיחות. הקוד הוא 2." }
       ]},
-      { id: "civil_union", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "זוגיות אזרחית", promptHe: "יש לאפשר מסלול זוגיות אזרחי עם זכויות וחובות של זוגות נשואים.", stances: [
+      { id: "civil_union", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "נישואים וזוגיות אזרחית", promptHe: "האם יש לאפשר נישואים אזרחיים או ברית זוגיות אזרחית בישראל עם מלוא הזכויות והחובות של זוגות נשואים?", contextHe: "רקע: בישראל נישואים וגירושים נערכים על פי הדין הדתי בלבד, ולכן מאות אלפי אזרחים (חסרי דת, פסולי חיתון וזוגות להט״ב) אינם יכולים להינשא בארץ ונאלצים להתחתן בחו״ל.", stances: [
         { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_marriage", readingHe: "ההצעה המתועדת היא נישואים וגירושים אזרחיים לכל אזרח. הקוד הוא 2." },
         { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_civil_union", readingHe: "ההצעה המתועדת היא ברית זוגיות אזרחית עם זכויות וחובות של זוגות נשואים. הקוד הוא 2." }
       ]},
-      { id: "shabbat_transit", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "תחבורה בשבת", promptHe: "יש לאפשר לרשות מקומית להפעיל תחבורה ציבורית בשבת.", stances: [
+      { id: "shabbat_transit", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "תחבורה ציבורית בשבת", promptHe: "האם יש לאפשר לכל רשות מקומית להחליט בעצמה על הפעלת תחבורה ציבורית בשבת לפי אופי תושביה?", contextHe: "רקע: לפי ה״סטטוס קוו״ הנהוג מאז קום המדינה, תחבורה ציבורית סדירה מושבתת בשבת ברוב ערי ישראל, למעט חריגים ומיזמים עירוניים.", stances: [
         { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_shabbat_transport", readingHe: "ההצעה מאפשרת לכל רשות לקבוע תחבורה ציבורית בשבת לפי צביונה. הקוד הוא 2." },
         { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_shabbat_transport", readingHe: "ההצעה היא תחבורה ציבורית בשבת לפי החלטות הרשויות המקומיות. הקוד הוא 2." }
       ]},
-      { id: "shabbat_rest", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "שבת במרחב הציבורי", promptHe: "יש לשמור על השבת כיום מנוחה במרחב הציבורי.", stances: [
+      { id: "shabbat_rest", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "שמירת צביון השבת במרחב הציבורי", promptHe: "האם יש לשמור על השבת כיום מנוחה לאומי במרחב הציבורי ולהגן על עסקים ועובדים שומרי שבת?", contextHe: "רקע: תומכי שמירת השבת במרחב הציבורי מבקשים למנוע מסחר ופתיחת עסקים בשבת מטעמים דתיים, לאומיים וסוציאליים של מניעת תחרות הוגנת מבעלי עסקים שומרי שבת.", stances: [
         { partyId: "noam", value: 2, evidenceId: "e_noam_shabbat", readingHe: "יש הצהרה על שמירת שבת כיום מנוחה במרחב הציבורי ועל הגנת עסקים ועובדים שומרי שבת. הקוד הוא 2." }
       ]},
-      { id: "rabbinate", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "הרבנות הראשית", promptHe: "יש לחזק את הרבנות הראשית ואת הסדרי הדת.", stances: [
+      { id: "rabbinate", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "חיזוק מעמד הרבנות הראשית", promptHe: "האם יש לחזק את סמכויות הרבנות הראשית ואת הסדרי הדת במדינה ברוח ההלכה?", contextHe: "רקע: המחלוקת עוסקת בשאלה האם לשמר ולחזק את מעמדה הממלכתי והבלעדי של הרבנות הראשית בתחומי הנישואים, הגיור והכשרות או לבזר ולצמצם את סמכויותיה.", stances: [
         { partyId: "noam", value: 2, evidenceId: "e_noam_rabbinate", readingHe: "יש הצהרה על חיזוק הרבנות הראשית ועל קידום הסדרי דת ברוח יהודית. הקוד הוא 2." }
       ]},
-      { id: "religious_councils", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "שירותי הדת", promptHe: "יש לבטל מועצות דתיות ולהעביר את שירותי הדת לרשויות המקומיות.", stances: [
+      { id: "religious_councils", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "ביטול המועצות הדתיות", promptHe: "האם יש לבטל את המועצות הדתיות הנפרדות ולהעביר את ניהול שירותי הדת למחלקות עירוניות ברשויות המקומיות?", contextHe: "רקע: המועצות הדתיות פועלות כגופים נפרדים מהעיריות עם תקציבים ומינויים משלהן. מבקריהן טוענים לכפילות בירוקרטית ודורשים לשלבן כמחלקה רגילה בעירייה.", stances: [
         { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_religious_services", readingHe: "ההצעה המתועדת היא לבטל מועצות דתיות ולהקים מחלקות עירוניות. הקוד הוא 2." }
       ]},
-      { id: "kashrut", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "הכשרות", promptHe: "יש לצמצם את בלעדיות הרבנות בכשרות ולהכיר בכשרות נוספת.", stances: [
+      { id: "kashrut", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "פתיחת שוק הכשרות לתחרות", promptHe: "האם יש לצמצם את מונופול הרבנות בכשרות ולהכיר בגופי כשרות נוספים ובכשרות בינלאומית?", contextHe: "רקע: בלעדיות הרבנות במתן תעודות כשרות ספגה ביקורת על עלויות גבוהות לעסקים ולצרכנים ועל ליקויי פיקוח, ומנגד תומכיה מזהירים מפני פגיעה באחידות ההלכתית.", stances: [
         { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_kashrut", readingHe: "ההצעה המתועדת היא להכיר בכשרות בינלאומית ולצמצם את בלעדיות הרבנות. הקוד הוא 2." }
       ]},
-      { id: "conversion", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "הסדרי הגיור", promptHe: "יש לשנות את הסדרי הגיור הקיימים, ולא להשאיר את הריכוז הנוכחי כפי שהוא.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_conversion", readingHe: "ההצעה מבזרת גיור אורתודוקסי לרבני קהילה ושומרת תקן הלכתי. זהו שינוי של הריכוז הקיים, ולכן הקוד הוא 2." },
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_conversion", readingHe: "ההצעה היא לאמץ את דוח ניסים בנושא הגיור. זהו שינוי של ההסדר הקיים, ולכן הקוד הוא 2. הטענה אינה מפרשת את הדוח מעבר למה שתועד." }
+      { id: "conversion", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "רפורמת הגיור ודוח ניסים", promptHe: "האם יש לבזר את מערך הגיור ולאפשר גיור בידי רבני ערים או לפי המלצות דוח ניסים?", contextHe: "רקע: דוח ועדת ניסים (בראשות שר המשפטים לשעבר משה ניסים) הציע להקים רשות גיור ממלכתית ולהקל על גיורם של מאות אלפי עולים מזרע ישראל. הצעות נוספות מבקשות להסמיך רבני ערים וקהילות לערוך גיור אורתודוקסי מקרב.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_conversion", readingHe: "ההצעה מבזרת גיור אורתודוקסי לרבני קהילה ושומרת תקן הלכתי. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_conversion", readingHe: "ההצעה היא לאמץ את דוח ניסים בנושא הגיור. הקוד הוא 2." }
       ]},
-      { id: "lgbtq_protection", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "הגנה מפני אפליה", promptHe: "יש לעגן בחוק הגנה מאפליה בשל נטייה מינית או זהות מגדרית.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_lgbtq", readingHe: "ההצעה המתועדת כוללת עיגון הגנה מאפליה בשל נטייה מינית או זהות מגדרית. הקוד הוא 2." }
+      { id: "lgbtq_protection", topicId: "religion_state", domainHe: "דת, מדינה וזהות", titleHe: "שוויון זכויות ללהט״ב ואיסור טיפולי המרה", promptHe: "האם יש לעגן בחוק יסוד הגנה מפני אפליה בשל נטייה מינית או זהות מגדרית ולאסור בחוק טיפולי המרה?", contextHe: "רקע: ארגוני הקהילה הגאה דורשים עיגון חוקתי של איסור אפליה, שוויון זכויות למשפחות גאות וחקיקה פלילית נגד טיפולי המרה בקטינים.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_lgbtq", readingHe: "ההצעה המתועדת כוללת עיגון הגנה מאפליה בשל נטייה מינית או זהות מגדרית ואיסור טיפולי המרה. הקוד הוא 2." }
       ]},
-      { id: "state_inquiry", topicId: "institutions_democracy", domainHe: "משטר ומוסדות", titleHe: "ועדת חקירה", promptHe: "יש להקים ועדת חקירה ממלכתית לאירועי שבעה באוקטובר.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_inquiry", readingHe: "ההצעה המתועדת היא ועדת חקירה ממלכתית לאירועי שבעה באוקטובר. הקוד הוא 2." },
-        { partyId: "yashar", value: 2, evidenceId: "e_yashar_inquiry", readingHe: "ההצעה המתועדת היא ועדת חקירה ממלכתית לטבח, לעשור שקדם לו ולניהול המלחמה. הקוד הוא 2." },
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_inquiry", readingHe: "ההצעה המתועדת היא שוועדת חקירה ממלכתית תהיה החלטת הממשלה הראשונה. הקוד הוא 2." },
-        { partyId: "miluimnikim_economic", value: 1, evidenceId: "e_miluimnikim_economic_inquiry", readingHe: "יש קריאה לחקירת הכשלים, בלי לנקוב במפורש בוועדה ממלכתית. הקוד הוא 1." }
-      ]},
-      { id: "term_limits", topicId: "institutions_democracy", domainHe: "משטר ומוסדות", titleHe: "הגבלת כהונה", promptHe: "יש להגביל את מספר הקדנציות של ראש הממשלה.", stances: [
-        { partyId: "yashar", value: 2, evidenceId: "e_yashar_term_limits", readingHe: "ההצעה המתועדת היא הגבלה לשתי קדנציות. הקוד הוא 2." },
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_term_limits", readingHe: "ההצעה המתועדת היא הגבלת כהונת ראש הממשלה. הקוד הוא 2." }
-      ]},
-      { id: "override_clause", topicId: "institutions_democracy", domainHe: "משטר ומוסדות", titleHe: "פסקת התגברות", promptHe: "יש לאפשר לכנסת להתגבר על פסילת חוקים בבג״ץ.", stances: [
-        { partyId: "noam", value: 2, evidenceId: "e_noam_override", readingHe: "ההצעה המתועדת היא פסקת התגברות שמצמצמת את יכולת בג״ץ לבטל החלטות כנסת. הקוד הוא 2." }
-      ]},
-      { id: "judicial_independence", topicId: "institutions_democracy", domainHe: "משטר ומוסדות", titleHe: "עצמאות בתי המשפט", promptHe: "יש לשמור על מערכת משפט עצמאית ועל יכולתה לבקר את הרשויות.", stances: [
-        { partyId: "yashar", value: 2, evidenceId: "e_yashar_judiciary", readingHe: "יש הצהרה על שמירת מערכת משפט עצמאית, זכויות המיעוט ושלטון החוק. הקוד הוא 2." }
-      ]},
-      { id: "attorney_general", topicId: "institutions_democracy", domainHe: "משטר ומוסדות", titleHe: "היועץ המשפטי", promptHe: "יש לפצל את תפקיד היועץ המשפטי לממשלה ולבטל את הווטו שלו על החלטות הממשלה.", stances: [
-        { partyId: "noam", value: 2, evidenceId: "e_noam_attorney_general", readingHe: "ההצעה המתועדת היא פיצול התפקיד וצמצומו לייעוץ שאינו מטיל וטו. הקוד הוא 2." }
-      ]},
-      { id: "constitution", topicId: "institutions_democracy", domainHe: "משטר ומוסדות", titleHe: "חוקה", promptHe: "יש לקדם חוקה שתעגן זכויות אדם ותסדיר את היחסים בין הרשויות.", stances: [
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_constitution", readingHe: "ההצעה המתועדת היא חוקה שתעגן זכויות אדם ותסדיר יחסים בין רשויות. הקוד הוא 2." }
-      ]},
-      { id: "transparency", topicId: "institutions_democracy", domainHe: "משטר ומוסדות", titleHe: "שקיפות", promptHe: "יש לחייב שקיפות באינטרסים ובתהליכי קבלת החלטות.", stances: [
-        { partyId: "pirates", value: 2, evidenceId: "e_pirates_transparency", readingHe: "יש הצהרה על שקיפות בתהליכי קבלת החלטות ובאינטרסים המשפיעים עליהם. הקוד הוא 2." }
-      ]},
-      { id: "coalition_rule", topicId: "institutions_democracy", domainHe: "משטר ומוסדות", titleHe: "שותפות בקואליציה", promptHe: "יש להרכיב ממשלה רק ממפלגות שהרשימה מגדירה ציוניות, ללא מפלגות חרדיות או ערביות שהיא מגדירה לא־ציוניות.", stances: [
-        { partyId: "miluimnikim_economic", value: 2, evidenceId: "e_miluimnikim_economic_coalition", readingHe: "ההצעה המתועדת של מרכיב המילואימניקים היא ממשלה ממפלגות שהוא מגדיר ציוניות, ללא מפלגות חרדיות או ערביות שהוא מגדיר לא־ציוניות. הקוד הוא 2." }
-      ]},
-      { id: "universal_service", topicId: "public_services_equality", domainHe: "שירות, חינוך ושוויון", titleHe: "שירות לכל אזרח", promptHe: "יש לחייב שירות צבאי או אזרחי לכל אזרח.", stances: [
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_service", readingHe: "ההצעה המתועדת היא חובת שירות צבאי או אזרחי לכל אזרח בגיל 18, עם סנקציות. הקוד הוא 2." },
-        { partyId: "yashar", value: 2, evidenceId: "e_yashar_service", readingHe: "ההצעה המתועדת היא חוק שירות ממלכתי לכל, בראש ובראשונה בצה״ל. הקוד הוא 2." },
-        { partyId: "miluimnikim_economic", value: 2, evidenceId: "e_miluimnikim_economic_service", readingHe: "ההצעה המתועדת היא שירות צבאי או אזרחי לכל אזרח, עם סנקציות והטבות. הקוד הוא 2." },
-        { partyId: "amcha_israel", value: 1, evidenceId: "e_amcha_israel_service", readingHe: "יש שירות צבאי למתאימים, שירות לאומי לאחרים ומסלול מצוינות תורנית. זהו כיוון של שירות, לא חובה זהה לכולם, ולכן הקוד הוא 1." },
-        { partyId: "haredi_public", value: -2, evidenceId: "e_haredi_public_service", readingHe: "ההצעה מבקשת להגן על לומדי תורה מסנקציות. זהו כיוון מנוגד לחובת שירות לכל אזרח, ולכן הקוד הוא ‎-2." }
-      ]},
-      { id: "core_funding", topicId: "public_services_equality", domainHe: "שירות, חינוך ושוויון", titleHe: "לימודי ליבה", promptHe: "יש להתנות מימון ציבורי למוסדות חינוך בלימודי ליבה.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_core", readingHe: "ההצעה מתנה מימון ציבורי בלימודי ליבה מלאים. הקוד הוא 2." },
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_core", readingHe: "ההצעה דורשת לימודי ליבה לכל תלמיד ושלילת תקצוב ממוסד שאינו עומד בכך. הקוד הוא 2." },
-        { partyId: "yashar", value: 1, evidenceId: "e_yashar_core", readingHe: "ההצעה היא לימודי ליבה לכל ועדיפות לחינוך הממלכתי. היא תומכת בליבה, אך אינה מתנה במפורש מימון, ולכן הקוד הוא 1." },
-        { partyId: "haredi_public", value: -1, evidenceId: "e_haredi_public_education", readingHe: "ההצעה שומרת על עצמאות החינוך החרדי ומשפרת אנגלית ומתמטיקה. היא מתנגדת להתניית המימון, אך אינה דוחה כל לימודי ליבה, ולכן הקוד הוא ‎-1." }
-      ]},
-      { id: "free_education", topicId: "public_services_equality", domainHe: "שירות, חינוך ושוויון", titleHe: "חינוך חינם", promptHe: "יש להנהיג חינוך חינם מלידה ועד לימודי דוקטורט.", stances: [
+      { id: "free_education", topicId: "public_services_equality", domainHe: "שוויון בנטל, חינוך וחברה", titleHe: "חינוך חינם מלידה עד דוקטורט", promptHe: "האם על המדינה לממן חינוך חינם מלא מגיל לידה (מעונות יום) ועד תארים מתקדמים באקדמיה?", contextHe: "רקע: הורים לפעוטות בגילאי 0–3 וסטודנטים להשכלה גבוהה בישראל נושאים בעלויות פרטיות גבוהות בהשוואה למדינות רווחה באירופה.", stances: [
         { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_education", readingHe: "ההצעה המתועדת היא חינוך חינם מלידה ועד לימודי דוקטורט. הקוד הוא 2." }
       ]},
-      { id: "health_periphery", topicId: "public_services_equality", domainHe: "שירות, חינוך ושוויון", titleHe: "בריאות בפריפריה", promptHe: "יש להשקיע בשירותי בריאות בפריפריה.", stances: [
+      { id: "health_periphery", topicId: "public_services_equality", domainHe: "שוויון בנטל, חינוך וחברה", titleHe: "חיזוק שירותי הבריאות בפריפריה", promptHe: "האם יש לתת עדיפות תקציבית להקמת מרכזי בריאות ולהגדלת תקני רופאים בפריפריה?", contextHe: "רקע: נתוני משרד הבריאות מצביעים על פערים ניכרים בתוחלת החיים, בזמני ההמתנה לרופאים מומחים ובמספר מיטות האשפוז בין מרכז הארץ לבין הצפון והדרום.", stances: [
         { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_health", readingHe: "ההצעה כוללת מרכזי בריאות בפריסה ארצית, בעדיפות לפריפריה. הקוד הוא 2." },
         { partyId: "likud", value: 2, evidenceId: "e_likud_health", readingHe: "יש הצהרה על השקעה בבריאות בפריפריה. הקוד הוא 2." },
         { partyId: "yashar", value: 2, evidenceId: "e_yashar_health", readingHe: "ההצעה המתועדת כוללת השקעה בבריאות בפריפריה. הקוד הוא 2." }
       ]},
-      { id: "arab_gaps", topicId: "public_services_equality", domainHe: "שירות, חינוך ושוויון", titleHe: "פערים בחברה הערבית", promptHe: "יש תכנית ייעודית לסגירת פערים בשירותים ובתשתיות בחברה הערבית.", stances: [
+      { id: "arab_gaps", topicId: "public_services_equality", domainHe: "שוויון בנטל, חינוך וחברה", titleHe: "תוכניות פיתוח לחברה הערבית", promptHe: "האם יש להפעיל תוכניות חומש ממשלתיות לסגירת פערים בתשתיות, בחינוך ובאזורי תעשייה בחברה הערבית?", contextHe: "רקע: תוכניות חומש ממשלתיות לחברה הערבית נועדו לצמצם פערים בתשתיות, בתחבורה ובתעסוקה ולהגביר את השתלבות הצעירים והנשים בשוק העבודה.", stances: [
         { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_arab_development", readingHe: "ההצעה המתועדת כוללת תכניות ייעודיות לסגירת פערים בחברה הערבית. הקוד הוא 2." }
       ]},
-      { id: "equal_services", topicId: "public_services_equality", domainHe: "שירות, חינוך ושוויון", titleHe: "שוויון בשירותים", promptHe: "יש להשוות תקציבים ורמת שירותי חינוך, דיור ורווחה בין האזרחים.", stances: [
+      { id: "equal_services", topicId: "public_services_equality", domainHe: "שוויון בנטל, חינוך וחברה", titleHe: "השוואת תקציבי חינוך ורווחה", promptHe: "האם יש להשוות באופן מלא את תקציבי החינוך, הדיור והרווחה בין כלל הרשויות והאזרחים בישראל?", contextHe: "רקע: פערים בהכנסות עצמיות מארנונה ובהקצאות משרדי הממשלה יוצרים הבדלים ניכרים בהשקעה לתלמיד וברמת השירותים העירוניים בין יישובים שונים.", stances: [
         { partyId: "joint_list", value: 2, evidenceId: "e_joint_list_budgets", readingHe: "ההצעה המתועדת היא להשוות תקציבים ורמת שירותי חינוך, דיור ורווחה. הקוד הוא 2." }
       ]},
-      { id: "organized_crime", topicId: "security_foreign_relations", domainHe: "אכיפה וזכויות", titleHe: "פשיעה מאורגנת", promptHe: "יש לחזק את המאבק בפשיעה המאורגנת ובפרוטקשן באמצעות גוף ייעודי או אכיפה מוגברת.", stances: [
+      { id: "organized_crime", topicId: "security_foreign_relations", domainHe: "ביטחון פנים ואכיפה", titleHe: "מאבק בפשיעה המאורגנת ובפרוטקשן", promptHe: "האם יש להקים קבינט או מטה לאומי ייעודי ובתי משפט מיוחדים למיגור הפשיעה המאורגנת וגביית דמי החסות (פרוטקשן)?", contextHe: "רקע: ארגוני הפשיעה וגביית דמי החסות מחקלאים, קבלנים ובעלי עסקים הפכו למכת מדינה בנגב, בגליל ובחברה הערבית והכללית.", stances: [
         { partyId: "yashar", value: 2, evidenceId: "e_yashar_police", readingHe: "ההצעה המתועדת היא קבינט למאבק בפשיעה המאורגנת. הקוד הוא 2." },
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_police", readingHe: "ההצעה המתועדת היא מטה לאומי למאבק בפשע המאורגן ובפרוטקשן. הקוד הוא 2." },
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_police", readingHe: "ההצעה המתועדת היא מטה לאומי למאבק בפשע המאורגן ובפרוטקשן ובתי משפט ייעודיים. הקוד הוא 2." },
         { partyId: "amcha_israel", value: 1, evidenceId: "e_amcha_israel_police", readingHe: "ההצעה מחזקת אכיפה וענישה נגד פרוטקשן, בלי גוף ייעודי מפורש. הקוד הוא 1." }
       ]},
-      { id: "crime_detention", topicId: "security_foreign_relations", domainHe: "אכיפה וזכויות", titleHe: "מעצר מנהלי", promptHe: "יש לאפשר מעצר מנהלי לראשי ארגוני פשיעה.", stances: [
-        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_detention", readingHe: "ההצעה המתועדת כוללת חקיקה שתאפשר מעצרים מנהליים לראשי ארגוני פשיעה. הקוד הוא 2." }
+      { id: "illegal_weapons_terror", topicId: "security_foreign_relations", domainHe: "ביטחון פנים ואכיפה", titleHe: "הגדרת נשק לא חוקי כטרור", promptHe: "האם יש להתייחס להחזקת נשק לא חוקי כאל עבירת טרור, להטיל סגרים מודיעיניים לאיסוף נשק ולחלט את הון העבריינים?", contextHe: "רקע: מאות אלפי כלי נשק לא חוקיים בישראל מוברחים דרך הגבולות או נגנבים מצה״ל ומשמשים הן לפשיעה מדממת והן לפיגועים ביטחוניים.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_illegal_weapons", readingHe: "בתפיסת הביטחון מוצע להגדיר נשק לא חוקי כטרור, להפעיל חמ״ל משולב לאיסוף נשק וחילוט הון ולחסום צירי הברחה. הקוד הוא 2." }
       ]},
-      { id: "climate_law", topicId: "environment_infrastructure", domainHe: "סביבה ותשתיות", titleHe: "חוק אקלים", promptHe: "יש לחוקק חוק אקלים מחייב ומתוקצב.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_climate", readingHe: "ההצעה המתועדת היא חוק אקלים מחייב ומתוקצב. הקוד הוא 2." }
+      { id: "crime_detention", topicId: "security_foreign_relations", domainHe: "ביטחון פנים ואכיפה", titleHe: "מעצרים מנהליים ורוגלות נגד ראשי פשע", promptHe: "האם יש להתיר בחוק מעצרים מנהליים ושימוש ברוגלות נגד ראשי ארגוני הפשיעה?", contextHe: "רקע: כלי מעצר מנהלי ואיסוף סייבר שימשו מסורתית לסיכול טרור ביטחוני. תומכי המהלך טוענים כי בלי כלים אלה המשטרה מתקשה לעצור את ראשי ארגוני הפשע, בעוד מבקריו חוששים מפגיעה בזכויות חשודים.", stances: [
+        { partyId: "yisrael_beitenu", value: 2, evidenceId: "e_yisrael_beitenu_detention", readingHe: "ההצעה המתועדת כוללת חקיקה שתאפשר מעצרים מנהליים לראשי ארגוני פשיעה ושימוש ברוגלות. הקוד הוא 2." }
       ]},
-      { id: "coal_exit", topicId: "environment_infrastructure", domainHe: "סביבה ותשתיות", titleHe: "פחם ואנרגיה מתחדשת", promptHe: "יש להפסיק את ההפעלה השוטפת של יחידות הפחם הישנות ולהאיץ אנרגיה מתחדשת.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_energy", readingHe: "ההצעה המתועדת היא להפסיק הפעלה שוטפת של יחידות הפחם הישנות ולהאיץ אנרגיה מתחדשת. הקוד הוא 2." }
+      { id: "climate_law", topicId: "environment_infrastructure", domainHe: "סביבה, אנרגיה ותחבורה", titleHe: "חוק אקלים מחייב", promptHe: "האם יש לחוקק חוק אקלים מחייב ומתוקצב עם יעדים מחייבים להפחתת פליטות ולהיערכות לסיכוני אקלים?", contextHe: "רקע: מדינות רבות עיגנו בחוק יעדים מחייבים להפחתת פליטות גזי חממה ולהיערכות לגלי חום, שריפות ושיטפונות. בישראל נמתחה ביקורת על עיכובים בחקיקה מחייבת ובתקצובה.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_climate", readingHe: "ההצעה המתועדת היא חוק אקלים מחייב ומתוקצב ומערך לאומי לניהול סיכוני אקלים. הקוד הוא 2." }
       ]},
-      { id: "nature_protection", topicId: "environment_infrastructure", domainHe: "סביבה ותשתיות", titleHe: "טבע ומים", promptHe: "יש לשמור על מקורות המים, הטבע והסביבה.", stances: [
+      { id: "coal_exit", topicId: "environment_infrastructure", domainHe: "סביבה, אנרגיה ותחבורה", titleHe: "גמילה מפחם והאצת אנרגיה מתחדשת", promptHe: "האם יש להפסיק את ההפעלה השוטפת של יחידות הפחם הישנות ולהאיץ הקמת אנרגיה סולארית ומתקני אגירה?", contextHe: "רקע: ייצור חשמל מפחם בתחנת אורות רבין גורם לזיהום אוויר כבד, והמעבר לאנרגיה מתחדשת ולאגירת חשמל נתפס גם כצורך סביבתי וגם כמרכיב של עצמאות וביטחון אנרגטי.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_energy", readingHe: "ההצעה המתועדת היא להפסיק הפעלה שוטפת של יחידות הפחם הישנות ולהאיץ אנרגיה מתחדשת ואגירה. הקוד הוא 2." }
+      ]},
+      { id: "nature_protection", topicId: "environment_infrastructure", domainHe: "סביבה, אנרגיה ותחבורה", titleHe: "הגנה על שטחים פתוחים, נחלים ומקורות מים", promptHe: "האם יש לעגן בחוק הגנה על מסדרונות אקולוגיים, נחלים, חופים ומקורות מים מפני זיהום ובנייה דורסנית?", contextHe: "רקע: צפיפות האוכלוסייה הגבוהה בישראל יוצרת לחצי פיתוח כבדים על השטחים הפתוחים, החופים והנחלים שנותרו.", stances: [
         { partyId: "pirates", value: 2, evidenceId: "e_pirates_nature", readingHe: "יש הצהרה על שמירת מקורות המים, הטבע והסביבה. הקוד הוא 2." },
         { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_nature", readingHe: "ההצעה מבקשת לעגן מסדרונות אקולוגיים, לשקם נחלים ולהגן על חופים ומגוון ביולוגי. הקוד הוא 2." }
       ]},
-      { id: "public_transit", topicId: "environment_infrastructure", domainHe: "סביבה ותשתיות", titleHe: "תחבורה ציבורית", promptHe: "יש לחזק תחבורה ציבורית נגישה ואמינה.", stances: [
+      { id: "public_transit", topicId: "environment_infrastructure", domainHe: "סביבה, אנרגיה ותחבורה", titleHe: "רשויות תחבורה מטרופוליניות", promptHe: "האם יש להקים רשויות תחבורה מטרופוליניות שיקדמו תחבורה ציבורית יעילה ויצמצמו את הפקקים?", contextHe: "רקע: בניגוד לרוב המטרופולינים במערב, הסמכויות על תחבורה ציבורית בישראל מרוכזות במשרדי הממשלה במקום ברשויות מטרופוליניות המתאמות בין האוטובוסים, הרכבות והעיריות.", stances: [
         { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_transit", readingHe: "ההצעה המתועדת היא חוק רשויות תחבורה מטרופוליניות לקידום תחבורה ציבורית נגישה ואמינה. הקוד הוא 2." }
       ]},
-      { id: "urban_renewal", topicId: "environment_infrastructure", domainHe: "סביבה ותשתיות", titleHe: "התחדשות עירונית", promptHe: "יש להרחיב התחדשות עירונית ולקצר הליכי תכנון.", stances: [
-        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_urban_renewal", readingHe: "ההצעה המתועדת היא להרחיב התחדשות עירונית ולקצר תכנון במסלול ייעודי. הקוד הוא 2." }
+      { id: "urban_renewal", topicId: "environment_infrastructure", domainHe: "סביבה, אנרגיה ותחבורה", titleHe: "האצת התחדשות עירונית ומיגון", promptHe: "האם יש לקצר הליכי תכנון ולהעניק סמכויות לרשויות המקומיות כדי להאיץ התחדשות עירונית (פינוי־בינוי) ומיגון מבנים ישנים?", contextHe: "רקע: מאות אלפי דירות בישראל נבנו לפני חיוב ממ״דים ואינן עמידות לירי טילים או לרעידות אדמה, אך פרויקטים של פינוי־בינוי מתעכבים במשך שנים בוועדות התכנון.", stances: [
+        { partyId: "beyachad", value: 2, evidenceId: "e_beyachad_urban_renewal", readingHe: "ההצעה המתועדת היא להרחיב התחדשות עירונית ולקצר תכנון במסלול ייעודי וסמכויות מקומיות. הקוד הוא 2." }
       ]}
     ]
   };
@@ -678,7 +702,7 @@
   }
 
   function createReadingState() {
-    return { view: "overview", step: 1, topics: new Set(), evidence: "all", depth: "brief", search: "", comparison: new Set(), reading: false, questionId: null, comparisonQuestionId: null, compassIndex: 0, compassDone: false, compassAnswers: new Map(), compassWeights: new Set(), compassOpen: null };
+    return { view: "overview", step: 1, topics: new Set(), evidence: "all", depth: "brief", search: "", comparison: new Set(), reading: false, questionId: null, comparisonQuestionId: null, compassIndex: 0, compassDone: false, compassContextOpen: false, compassAnswers: new Map(), compassWeights: new Set(), compassOpen: null };
   }
 
   function resetReadingState(target) {
@@ -1202,17 +1226,24 @@
     return card;
   }
 
+  function syncLearningAccess() {
+    document.querySelectorAll("[data-learning-nav]").forEach((node) => {
+      node.hidden = !state.compassDone;
+    });
+  }
+
   function renderCompass() {
     const root = $("compass-root");
     if (!root) return;
     root.replaceChildren();
+    syncLearningAccess();
     const header = element("header", "view-heading");
-    header.append(element("p", "eyebrow", "מצפן עמדות · חפיפה מתועדת"));
-    const title = element("h1", "", "לא ניחוש. חפיפה עם מה שתועד.");
+    header.append(element("p", "eyebrow", "מצפן בחירות 2026 · התאמת מפלגה להעדפות שלכם"));
+    const title = element("h1", "", "איזו מפלגה באמת מתאימה לעמדות שלכם?");
     title.id = "compass-title";
     title.tabIndex = -1;
     header.append(title);
-    paragraph(header, "עוברים על כל הטענות, תחום אחרי תחום. התוצאה מופיעה רק אחרי הטענה האחרונה. זה אינו המלצת הצבעה.");
+    paragraph(header, "ענו על השאלות שבלב השיח הישראלי — איראן, לבנון, עזה, הסכמי אברהם, היחסים עם ארה״ב, יוקר המחיה, שוויון בנטל ודת ומדינה — כדי לגלות את אחוז ההתאמה של כל מפלגה להעדפות שלכם. התוצאה מופיעה רק אחרי הטענה האחרונה; החישוב מבוסס על עמדות מתועדות בלבד ואינו המלצת הצבעה.");
     root.append(header);
     if (!model.research) {
       const empty = element("div", "empty-state");
@@ -1233,9 +1264,20 @@
       const fill = element("span");
       fill.style.setProperty("--step", String(Math.round(((state.compassIndex + 1) / total) * 100)));
       track.append(fill);
-      card.append(art(question.topicId, 72).image, progress, track, element("h2", "", question.titleHe));
-      paragraph(card, question.promptHe, "compass-prompt");
-      paragraph(card, "אפשר להסכים, להתנגד, או לדלג. דילוג לא נכנס לחישוב, והשאלון ממשיך עד הסוף.", "small-copy");
+      const promptRow = element("div", "compass-prompt-row");
+      promptRow.append(element("p", "compass-prompt", question.promptHe));
+      const helpBtn = button("?", "compass-context", "compass-help-btn");
+      helpBtn.setAttribute("aria-expanded", state.compassContextOpen ? "true" : "false");
+      helpBtn.setAttribute("aria-label", `הקשר ורקע לשאלה: ${question.titleHe}`);
+      helpBtn.title = "הקשר ורקע לשאלה";
+      promptRow.append(helpBtn);
+      card.append(art(question.topicId, 72).image, progress, track, element("h2", "", question.titleHe), promptRow);
+      if (state.compassContextOpen && nonempty(question.contextHe)) {
+        const contextBox = element("div", "compass-context-box");
+        paragraph(contextBox, question.contextHe);
+        card.append(contextBox);
+      }
+      paragraph(card, "סמנו את מידת ההסכמה שלכם או דלגו. לחצו על סימן השאלה (?) להסבר ורקע על הסוגיה.", "small-copy");
       const scale = element("div", "compass-scale");
       scale.setAttribute("role", "group");
       scale.setAttribute("aria-label", "הכיוון שלכם בשאלה");
@@ -1250,7 +1292,7 @@
       const back = button("חזרה", "compass-back", "button button--outline");
       back.disabled = state.compassIndex === 0;
       const skip = button("דילוג על השאלה", "compass-skip", "button button--outline");
-      const next = button(state.compassIndex === total - 1 ? "סיום השאלון" : "לטענה הבאה", "compass-next", "button button--primary");
+      const next = button(state.compassIndex === total - 1 ? "סיום השאלון והצגת ההתאמה" : "לטענה הבאה", "compass-next", "button button--primary");
       actions.append(back, skip, next);
       card.append(scale, weight, actions);
       root.append(card);
@@ -1258,10 +1300,10 @@
     }
     const result = compassResult();
     const method = element("section", "compass-method");
-    method.append(element("h2", "", "איך האחוז מחושב"));
+    method.append(element("h2", "", "תוצאות ההתאמה שלכם למפלגות"));
     paragraph(method, COMPASS.methodHe);
     paragraph(method, "נקודות לשאלה = 4 פחות המרחק בין הכיוון שלכם לקוד המתועד. אחוז = סכום הנקודות כפול המשקל, חלקי סכום 4 כפול המשקל. משקל 2 אם סימנתם שהשאלה חשובה, אחרת 1.");
-    paragraph(method, "דילוג, או בחירה בלי עמדה מחייבת, לא נכנסים. לרשימה בלי קוד מתועד אין אחוז: לא 0 ולא 50. הדירוג הראשי כולל רק רשימות עם לפחות 3 שאלות מתועדות, והוא ממוין מהחפיפה הגבוהה לנמוכה.");
+    paragraph(method, "דילוג, או בחירה בלי עמדה מחייבת, לא נכנסים. לרשימה בלי קוד מתועד אין אחוז: לא 0 ולא 50. הדירוג הראשי כולל רק רשימות עם לפחות 3 שאלות מתועדות, והוא ממוין מאחוז ההתאמה הגבוה לנמוך.");
     const tools = element("div", "wizard-actions");
     tools.append(button("חזרה לשאלות", "compass-edit", "button button--outline"), button("מחיקת התשובות", "compass-clear", "button button--outline"));
     method.append(tools);
@@ -1271,33 +1313,45 @@
       empty.append(element("h2", "", "עדיין אין כיוון לחישוב."));
       paragraph(empty, "דילוג ובחירה בלי עמדה מחייבת לא יוצרים אחוז. סמנו תמיכה או התנגדות לפחות בשאלה אחת.");
       root.append(empty);
-      return;
+    } else {
+      const stable = result.scored.filter((row) => row.stable).sort(overlapSort);
+      const partial = result.scored.filter((row) => !row.stable).sort(overlapSort);
+      const bands = element("div", "compass-bands");
+      const addBand = (title, note, rows, className) => {
+        const band = element("section", `compass-band ${className}`);
+        band.append(element("h2", "", title));
+        paragraph(band, note);
+        if (!rows.length) paragraph(band, "אין רשימות בקבוצה הזו לפי התשובות הנוכחיות.", "small-copy");
+        rows.forEach((row, index) => {
+          const item = renderOverlap(row, result.sidedCount);
+          item.style.setProperty("--order", String(index));
+          band.append(item);
+        });
+        bands.append(band);
+      };
+      addBand("המפלגות המתאימות ביותר להעדפותיכם (מהגבוה לנמוך)", `רק רשימות עם לפחות ${COMPASS_MINIMUM} שאלות מתועדות מול כיוון שסימנתם. פתחו כל מפלגה כדי לראות את הנימוק והמקור לכל שאלה.`, stable, "compass-band--stable");
+      addBand("חפיפה חלקית, לא דירוג יציב", "יש כאן אחוז, אבל הוא נשען על שאלה אחת או שתיים. הוא מוצג בנפרד כדי שאחוז גבוה על מעט תיעוד לא ייראה כמו התאמה מבוססת.", partial, "compass-band--partial");
+      root.append(bands);
+      const aside = element("section", "compass-unscored");
+      aside.append(element("h2", "", "בלי אחוז"));
+      paragraph(aside, "לרשימות האלה אין עמדה מקודדת מול הכיוון שסימנתם. חוסר תיעוד אינו עמדה, ולכן לא מוצג להן 0% או 50%.");
+      const names = element("ul", "compass-name-list");
+      canonicalOrder(result.none.map((row) => ({ id: row.partyId, nameHe: row.nameHe }))).forEach((row) => names.append(element("li", "", row.nameHe)));
+      aside.append(names);
+      root.append(aside);
     }
-    const stable = result.scored.filter((row) => row.stable).sort(overlapSort);
-    const partial = result.scored.filter((row) => !row.stable).sort(overlapSort);
-    const bands = element("div", "compass-bands");
-    const addBand = (title, note, rows, className) => {
-      const band = element("section", `compass-band ${className}`);
-      band.append(element("h2", "", title));
-      paragraph(band, note);
-      if (!rows.length) paragraph(band, "אין רשימות בקבוצה הזו לפי התשובות הנוכחיות.", "small-copy");
-      rows.forEach((row, index) => {
-        const item = renderOverlap(row, result.sidedCount);
-        item.style.setProperty("--order", String(index));
-        band.append(item);
-      });
-      bands.append(band);
-    };
-    addBand("החפיפה המתועדת, מהגבוה לנמוך", `רק רשימות עם לפחות ${COMPASS_MINIMUM} שאלות מתועדות מול כיוון שסימנתם. אחוז על שאלה אחת אינו מספיק כדי לעמוד בראש.`, stable, "compass-band--stable");
-    addBand("חפיפה חלקית, לא דירוג יציב", "יש כאן אחוז, אבל הוא נשען על שאלה אחת או שתיים. הוא מוצג בנפרד כדי שאחוז גבוה על מעט תיעוד לא ייראה כמו התאמה מבוססת.", partial, "compass-band--partial");
-    root.append(bands);
-    const aside = element("section", "compass-unscored");
-    aside.append(element("h2", "", "בלי אחוז"));
-    paragraph(aside, "לרשימות האלה אין עמדה מקודדת מול הכיוון שסימנתם. חוסר תיעוד אינו עמדה, ולכן לא מוצג להן 0% או 50%.");
-    const names = element("ul", "compass-name-list");
-    canonicalOrder(result.none.map((row) => ({ id: row.partyId, nameHe: row.nameHe }))).forEach((row) => names.append(element("li", "", row.nameHe)));
-    aside.append(names);
-    root.append(aside);
+    const postLearn = element("section", "compass-post-learn");
+    postLearn.append(element("h2", "", "סיימתם את המצפן — רוצים להעמיק במצעים ובמקורות?"));
+    paragraph(postLearn, "כעת לאחר השלמת השאלון, פתוחה בפניכם ספריית המחקר המלאה: קריאה לפי נושאים, עיון בכל 38 הרשימות והשוואה ישירה זו לצד זו.");
+    const learnActions = element("div", "wizard-actions");
+    const toExplore = button("למפת הנושאים ומסלול הקריאה ←", "start-reading", "button button--primary");
+    const toRoster = button("למאגר כל הרשימות", "show-roster", "button button--outline");
+    const toCompare = element("button", "button button--outline", "להשוואת מפלגות ומקורות");
+    toCompare.type = "button";
+    toCompare.dataset.view = "compare";
+    learnActions.append(toExplore, toRoster, toCompare);
+    postLearn.append(learnActions);
+    root.append(postLearn);
   }
 
   function showView(view, moveFocus = true) {
@@ -1509,8 +1563,9 @@
     renderRoster();
     renderWizard();
     syncComparison();
-    showView("overview");
-    announce("התצוגה אופסה. בחירות הקריאה, החיפוש ורשימות ההשוואה נמחקו.");
+    syncLearningAccess();
+    showView("compass");
+    announce("התצוגה אופסה. תשובות המצפן, בחירות הקריאה, החיפוש ורשימות ההשוואה נמחקו.");
     window.setTimeout(() => { resetting = false; focus(viewHeading()); }, 0);
   }
 
@@ -1594,6 +1649,9 @@
       state.comparison.clear();
       syncComparison();
       announce("רשימות ההשוואה נוקו.");
+    } else if (action === "compass-context") {
+      state.compassContextOpen = !state.compassContextOpen;
+      renderCompass();
     } else if (action === "compass-answer") {
       const value = Number(control.dataset.compassValue);
       const question = COMPASS.questions[state.compassIndex];
@@ -1603,26 +1661,33 @@
     } else if (action === "compass-skip") {
       const question = COMPASS.questions[state.compassIndex];
       if (question) state.compassAnswers.delete(question.id);
+      state.compassContextOpen = false;
       if (state.compassIndex < COMPASS.questions.length - 1) state.compassIndex += 1;
       renderCompass();
       focus($("compass-title"));
     } else if (action === "compass-next") {
+      state.compassContextOpen = false;
       if (state.compassIndex < COMPASS.questions.length - 1) state.compassIndex += 1;
       else state.compassDone = true;
       renderCompass();
       focus($("compass-title"));
     } else if (action === "compass-back") {
+      state.compassContextOpen = false;
       if (state.compassDone) state.compassDone = false;
       else state.compassIndex = Math.max(0, state.compassIndex - 1);
       renderCompass();
       focus($("compass-title"));
     } else if (action === "compass-edit" || action === "compass-clear" || action === "compass-open") {
-      if (action === "compass-edit") state.compassDone = false;
+      if (action === "compass-edit") {
+        state.compassDone = false;
+        state.compassContextOpen = false;
+      }
       if (action === "compass-clear") {
         state.compassAnswers = new Map();
         state.compassWeights = new Set();
         state.compassIndex = 0;
         state.compassDone = false;
+        state.compassContextOpen = false;
         state.compassOpen = null;
       }
       if (action === "compass-open") state.compassOpen = state.compassOpen === control.dataset.partyId ? null : control.dataset.partyId;
@@ -1671,7 +1736,8 @@
     $("comparison-options").replaceChildren(...model.parties.map((party) => comparisonChoice(party)));
     renderLibrary();
     syncComparison();
-    showView("overview", false);
+    syncLearningAccess();
+    showView("compass", false);
     document.addEventListener("click", handleClick);
     document.addEventListener("change", handleChange);
     document.addEventListener("keydown", (event) => {

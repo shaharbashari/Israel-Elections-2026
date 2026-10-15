@@ -18,17 +18,17 @@
     <a class="skip-link" href="#main">דילוג לתוכן המרכזי</a>
     <header class="site-header">
       <div class="container header-inner">
-        <button type="button" class="brand" data-view="overview" aria-label="מבט — לעמוד הפתיחה">
+        <button type="button" class="brand" data-view="compass" aria-label="מבט — למצפן הבחירות">
           <img src="assets/mark.svg" width="42" height="42" alt="">
-          <span><strong>מבט</strong><span class="brand-caption">בחירות בישראל</span></span>
+          <span><strong>מבט</strong><span class="brand-caption">מצפן בחירות 2026</span></span>
         </button>
         <nav class="main-nav" aria-label="ניווט ראשי">
-          <button type="button" data-view="overview" aria-current="page">הרשימות</button>
-          <button type="button" data-view="explore">מפת הנושאים</button>
-          <button type="button" data-view="compass">מצפן עמדות</button>
-          <button type="button" data-view="compare">השוואה ומקורות <span id="nav-count" class="nav-count" hidden></span></button>
+          <button type="button" data-view="compass" aria-current="page">מצפן בחירות</button>
+          <button type="button" data-view="overview" data-learning-nav hidden>הרשימות</button>
+          <button type="button" data-view="explore" data-learning-nav hidden>מפת הנושאים</button>
+          <button type="button" data-view="compare" data-learning-nav hidden>השוואה ומקורות <span id="nav-count" class="nav-count" hidden></span></button>
         </nav>
-        <span class="header-note">מידע ציבורי. קריאה עצמאית.</span>
+        <span class="header-note">מתאימים מפלגה לעמדות שלכם.</span>
       </div>
     </header>
 
@@ -40,21 +40,21 @@
         <details><summary>פרטים טכניים</summary><ul id="data-problems"></ul></details>
       </section>
 
-      <section id="view-overview" class="view" aria-labelledby="overview-title">
+      <section id="view-overview" class="view" aria-labelledby="overview-title" hidden>
         <div class="hero">
           <div class="hero-copy">
-            <p class="eyebrow hero-eyebrow"><span class="small-rule" aria-hidden="true"></span> מבט על הבחירות · מאגר עצמאי</p>
-            <h1 id="overview-title" tabindex="-1">פחות רעש.<br><span>יותר הקשר.</span></h1>
-            <p class="hero-description">הרשימות, הסוגיות ומה שכתוב במקורות.<br>אפשר גם למדוד חפיפה עם עמדות מתועדות — זה אינו המלצת הצבעה.</p>
+            <p class="eyebrow hero-eyebrow"><span class="small-rule" aria-hidden="true"></span> מצפן בחירות 2026 · התאמה אישית מבוססת מקורות</p>
+            <h1 id="overview-title" tabindex="-1">איזו מפלגה מתאימה<br><span>להעדפות שלכם?</span></h1>
+            <p class="hero-description">מצפן הבחירות מתאים לכם מפלגה לפי העמדות שלכם בנושאי הליבה של החברה הישראלית.<br>חישוב התאמה שקוף לפי מצעים מתועדים — אינו המלצת הצבעה.</p>
             <div class="hero-actions">
-              <button type="button" class="button button--light" data-view="compass">למצפן העמדות <span aria-hidden="true">←</span></button>
-              <button type="button" class="button button--on-dark" data-action="start-reading">מה תרצו להבין?</button>
+              <button type="button" class="button button--light" data-view="compass">למצפן הבחירות <span aria-hidden="true">←</span></button>
+              <button type="button" class="button button--on-dark" data-action="start-reading">למפת הנושאים לאחר המצפן</button>
             </div>
             <p class="hero-footnote">בלי חשבון · התשובות נשארות בעמוד בלבד</p>
           </div>
           <figure class="hero-art">
             <img src="assets/reading-room.svg" width="520" height="410" alt="">
-            <figcaption>שואלים. קוראים. רואים את ההקשר.</figcaption>
+            <figcaption>עונים על המצפן. מקבלים אחוז התאמה ונימוק לכל מפלגה.</figcaption>
           </figure>
         </div>
         <dl id="research-metadata" class="metadata-grid" aria-label="תאריך והיקף המידע"></dl>
@@ -160,7 +160,7 @@
         </section>
       </section>
 
-      <section id="view-compass" class="view" aria-labelledby="compass-title" hidden>
+      <section id="view-compass" class="view" aria-labelledby="compass-title">
         <div id="compass-root"></div>
       </section>
 

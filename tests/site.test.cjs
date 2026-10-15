@@ -21,9 +21,11 @@ test("compass scores documented overlap only and does not recommend a vote", () 
   }
   assert.doesNotMatch(source, /\bnavigator\.(?:share|clipboard)\b|\bBlob\s*\(|download\s*=/u);
   assert.match(html, /אינו המלצת הצבעה/u);
-  assert.match(html, /מצפן עמדות/u);
+  assert.match(html, /מצפן בחירות/u);
   assert.doesNotMatch(source, /רשימות קודדו|compass-results|לתוצאות עם התשובות/u);
   assert.match(source, /התוצאה מופיעה רק אחרי הטענה האחרונה/u);
+  assert.match(source, /compass-context/u);
+  assert.match(html, /data-learning-nav hidden/u);
   assert.match(html, /ללא דירוג|בלי דירוג|לא דירוג/u);
   assert.equal(app.COMPASS_MINIMUM, 3);
   const questions = [{ id: "q", titleHe: "שאלה", stances: [{ partyId: "a", value: 2, evidenceId: "e1", readingHe: "קריאה" }] }];
@@ -59,9 +61,15 @@ test("compass codes cite existing evidence and never reuse one record twice", ()
   }
   const partyIds = new Set(research.parties.map((party) => party.id));
   const used = new Set();
-  assert.ok(app.COMPASS.questions.length >= 30);
+  assert.ok(app.COMPASS.questions.length >= 40);
+  const questionIds = new Set(app.COMPASS.questions.map((question) => question.id));
+  for (const requiredId of ["iran_equation", "lebanon_north", "gaza_civil", "abraham_accords", "us_hamas_ultimatum", "universal_service", "captive_deals", "conversion"]) {
+    assert.equal(questionIds.has(requiredId), true, requiredId);
+  }
   for (const question of app.COMPASS.questions) {
     assert.equal(typeof question.promptHe, "string");
+    assert.equal(typeof question.contextHe, "string");
+    assert.match(question.contextHe, /^רקע:/u);
     assert.ok(question.stances.length >= 1, question.id);
     const seen = new Set();
     for (const stance of question.stances) {
